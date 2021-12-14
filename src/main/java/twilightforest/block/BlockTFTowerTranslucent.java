@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -42,8 +43,7 @@ public class BlockTFTowerTranslucent extends Block {
         this.setHardness(50.0F);
         this.setResistance(2000.0F);
         this.setStepSound(Block.soundTypeMetal);
-        this.setCreativeTab(TFItems.creativeTab);
-
+        // this.setCreativeTab(TFItems.creativeTab);
     }
 
     /**
@@ -222,8 +222,15 @@ public class BlockTFTowerTranslucent extends Block {
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-        // none!
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+        list.add(new ItemStack(item, 1, 0));
+        list.add(new ItemStack(item, 1, 1));
+        list.add(new ItemStack(item, 1, 2));
+        list.add(new ItemStack(item, 1, 3));
+        list.add(new ItemStack(item, 1, 4));
+        list.add(new ItemStack(item, 1, 5));
+        list.add(new ItemStack(item, 1, 6));
+        list.add(new ItemStack(item, 1, 7));
     }
 
 }

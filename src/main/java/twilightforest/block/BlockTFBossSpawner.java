@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -28,12 +29,12 @@ public class BlockTFBossSpawner extends BlockContainer {
         super(Material.rock);
         this.setHardness(20F);
         // this.setResistance(10F);
-        this.setCreativeTab(TFItems.creativeTab);
+        // this.setCreativeTab(TFItems.creativeTab);
     }
 
     /**
      * Called throughout the code as a replacement for block instanceof BlockContainer Moving this to
-     * the Block base class allows for mods that wish to extend vinella blocks, and also want to have a
+     * the Block base class allows for mods that wish to extend vanilla blocks, and also want to have a
      * tile entity on that block, may.
      *
      * Return true from this function to specify this block has a tile entity.
@@ -96,12 +97,13 @@ public class BlockTFBossSpawner extends BlockContainer {
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
-        // par3List.add(new ItemStack(par1, 1, 0));
-        // par3List.add(new ItemStack(par1, 1, 1));
-        // par3List.add(new ItemStack(par1, 1, 2));
-        // par3List.add(new ItemStack(par1, 1, 3));
-        // par3List.add(new ItemStack(par1, 1, 4));
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+         list.add(new ItemStack(item, 1, 0));
+         list.add(new ItemStack(item, 1, 1));
+         list.add(new ItemStack(item, 1, 2));
+         list.add(new ItemStack(item, 1, 3));
+         list.add(new ItemStack(item, 1, 4));
+         list.add(new ItemStack(item, 1, 5));
     }
 
     /**

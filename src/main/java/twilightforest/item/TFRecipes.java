@@ -29,6 +29,8 @@ public class TFRecipes {
         OreDictionary.registerOre("plankWood", new ItemStack(TFBlocks.towerWood, 1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("plankWood", new ItemStack(TFBlocks.plank, 1, OreDictionary.WILDCARD_VALUE));
 
+        OreDictionary.registerOre("feather", new ItemStack(TFItems.feather, 1, OreDictionary.WILDCARD_VALUE));
+
         // register my ores, just for fun
         OreDictionary.registerOre("ingotFiery", new ItemStack(TFItems.fieryIngot));
         OreDictionary.registerOre("oreIronwood", new ItemStack(TFItems.ironwoodRaw));

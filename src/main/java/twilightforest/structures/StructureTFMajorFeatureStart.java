@@ -345,7 +345,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
             //System.out.println("Checking locks for lockIndex " + lockIndex);
 
             for (int i = 0; i < this.lockBytes.length; i++) {
-                System.out.println("Lock " + i + " = " + this.lockBytes[i]);
+                //System.out.println("Lock " + i + " = " + this.lockBytes[i]);
             }
             return this.lockBytes[lockIndex] != 0;
         } else {

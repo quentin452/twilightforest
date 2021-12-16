@@ -1,10 +1,10 @@
 [
 {
-  "modid": "TwilightForest",
-  "name": "The Twilight Forest",
+  "modid": "${modId}",
+  "name": "${modName}",
   "description": "An enchanted forest dimension.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://www.minecraftforum.net/topic/561673-",
   "updateUrl": "",
   "authors": [

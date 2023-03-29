@@ -393,8 +393,8 @@ public class EntityTFTowerGhast extends EntityGhast {
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         boolean wasAttacked = super.attackEntityFrom(par1DamageSource, par2);
 
-        if (wasAttacked && par1DamageSource.getSourceOfDamage() instanceof EntityLivingBase) {
-            this.targetedEntity = (EntityLivingBase) par1DamageSource.getSourceOfDamage();
+        if (wasAttacked && par1DamageSource.getEntity() instanceof EntityLivingBase) {
+            this.targetedEntity = (EntityLivingBase) par1DamageSource.getEntity();
 
             this.isAggressive = true;
 

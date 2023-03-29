@@ -61,15 +61,14 @@ public class EntityTFRedcapSapper extends EntityTFRedcap {
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
+        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
             // are we in a level 2 hill?
             int chunkX = MathHelper.floor_double(posX) >> 4;
             int chunkZ = MathHelper.floor_double(posZ) >> 4;
             if (TFFeature.getNearestFeature(chunkX, chunkZ, worldObj) == TFFeature.hill2) {
                 // award level 2 hill cheevo
-                ((EntityPlayer) par1DamageSource.getSourceOfDamage())
-                        .triggerAchievement(TFAchievementPage.twilightHill2);
+                ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHill2);
             }
 
         }

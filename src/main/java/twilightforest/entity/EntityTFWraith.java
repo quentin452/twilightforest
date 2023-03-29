@@ -239,14 +239,14 @@ public class EntityTFWraith extends EntityFlying implements IMob {
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        if (damageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) damageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
+        if (damageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) damageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
             // are we in a level 3 hill?
             int chunkX = MathHelper.floor_double(posX) >> 4;
             int chunkZ = MathHelper.floor_double(posZ) >> 4;
             if (TFFeature.getNearestFeature(chunkX, chunkZ, worldObj) == TFFeature.hill3) {
                 // award level 3 hill cheevo
-                ((EntityPlayer) damageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHill3);
+                ((EntityPlayer) damageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHill3);
             }
         }
     }

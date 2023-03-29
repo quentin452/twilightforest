@@ -157,7 +157,7 @@ public class EntityTFUrGhast extends EntityTFTowerGhast implements IBossDisplayD
         if ("fireball".equals(source.getDamageType()) && source.getEntity() instanceof EntityPlayer) {
             // 'hide' fireball attacks so that we don't take 1000 damage.
             attackSuccessful = super.attackEntityFrom(
-                    DamageSource.causeThrownDamage(source.getSourceOfDamage(), source.getEntity()),
+                    DamageSource.causeThrownDamage(source.getEntity(), source.getEntity()),
                     damage);
         } else {
             attackSuccessful = super.attackEntityFrom(source, damage);
@@ -802,10 +802,9 @@ public class EntityTFUrGhast extends EntityTFTowerGhast implements IBossDisplayD
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage())
-                    .triggerAchievement(TFAchievementPage.twilightProgressUrghast);
+        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightProgressUrghast);
 
         }
 

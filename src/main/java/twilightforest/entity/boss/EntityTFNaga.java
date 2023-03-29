@@ -742,8 +742,8 @@ public class EntityTFNaga extends EntityMob implements IMob, IBossDisplayData, I
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         // reject damage from outside of our home radius
-        if (damagesource.getSourceOfDamage() != null) {
-            if (!this.isEntityWithinHomeArea(damagesource.getSourceOfDamage())) {
+        if (damagesource.getEntity() != null) {
+            if (!this.isEntityWithinHomeArea(damagesource.getEntity())) {
                 return false;
             }
 
@@ -1067,10 +1067,9 @@ public class EntityTFNaga extends EntityMob implements IMob, IBossDisplayData, I
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage())
-                    .triggerAchievement(TFAchievementPage.twilightKillNaga);
+        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightKillNaga);
         }
 
         // mark the courtyard as defeated

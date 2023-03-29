@@ -288,8 +288,8 @@ public class EntityTFGoblinKnightUpper extends EntityMob {
 
         // check the angle of attack, if applicable
         Entity attacker = null;
-        if (par1DamageSource.getSourceOfDamage() != null) {
-            attacker = par1DamageSource.getSourceOfDamage();
+        if (par1DamageSource.getEntity() != null) {
+            attacker = par1DamageSource.getEntity();
         }
 
         if (par1DamageSource.getEntity() != null) {

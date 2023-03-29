@@ -860,8 +860,8 @@ public class EntityTFHydra extends EntityLiving implements IBossDisplayData, IEn
     protected double calculateRange(DamageSource damagesource) {
         double range = -1;
 
-        if (damagesource.getSourceOfDamage() != null) {
-            range = this.getDistanceSqToEntity(damagesource.getSourceOfDamage());
+        if (damagesource.getEntity() != null) {
+            range = this.getDistanceSqToEntity(damagesource.getEntity());
         }
 
         if (damagesource.getEntity() != null) {
@@ -951,10 +951,9 @@ public class EntityTFHydra extends EntityLiving implements IBossDisplayData, IEn
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage())
-                    .triggerAchievement(TFAchievementPage.twilightKillHydra);
+        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightKillHydra);
         }
 
         // mark the lair as defeated

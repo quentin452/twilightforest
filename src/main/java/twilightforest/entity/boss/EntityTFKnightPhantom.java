@@ -6,6 +6,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -167,10 +168,9 @@ public class EntityTFKnightPhantom extends EntityFlying implements IMob {
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        if (damageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) damageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
-            ((EntityPlayer) damageSource.getSourceOfDamage())
-                    .triggerAchievement(TFAchievementPage.twilightProgressKnights);
+        if (damageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) damageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
+            ((EntityPlayer) damageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightProgressKnights);
         }
 
         // mark the stronghold as defeated
@@ -907,4 +907,10 @@ public class EntityTFKnightPhantom extends EntityFlying implements IMob {
         return this.maximumHomeDistance != -1.0F;
     }
 
+    @Override
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData data) {
+        // Give the same home area as a spawner
+        setHomeArea((int) posX, (int) posY + 2, (int) posZ, 46);
+        return super.onSpawnWithEgg(data);
+    }
 }

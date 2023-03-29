@@ -306,7 +306,7 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
 
         // System.out.println("Damage source is " + par1DamageSource);
         // System.out.println("Damage type is " + par1DamageSource.getDamageType());
-        // System.out.println("Damage source source is " + par1DamageSource.getSourceOfDamage());
+        // System.out.println("Damage source source is " + par1DamageSource.getEntity());
 
         // ignore all bolts that are not reflected
         if (damageSource.getEntity() instanceof EntityTFLich) {
@@ -1039,10 +1039,9 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
-            ((EntityPlayer) par1DamageSource.getSourceOfDamage())
-                    .triggerAchievement(TFAchievementPage.twilightKillLich);
+        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
+            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightKillLich);
 
         }
 

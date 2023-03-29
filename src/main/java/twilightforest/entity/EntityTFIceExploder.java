@@ -113,8 +113,8 @@ public class EntityTFIceExploder extends EntityMob {
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        if (damageSource.getSourceOfDamage() instanceof EntityPlayer) {
-            ((EntityPlayer) damageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
+        if (damageSource.getEntity() instanceof EntityPlayer) {
+            ((EntityPlayer) damageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
         }
     }
 

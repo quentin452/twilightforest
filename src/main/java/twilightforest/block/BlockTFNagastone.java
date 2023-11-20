@@ -428,7 +428,6 @@ public class BlockTFNagastone extends Block {
 					return false;
 		    	}
 		    	if(neighbourBlock.getBlockMetadata() == 0) {
-		    		//Сосед - голова
 		    		switch(direction) {
 			    		case 0:
 		    				if(neighbourBlock.direction != Direction.DOWN)
@@ -477,7 +476,6 @@ public class BlockTFNagastone extends Block {
 		    		}
 		    	}
 		    	else {
-		    		//Сосед - хвост
 		    		switch(direction) {
 		    		case 0:
 		    		case 1:

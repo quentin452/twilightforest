@@ -1,56 +1,57 @@
 package twilightforest.client.renderer.blocks;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import twilightforest.block.BlockTFNagastoneEtched;
 import twilightforest.tileentity.TileEntityTFNagastoneEtched;
 
 public class RenderBlockTFNagastoneEtched implements ISimpleBlockRenderingHandler {
 
-	final int renderID;
-	
-	public RenderBlockTFNagastoneEtched(int nagastoneRenderID) {
-		this.renderID = nagastoneRenderID;
-	}
+    final int renderID;
 
-	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		renderInvNormalBlock(renderer, block, metadata);
-	}
+    public RenderBlockTFNagastoneEtched(int nagastoneRenderID) {
+        this.renderID = nagastoneRenderID;
+    }
 
-	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		TileEntityTFNagastoneEtched te = (TileEntityTFNagastoneEtched)world.getTileEntity(x, y, z);
-		BlockTFNagastoneEtched currentBlock = (BlockTFNagastoneEtched)block;
-		currentBlock.direction = te.direction;
-		renderer.renderStandardBlock(block, x, y, z);
-		return true;
+    @Override
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+        renderInvNormalBlock(renderer, block, metadata);
+    }
 
-	}
+    @Override
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+            RenderBlocks renderer) {
+        TileEntityTFNagastoneEtched te = (TileEntityTFNagastoneEtched) world.getTileEntity(x, y, z);
+        BlockTFNagastoneEtched currentBlock = (BlockTFNagastoneEtched) block;
+        currentBlock.direction = te.direction;
+        renderer.renderStandardBlock(block, x, y, z);
+        return true;
 
-	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
-		return true;
-	}
+    }
 
-	@Override
-	public int getRenderId() {
-		return renderID;
-	}
-	
-	
-	public static void renderInvNormalBlock(RenderBlocks renderblocks, Block par1Block, int meta) {
-		Tessellator tessellator =  Tessellator.instance;
-		
+    @Override
+    public boolean shouldRender3DInInventory(int modelId) {
+        return true;
+    }
+
+    @Override
+    public int getRenderId() {
+        return renderID;
+    }
+
+    public static void renderInvNormalBlock(RenderBlocks renderblocks, Block par1Block, int meta) {
+        Tessellator tessellator = Tessellator.instance;
+
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		// render jar portion
+        // render jar portion
         par1Block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 
         tessellator.startDrawingQuads();
@@ -79,6 +80,6 @@ public class RenderBlockTFNagastoneEtched implements ISimpleBlockRenderingHandle
         tessellator.setNormal(1.0F, 0.0F, 0.0F);
         renderblocks.renderFaceZPos(par1Block, 0.0D, 0.0D, 0.0D, par1Block.getIcon(5, meta));
         tessellator.draw();
-	}
+    }
 
 }

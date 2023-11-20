@@ -2,8 +2,6 @@ package twilightforest.block;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,11 +13,15 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import twilightforest.TwilightForestMod;
 import twilightforest.item.TFItems;
 import twilightforest.tileentity.TileEntityTFCake;
 
 public class BlockTFExperiment115 extends Block {
+
     @SideOnly(Side.CLIENT)
     private IIcon iconTop;
     @SideOnly(Side.CLIENT)
@@ -39,16 +41,16 @@ public class BlockTFExperiment115 extends Block {
     public boolean canProvidePower() {
         return true;
     }
-    
+
     @Override
     public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
-        return ((TileEntityTFCake)world.getTileEntity(x, y, z)).getSprinkled() && side != -1;
+        return ((TileEntityTFCake) world.getTileEntity(x, y, z)).getSprinkled() && side != -1;
     }
-    
+
     @Override
     public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
-    	TileEntityTFCake te = (TileEntityTFCake)world.getTileEntity(x, y, z);
-    	return te.getSprinkled() && side != -1 ? world.getBlockMetadata(x, y, z) * 2 : 0;
+        TileEntityTFCake te = (TileEntityTFCake) world.getTileEntity(x, y, z);
+        return te.getSprinkled() && side != -1 ? world.getBlockMetadata(x, y, z) * 2 : 0;
     }
 
     /**
@@ -82,7 +84,13 @@ public class BlockTFExperiment115 extends Block {
         float fx = l > 2 ? 1.0F - f : 0.5F;
         float fy = 0.5F;
         float fz = l > 4 ? 1.0F - f : 0.5F;
-        return AxisAlignedBB.getBoundingBox((double)x + f, (double)y, (double)z + f, (double)x + fx, (double)y + fy, (double)z + fz);
+        return AxisAlignedBB.getBoundingBox(
+                (double) x + f,
+                (double) y,
+                (double) z + f,
+                (double) x + fx,
+                (double) y + fy,
+                (double) z + fz);
     }
 
     /**
@@ -92,10 +100,11 @@ public class BlockTFExperiment115 extends Block {
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World worldIn, int x, int y, int z) {
         int l = worldIn.getBlockMetadata(x, y, z);
         float f = 0.0625F;
-        float fx = l > 2 ? 1.0F: 0.5F + f;
+        float fx = l > 2 ? 1.0F : 0.5F + f;
         float fy = 0.5F;
-        float fz = l > 4 ? 1.0F: 0.5F + f;
-        return AxisAlignedBB.getBoundingBox((double)x, (double)y, (double)z, (double)x + fx, (double)y + fy, (double)z + fz);
+        float fz = l > 4 ? 1.0F : 0.5F + f;
+        return AxisAlignedBB
+                .getBoundingBox((double) x, (double) y, (double) z, (double) x + fx, (double) y + fy, (double) z + fz);
     }
 
     /**
@@ -103,7 +112,8 @@ public class BlockTFExperiment115 extends Block {
      */
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        return side == 1 ? this.iconTop : (side == 0 ? this.iconBottom : (meta > 0 && side == 4 ? this.iconInner : this.blockIcon));
+        return side == 1 ? this.iconTop
+                : (side == 0 ? this.iconBottom : (meta > 0 && side == 4 ? this.iconInner : this.blockIcon));
     }
 
     @SideOnly(Side.CLIENT)
@@ -122,61 +132,56 @@ public class BlockTFExperiment115 extends Block {
     }
 
     /**
-     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
     public boolean isOpaqueCube() {
         return false;
     }
-	
+
     /**
      * The type of render function that is called for this block
      */
-	@Override
-	public int getRenderType()
-	{
-		return TwilightForestMod.proxy.getCakeBlockRenderID();
-	}
-    
-	@Override
+    @Override
+    public int getRenderType() {
+        return TwilightForestMod.proxy.getCakeBlockRenderID();
+    }
+
+    @Override
     public boolean hasTileEntity(final int metadata) {
         return true;
     }
-    
-	@Override
-	public TileEntity createTileEntity(World world, int metadata) {
-		return new TileEntityTFCake();
-	}
+
+    @Override
+    public TileEntity createTileEntity(World world, int metadata) {
+        return new TileEntityTFCake();
+    }
 
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ) {
-    	if(player.getHeldItem() != null) {
-        	if(player.getHeldItem().getItem() == TFItems.experiment115 && player.isSneaking()) {
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX,
+            float subY, float subZ) {
+        if (player.getHeldItem() != null) {
+            if (player.getHeldItem().getItem() == TFItems.experiment115 && player.isSneaking()) {
                 int l = worldIn.getBlockMetadata(x, y, z) + 1;
-        		if(l <= 8) {
+                if (l <= 8) {
                     worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
-        			player.getHeldItem().stackSize--;
-        		}
-            	worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
-        	}
-        	else {
-        		if(player.getHeldItem().getItem() == Items.redstone) {
-        			TileEntityTFCake te = (TileEntityTFCake)worldIn.getTileEntity(x, y, z);
+                    player.getHeldItem().stackSize--;
+                }
+                worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
+            } else {
+                if (player.getHeldItem().getItem() == Items.redstone) {
+                    TileEntityTFCake te = (TileEntityTFCake) worldIn.getTileEntity(x, y, z);
                     int l = worldIn.getBlockMetadata(x, y, z);
-            		if(l == 8 && !te.getSprinkled()) {
-            			te.setSprinkled(true);
-            			player.getHeldItem().stackSize--;
-            		}
-                	worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
-            	}
-            	else
-                    this.eatCake(worldIn, x, y, z, player);
-        	}
-    	}
-    	else
-            this.eatCake(worldIn, x, y, z, player);
+                    if (l == 8 && !te.getSprinkled()) {
+                        te.setSprinkled(true);
+                        player.getHeldItem().stackSize--;
+                    }
+                    worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
+                } else this.eatCake(worldIn, x, y, z, player);
+            }
+        } else this.eatCake(worldIn, x, y, z, player);
         return true;
     }
 
@@ -192,11 +197,9 @@ public class BlockTFExperiment115 extends Block {
             player.getFoodStats().addStats(4, 0.3F);
             int l = worldIn.getBlockMetadata(x, y, z) - 1;
 
-            if (l == 0)
-            	worldIn.setBlockToAir(x, y, z);
-            else
-            	worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
-        	worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
+            if (l == 0) worldIn.setBlockToAir(x, y, z);
+            else worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
+            worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
         }
     }
 
@@ -209,16 +212,16 @@ public class BlockTFExperiment115 extends Block {
 
     @Override
     public void updateTick(World worldIn, int x, int y, int z, Random random) {
-    	TileEntityTFCake te = (TileEntityTFCake)worldIn.getTileEntity(x, y, z);
-    	if(te.getSprinkled()) {
-    		{
-    			int l = te.getBlockMetadata() + 1;
-        		if(l <= 8) {
-        			worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
-                	worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
-        		}
-    		}
-    	}
+        TileEntityTFCake te = (TileEntityTFCake) worldIn.getTileEntity(x, y, z);
+        if (te.getSprinkled()) {
+            {
+                int l = te.getBlockMetadata() + 1;
+                if (l <= 8) {
+                    worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
+                    worldIn.notifyBlocksOfNeighborChange(x, y, z, this);
+                }
+            }
+        }
     }
 
     /**
@@ -232,7 +235,7 @@ public class BlockTFExperiment115 extends Block {
     }
 
     /**
-     * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
+     * Can this block stay at this position. Similar to canPlaceBlockAt except gets checked often with plants.
      */
     public boolean canBlockStay(World worldIn, int x, int y, int z) {
         return worldIn.getBlock(x, y - 1, z).getMaterial().isSolid();

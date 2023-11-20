@@ -3,6 +3,7 @@ package twilightforest.structures.courtyard;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 public class TFNagaCourtyardPieces {
+
     public static void registerPieces() {
         MapGenStructureIO.func_143031_a(ComponentTFNagaCourtyardMain.class, "TFNCMn");
         MapGenStructureIO.func_143031_a(ComponentTFNagaCourtyardDecorator.class, "TFNCDeco");

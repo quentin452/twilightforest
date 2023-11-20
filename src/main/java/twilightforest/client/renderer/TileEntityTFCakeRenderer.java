@@ -1,653 +1,635 @@
 package twilightforest.client.renderer;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
 
 import twilightforest.TwilightForestMod;
-import twilightforest.client.model.ModelTFFirefly;
 import twilightforest.tileentity.TileEntityTFCake;
-
 
 public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 
     private static final String textureLoc = TwilightForestMod.ID + ":textures/blocks/experiment115/";
 
-	public TileEntityTFCakeRenderer()
-    {
+    public TileEntityTFCakeRenderer() {
 
     }
 
-	
-	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float fl) {
-		renderTileEntityCakeAt((TileEntityTFCake)tileentity, d, d1, d2, fl);
-	}
+    @Override
+    public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float fl) {
+        renderTileEntityCakeAt((TileEntityTFCake) tileentity, d, d1, d2, fl);
+    }
 
-
-	/**
-	 * Render a tasty cake!
-	 */
-	private void renderTileEntityCakeAt(TileEntityTFCake tileentity, double x, double y, double z, float fl) {
+    /**
+     * Render a tasty cake!
+     */
+    private void renderTileEntityCakeAt(TileEntityTFCake tileentity, double x, double y, double z, float fl) {
         int l = tileentity.getBlockMetadata();
-		float f = 0.0625F;
-		float f1 = (l + 1) / 9.0f;
-		final Tessellator tessellator = Tessellator.instance;
-		
-		ResourceLocation textureSide = new ResourceLocation(textureLoc + "experiment115_side.png");
-		ResourceLocation textureInner = new ResourceLocation(textureLoc + "experiment115_inner.png");
-		ResourceLocation textureBottom = new ResourceLocation(textureLoc + "experiment115_bottom.png");
-		ResourceLocation textureTop = new ResourceLocation(textureLoc + "experiment115_top.png");
-		ResourceLocation textureSpinkle = new ResourceLocation(textureLoc + "experiment115_sprinkle.png");
-		
-		Minecraft.getMinecraft().getTextureManager().bindTexture(textureSide);
-		tessellator.startDrawingQuads();
-		
-		switch(l)
-		{
-		case 1:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
-			
-			//Diagonal facet
-			tessellator.setNormal(0.5f, 0.0f, -0.5f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1 - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1 - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			
-			//Drawing triangles
-			tessellator.draw();
-			tessellator.startDrawing(4);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
-			
-			tessellator.draw();
-			tessellator.startDrawing(4);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawing(4);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+        float f = 0.0625F;
+        float f1 = (l + 1) / 9.0f;
+        final Tessellator tessellator = Tessellator.instance;
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			}
-			break;
-		case 2:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+        ResourceLocation textureSide = new ResourceLocation(textureLoc + "experiment115_side.png");
+        ResourceLocation textureInner = new ResourceLocation(textureLoc + "experiment115_inner.png");
+        ResourceLocation textureBottom = new ResourceLocation(textureLoc + "experiment115_bottom.png");
+        ResourceLocation textureTop = new ResourceLocation(textureLoc + "experiment115_top.png");
+        ResourceLocation textureSpinkle = new ResourceLocation(textureLoc + "experiment115_sprinkle.png");
 
-			//Face z-
-			tessellator.setNormal(0.0f, 0.0f, -1.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + f, 0.5d, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(textureSide);
+        tessellator.startDrawingQuads();
 
-			//Face x+
-			tessellator.setNormal(1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + f, 0.5d, f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 0.5d, f);
-			
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawingQuads();
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+        switch (l) {
+            case 1:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 0.5d, f);
-			}
-			break;
-		case 3:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 
-			//Face z-
-			tessellator.setNormal(0.0f, 0.0f, -1.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-			//Diagonal facet
-			tessellator.setNormal(0.5f, 0.0f, 0.5f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawingQuads();
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+                // Diagonal facet
+                tessellator.setNormal(0.5f, 0.0f, -0.5f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1 - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1 - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			}
-			break;
-		case 4:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+                // Drawing triangles
+                tessellator.draw();
+                tessellator.startDrawing(4);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 
-			//Face x+
-			tessellator.setNormal(1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 0.5d, 1.0d);
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
 
-			//Face z-
-			tessellator.setNormal(0.0f, 0.0f, -1.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 1.0d - f, 0.5d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawingQuads();
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+                tessellator.draw();
+                tessellator.startDrawing(4);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 1.0d - f, 0.5d);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			}
-			break;
-		case 5:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 
-			//Face x+
-			tessellator.setNormal(1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawing(4);
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
 
-			//Face z-
-			tessellator.setNormal(0.0f, 0.0f, -1.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                }
+                break;
+            case 2:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Diagonal facet
-			tessellator.setNormal(-0.5f, 0.0f, 0.5f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawing(9);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			
-			tessellator.draw();
-			tessellator.startDrawing(9);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawing(9);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+                // Face z-
+                tessellator.setNormal(0.0f, 0.0f, -1.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + f, 0.5d, 1.0d);
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			}
-			break;
-		case 6:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 
-			//Face x+
-			tessellator.setNormal(1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-			//Face z-
-			tessellator.setNormal(0.0f, 0.0f, -1.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 0.5d, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
-			
-			//Inner Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+                // Face x+
+                tessellator.setNormal(1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 
-			//Inner Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawing(9);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 0.5d, 1.0d - f);
-			
-			tessellator.draw();
-			tessellator.startDrawing(9);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawing(9);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			}
-			break;
-		case 7:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + f, 0.5d, f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
 
-			//Face x+
-			tessellator.setNormal(1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 
-			//Face z-
-			tessellator.setNormal(0.0f, 0.0f, -1.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
-			
-			//Inner Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 0.5d, f);
 
-			//Diagonal facet
-			tessellator.setNormal(-0.5f, 0.0f, -0.5f);
-			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawing(9);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 0.5d, 1.0d - f);
-			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d - f);
-			
-			tessellator.draw();
-			tessellator.startDrawing(9);
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawing(9);
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawingQuads();
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
-				tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
-			}
-			break;
-		case 8:
-			//Face x-
-			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 0.5d, f);
+                }
+                break;
+            case 3:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Face x+
-			tessellator.setNormal(1.0f, 0.0f, 0.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+                // Face z-
+                tessellator.setNormal(0.0f, 0.0f, -1.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
 
-			//Face z-
-			tessellator.setNormal(0.0f, 0.0f, -1.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
-			
-			//Face z+
-			tessellator.setNormal(0.0f, 0.0f, 1.0f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 0.5d);
-			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
-			
-			//Bottom
-			tessellator.setNormal(0.0f, -1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d - f);
-			
-			tessellator.draw();
-			tessellator.startDrawingQuads();
-			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
-			
-			//Top
-			tessellator.setNormal(0.0f, 1.0f, 0.0f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 
-			if(tileentity.getSprinkled())
-			{
-				tessellator.draw();
-				tessellator.startDrawingQuads();
-				Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-				tessellator.setNormal(0.0f, 1.0f, 0.0f);
-		        tessellator.setColorOpaque_F(f1, f1, f1);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
-				tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
-				tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
-			}
-			break;
-		default:
-			
-			break;
-		}
-		tessellator.draw();
-	}
+                // Diagonal facet
+                tessellator.setNormal(0.5f, 0.0f, 0.5f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
+
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
+
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawingQuads();
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                }
+                break;
+            case 4:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+
+                // Face x+
+                tessellator.setNormal(1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 0.5d, 1.0d);
+
+                // Face z-
+                tessellator.setNormal(0.0f, 0.0f, -1.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
+
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
+
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 1.0d - f, 0.5d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
+
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawingQuads();
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 1.0d - f, 0.5d);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                }
+                break;
+            case 5:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+
+                // Face x+
+                tessellator.setNormal(1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+
+                // Face z-
+                tessellator.setNormal(0.0f, 0.0f, -1.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
+
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+
+                // Diagonal facet
+                tessellator.setNormal(-0.5f, 0.0f, 0.5f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawing(9);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
+
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
+
+                tessellator.draw();
+                tessellator.startDrawing(9);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
+
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawing(9);
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                }
+                break;
+            case 6:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+
+                // Face x+
+                tessellator.setNormal(1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+
+                // Face z-
+                tessellator.setNormal(0.0f, 0.0f, -1.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
+
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 0.5d, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
+
+                // Inner Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+
+                // Inner Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawing(9);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
+
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 0.5d, 1.0d - f);
+
+                tessellator.draw();
+                tessellator.startDrawing(9);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
+
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawing(9);
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                }
+                break;
+            case 7:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+
+                // Face x+
+                tessellator.setNormal(1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+
+                // Face z-
+                tessellator.setNormal(0.0f, 0.0f, -1.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
+
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
+
+                // Inner Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
+
+                // Diagonal facet
+                tessellator.setNormal(-0.5f, 0.0f, -0.5f);
+                tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawing(9);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
+
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 0.5d, 1.0d - f);
+                tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d - f);
+
+                tessellator.draw();
+                tessellator.startDrawing(9);
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
+
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawing(9);
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
+                }
+                break;
+            case 8:
+                // Face x-
+                tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
+
+                // Face x+
+                tessellator.setNormal(1.0f, 0.0f, 0.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
+
+                // Face z-
+                tessellator.setNormal(0.0f, 0.0f, -1.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
+
+                // Face z+
+                tessellator.setNormal(0.0f, 0.0f, 1.0f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 0.5d);
+                tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
+
+                // Bottom
+                tessellator.setNormal(0.0f, -1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y, z + f, f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, f, 1.0d - f);
+
+                tessellator.draw();
+                tessellator.startDrawingQuads();
+                Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
+
+                // Top
+                tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+
+                if (tileentity.getSprinkled()) {
+                    tessellator.draw();
+                    tessellator.startDrawingQuads();
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(textureSpinkle);
+
+                    tessellator.setNormal(0.0f, 1.0f, 0.0f);
+                    tessellator.setColorOpaque_F(f1, f1, f1);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
+                    tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, f);
+                    tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
+                }
+                break;
+            default:
+
+                break;
+        }
+        tessellator.draw();
+    }
 
 }

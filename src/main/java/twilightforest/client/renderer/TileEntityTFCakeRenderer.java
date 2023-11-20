@@ -52,7 +52,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 		switch(l)
 		{
 		case 1:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
@@ -63,26 +63,26 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 			
-			//Диагональ
+			//Diagonal facet
 			tessellator.setNormal(0.5f, 0.0f, -0.5f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1 - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1 - f, 0.5d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 			
-			//Режим рисования треугольников
+			//Drawing triangles
 			tessellator.draw();
 			tessellator.startDrawing(4);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
@@ -92,7 +92,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawing(4);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
@@ -112,14 +112,14 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			}
 			break;
 		case 2:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Грань z-
+			//Face z-
 			tessellator.setNormal(0.0f, 0.0f, -1.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
@@ -130,14 +130,14 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-			//Грань x+
+			//Face x+
 			tessellator.setNormal(1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + f, 1.0d - f, 0.5d);
@@ -148,7 +148,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
@@ -159,7 +159,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
@@ -181,14 +181,14 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			}
 			break;
 		case 3:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Грань z-
+			//Face z-
 			tessellator.setNormal(0.0f, 0.0f, -1.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
@@ -199,14 +199,14 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-			//Диагональ
+			//Diagonal facet
 			tessellator.setNormal(0.5f, 0.0f, 0.5f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
@@ -217,7 +217,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
@@ -228,7 +228,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
@@ -250,21 +250,21 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			}
 			break;
 		case 4:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Грань x+
+			//Face x+
 			tessellator.setNormal(1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 0.5d, 1.0d);
 
-			//Грань z-
+			//Face z-
 			tessellator.setNormal(0.0f, 0.0f, -1.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
@@ -275,7 +275,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 0.5d, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 0.5d, 1.0d - f, 0.5d);
@@ -286,7 +286,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
@@ -297,7 +297,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
@@ -319,21 +319,21 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			}
 			break;
 		case 5:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Грань x+
+			//Face x+
 			tessellator.setNormal(1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
 
-			//Грань z-
+			//Face z-
 			tessellator.setNormal(0.0f, 0.0f, -1.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
@@ -344,14 +344,14 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-			//Диагональ
+			//Diagonal facet
 			tessellator.setNormal(-0.5f, 0.0f, 0.5f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
@@ -362,7 +362,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawing(9);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
@@ -374,7 +374,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawing(9);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);
@@ -398,28 +398,28 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			}
 			break;
 		case 6:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Грань x+
+			//Face x+
 			tessellator.setNormal(1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
 
-			//Грань z-
+			//Face z-
 			tessellator.setNormal(0.0f, 0.0f, -1.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
@@ -430,14 +430,14 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 			
-			//Внутренняя грань z+
+			//Inner Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-			//Внутренняя грань x-
+			//Inner Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 1.0d - f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
@@ -448,7 +448,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawing(9);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
@@ -461,7 +461,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawing(9);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 1.0d - f, 0.5d, 1.0d - f);
@@ -487,28 +487,28 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			}
 			break;
 		case 7:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Грань x+
+			//Face x+
 			tessellator.setNormal(1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
 
-			//Грань z-
+			//Face z-
 			tessellator.setNormal(0.0f, 0.0f, -1.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
@@ -519,14 +519,14 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureInner);
 			
-			//Внутренняя грань z+
+			//Inner Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 1.0d);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 0.5d, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 1.0d);
 
-			//Диагональ
+			//Diagonal facet
 			tessellator.setNormal(-0.5f, 0.0f, -0.5f);
 			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
@@ -537,7 +537,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawing(9);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + 0.5d, f, 0.5d);
@@ -551,7 +551,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawing(9);
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 0.5d, y + 0.5d, z + 0.5d, 0.5d, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
@@ -579,28 +579,28 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			}
 			break;
 		case 8:
-			//Грань x-
+			//Face x-
 			tessellator.setNormal(-1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + 1.0d - f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, 1.0d);
 
-			//Грань x+
+			//Face x+
 			tessellator.setNormal(1.0f, 0.0f, 0.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, f, 1.0d);
 
-			//Грань z-
+			//Face z-
 			tessellator.setNormal(0.0f, 0.0f, -1.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + f, 1.0d - f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + f, f, 0.5d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, f, 1.0d);
 			
-			//Грань z+
+			//Face z+
 			tessellator.setNormal(0.0f, 0.0f, 1.0f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + 1.0d - f, 1.0d - f, 1.0d);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 0.5d);
@@ -611,7 +611,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureBottom);
 			
-			//Низ
+			//Bottom
 			tessellator.setNormal(0.0f, -1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y, z + f, f, f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y, z + f, 1.0d - f, f);
@@ -622,7 +622,7 @@ public class TileEntityTFCakeRenderer extends TileEntitySpecialRenderer {
 			tessellator.startDrawingQuads();
 			Minecraft.getMinecraft().getTextureManager().bindTexture(textureTop);
 			
-			//Верх
+			//Top
 			tessellator.setNormal(0.0f, 1.0f, 0.0f);
 			tessellator.addVertexWithUV(x + f, y + 0.5d, z + 1.0d - f, f, 1.0d - f);
 			tessellator.addVertexWithUV(x + 1.0d - f, y + 0.5d, z + 1.0d - f, 1.0d - f, 1.0d - f);

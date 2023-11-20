@@ -69,20 +69,6 @@ public class RenderTFGiant extends RenderBiped {
 							{
 								bufferedImage = bufferedImage.getSubimage(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight() / 2);
 							}
-			            	/*else {
-								int newW = bufferedImage.getWidth();
-								int newH = bufferedImage.getHeight() * 2;
-								BufferedImage dimg = new BufferedImage(newW, newH, bufferedImage.getType());
-							    Graphics2D g = dimg.createGraphics();
-							    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-							    g.drawImage(bufferedImage, 0, 0, bufferedImage.getWidth() - 1, bufferedImage.getHeight() - 1, 0, 0, bufferedImage.getWidth() - 1, bufferedImage.getHeight() - 1, null);
-							    //Копируем ногу
-							    g.drawImage(bufferedImage, 0, bufferedImage.getHeight() / 2, bufferedImage.getWidth() / 4 - 1, bufferedImage.getHeight() - 1, bufferedImage.getWidth() / 4, bufferedImage.getHeight() / 2 * 3, bufferedImage.getWidth() / 2 - 1, bufferedImage.getHeight() * 2 - 1, null);
-							    //Копируем руку
-							    g.drawImage(bufferedImage, bufferedImage.getHeight() / 8 * 5, bufferedImage.getHeight() / 2, bufferedImage.getWidth() / 8 * 7 - 1, bufferedImage.getHeight() - 1, bufferedImage.getWidth() / 2, bufferedImage.getHeight() / 2 * 3, bufferedImage.getWidth() / 4 * 3 - 1, bufferedImage.getHeight() - 1, null);
-							    g.dispose();
-							    bufferedImage = dimg;
-			            	}*/
 							skin = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation(" ", new DynamicTexture(bufferedImage));
 			            }
 			        }

@@ -2,6 +2,7 @@
 
 dependencies {
     compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") {transitive = false}
+    compileOnly("curse.maven:skinport-234948:3212017")
 
     // For Thaumcraft runtime
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:Baubles:1.0.1.16:dev")

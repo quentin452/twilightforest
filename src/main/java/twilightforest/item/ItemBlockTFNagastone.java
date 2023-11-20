@@ -21,7 +21,7 @@ public class ItemBlockTFNagastone extends ItemBlock {
     @Override
     public IIcon getIconFromDamage(int i)
     {
-    	//Сменил максимальное значение с 15 на 1
+    	//Maximum value is now 1, not 15
         int j = MathHelper.clamp_int(i, 0, 1);
         return TFBlocks.nagastone.getIcon(2, j);
 

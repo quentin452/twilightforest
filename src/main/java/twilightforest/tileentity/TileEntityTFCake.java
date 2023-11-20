@@ -30,7 +30,7 @@ public class TileEntityTFCake extends TileEntity {
  
        NBTTagCompound tagCompound = new NBTTagCompound();
  
-       this.writeToNBT(tagCompound);//Можно записать всё, или отдельную информацию.
+       this.writeToNBT(tagCompound);
  
        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 3, tagCompound);
     }

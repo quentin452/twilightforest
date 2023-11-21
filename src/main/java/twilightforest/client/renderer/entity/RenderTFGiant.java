@@ -34,7 +34,7 @@ public class RenderTFGiant extends RenderBiped {
             skin = textureLoc;
         }
         if (Loader.isModLoaded("skinport")) {
-        	skin = RenderTFGiantSkinportIntegration.getSkin(player, skin, textureLoc);
+            skin = RenderTFGiantSkinportIntegration.getSkin(player, skin, textureLoc);
         }
         return skin;
     }

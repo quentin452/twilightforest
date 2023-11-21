@@ -7,6 +7,11 @@ import java.nio.ByteBuffer;
 
 import javax.imageio.ImageIO;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.util.ResourceLocation;
+
 import com.mojang.authlib.GameProfile;
 
 import lain.mods.skinport.init.forge.ClientProxy;
@@ -14,15 +19,12 @@ import lain.mods.skins.api.SkinProviderAPI;
 import lain.mods.skins.api.interfaces.ISkin;
 import lain.mods.skins.impl.PlayerProfile;
 import lain.mods.skins.impl.SkinData;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderTFGiantSkinportIntegration {
 
-	public static ResourceLocation getSkin(EntityClientPlayerMP player, ResourceLocation skin, ResourceLocation textureLoc) {
-		ResourceLocation skin1 = ClientProxy.bindTexture(Minecraft.getMinecraft().thePlayer.getGameProfile(), skin);
+    public static ResourceLocation getSkin(EntityClientPlayerMP player, ResourceLocation skin,
+            ResourceLocation textureLoc) {
+        ResourceLocation skin1 = ClientProxy.bindTexture(Minecraft.getMinecraft().thePlayer.getGameProfile(), skin);
         GameProfile profile = player.getGameProfile();
         if (profile != null) {
             ISkin iskin = SkinProviderAPI.SKIN.getSkin(PlayerProfile.wrapGameProfile(profile));
@@ -45,5 +47,5 @@ public class RenderTFGiantSkinportIntegration {
             }
         }
         return skin1;
-	}
+    }
 }

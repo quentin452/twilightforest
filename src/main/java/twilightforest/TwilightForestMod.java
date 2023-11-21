@@ -825,9 +825,9 @@ public class TwilightForestMod {
     }
 
     private void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityTFCake.class, "Experiment 115");
-		GameRegistry.registerTileEntity(TileEntityTFNagastone.class, "Nagastone");
-		GameRegistry.registerTileEntity(TileEntityTFNagastoneEtched.class, "Etched Nagastone");
+        GameRegistry.registerTileEntity(TileEntityTFCake.class, "Experiment 115");
+        GameRegistry.registerTileEntity(TileEntityTFNagastone.class, "Nagastone");
+        GameRegistry.registerTileEntity(TileEntityTFNagastoneEtched.class, "Etched Nagastone");
         GameRegistry.registerTileEntity(TileEntityTFFirefly.class, "Firefly");
         GameRegistry.registerTileEntity(TileEntityTFCicada.class, "Cicada");
         GameRegistry.registerTileEntity(TileEntityTFNagaSpawner.class, "Naga Spawner");

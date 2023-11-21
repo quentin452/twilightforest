@@ -250,20 +250,62 @@ public class TFThaumcraftIntegration {
                     TFBlocks.fireJet,
                     -1,
                     (new AspectList()).add(Aspect.FIRE, 4).add(Aspect.AIR, 2).add(Aspect.MOTION, 2));
-            registerTCObjectTag(TFBlocks.nagastone, -1, (new AspectList()).add(Aspect.ORDER, 1).add(Aspect.MOTION, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneEtched, 0, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneEtched, 1, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneEtched, 2, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneStairsLeft, -1, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneStairsRight, -1, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneStairsMossyLeft, -1, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneStairsMossyRight, -1, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneStairsWeatheredLeft, -1, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastoneStairsWeatheredRight, -1, (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastonePillar, -1, (new AspectList()).add(Aspect.MOTION, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastonePillarMossy, -1, (new AspectList()).add(Aspect.MOTION, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.nagastonePillarWeathered, -1, (new AspectList()).add(Aspect.MOTION, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
-			registerTCObjectTag(TFBlocks.spiralStoneBricks, -1, (new AspectList()).add(Aspect.EXCHANGE, 2).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastone,
+                    -1,
+                    (new AspectList()).add(Aspect.ORDER, 1).add(Aspect.MOTION, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneEtched,
+                    0,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneEtched,
+                    1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneEtched,
+                    2,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneStairsLeft,
+                    -1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneStairsRight,
+                    -1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneStairsMossyLeft,
+                    -1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneStairsMossyRight,
+                    -1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneStairsWeatheredLeft,
+                    -1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastoneStairsWeatheredRight,
+                    -1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastonePillar,
+                    -1,
+                    (new AspectList()).add(Aspect.MOTION, 1).add(Aspect.ORDER, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastonePillarMossy,
+                    -1,
+                    (new AspectList()).add(Aspect.MOTION, 1).add(Aspect.PLANT, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.nagastonePillarWeathered,
+                    -1,
+                    (new AspectList()).add(Aspect.MOTION, 1).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 2));
+            registerTCObjectTag(
+                    TFBlocks.spiralStoneBricks,
+                    -1,
+                    (new AspectList()).add(Aspect.EXCHANGE, 2).add(Aspect.EARTH, 2));
             registerTCObjectTag(TFBlocks.magicLeaves, -1, (new AspectList()).add(Aspect.PLANT, 2));
             registerTCObjectTag(
                     TFBlocks.towerWood,

@@ -21,6 +21,8 @@ import twilightforest.structures.courtyard.ComponentTFNagaCourtyardMain;
 import twilightforest.structures.courtyard.TFNagaCourtyardPieces;
 import twilightforest.structures.darktower.ComponentTFDarkTowerMain;
 import twilightforest.structures.darktower.TFDarkTowerPieces;
+import twilightforest.structures.finalcastle.ComponentTFFinalCastleMain;
+import twilightforest.structures.finalcastle.TFFinalCastlePieces;
 import twilightforest.structures.hollowtree.StructureTFHollowTreeStart;
 import twilightforest.structures.hollowtree.TFHollowTreePieces;
 import twilightforest.structures.icetower.ComponentTFIceTowerMain;
@@ -174,7 +176,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
             return new ComponentTFTrollCaveMain(world, rand, 0, x, y, z);
         }
         if (feature == TFFeature.finalCastle) {
-            return new TFFinalCastlePieces.Main(world, rand, 0, x, y, z);
+            return new ComponentTFFinalCastleMain(world, rand, 0, x, y, z);
         }
 
         return null;

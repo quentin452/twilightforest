@@ -27,7 +27,7 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import thaumcraft.api.*;
+import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import twilightforest.biomes.TFBiomeBase;
@@ -263,7 +263,7 @@ public class TwilightForestMod {
         MinecraftForge.EVENT_BUS.register(eventListener);
         FMLCommonHandler.instance().bus().register(eventListener); // we're getting events off this bus too
 
-     // set up portal item
+        // set up portal item
         Item portalItem;
         if (Item.itemRegistry.containsKey(portalCreationItemString)) {
             portalItem = (Item) Item.itemRegistry.getObject(portalCreationItemString);

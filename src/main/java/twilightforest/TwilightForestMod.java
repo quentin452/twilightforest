@@ -203,7 +203,6 @@ public class TwilightForestMod {
     public static boolean hasAssignedBiomeID = false;
 
     public static final TFEventListener eventListener = new TFEventListener();
-    public static final TFTickHandler tickHandler = new TFTickHandler();
     public static FMLEventChannel genericChannel;
 
     @Instance(ID)
@@ -264,10 +263,7 @@ public class TwilightForestMod {
         MinecraftForge.EVENT_BUS.register(eventListener);
         FMLCommonHandler.instance().bus().register(eventListener); // we're getting events off this bus too
 
-        // tick listener
-        FMLCommonHandler.instance().bus().register(tickHandler);
-
-        // set up portal item
+     // set up portal item
         Item portalItem;
         if (Item.itemRegistry.containsKey(portalCreationItemString)) {
             portalItem = (Item) Item.itemRegistry.getObject(portalCreationItemString);
@@ -283,7 +279,10 @@ public class TwilightForestMod {
                     portalCreationItemString);
             portalItem = Items.diamond;
         }
-        tickHandler.portalItem = portalItem;
+        // tick listener
+        final TFTickHandler tfTickHandler = new TFTickHandler(portalItem);
+        MinecraftForge.EVENT_BUS.register(tfTickHandler);
+        FMLCommonHandler.instance().bus().register(tfTickHandler);
 
         // make some channels for our maps
         TFMapPacketHandler mapPacketHandler = new TFMapPacketHandler();

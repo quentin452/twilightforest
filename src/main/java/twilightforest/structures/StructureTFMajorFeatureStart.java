@@ -68,7 +68,6 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         MapGenStructureIO.func_143031_a(ComponentTFHillMaze.class, "TFHillMaze");
         MapGenStructureIO.func_143031_a(ComponentTFHollowHill.class, "TFHill");
         MapGenStructureIO.func_143031_a(ComponentTFHydraLair.class, "TFHydra");
-        // MapGenStructureIO.func_143031_a(ComponentTFNagaCourtyard.class, "TFNaga");
         MapGenStructureIO.func_143031_a(ComponentTFQuestGrove.class, "TFQuest1");
         MapGenStructureIO.func_143031_a(ComponentTFYetiCave.class, "TFYeti");
     }

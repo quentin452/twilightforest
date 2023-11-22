@@ -29,18 +29,7 @@ public class ComponentTFNagaCourtyardTerraceAbstract extends ComponentTFNagaCour
          * if(groundAir > undergroundAir) this.boundingBox.minY--;
          */
 
-        this.fillWithBlocks(
-                world,
-                structureBoundingBox,
-                1,
-                2,
-                1,
-                15,
-                3,
-                15,
-                Blocks.air,
-                Blocks.air,
-                false);
+        this.fillWithBlocks(world, structureBoundingBox, 1, 2, 1, 15, 3, 15, Blocks.air, Blocks.air, false);
         this.fillWithBlocks(
                 world,
                 structureBoundingBox,

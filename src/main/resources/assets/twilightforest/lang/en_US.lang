@@ -51,6 +51,7 @@ tile.TFFireJet.12.name=Encased Popping Fire Jet
 tile.TFFireJet.13.name=Encased Flaming Fire Jet
 tile.TFNagastone.0.name=Nagastone Head
 tile.TFNagastone.1.name=Nagastone
+tile.TFNagastone.32767.name=Any Nagastone
 tile.TFNagastoneEtched.0.name=Etched Nagastone
 tile.TFNagastoneEtched.1.name=Mossy Etched Nagastone
 tile.TFNagastoneEtched.2.name=Ruined Etched Nagastone
@@ -291,7 +292,7 @@ item.knightmetalRing.name=Knightmetal Loop
 item.chainBlock.name=Block and Chain
 item.cubeTalisman.name=Talisman of the Cube
 item.cubeOfAnnihilation.name=Cube of Annihilation
-    
+
 item.minotaurAxe.tooltip=Extra damage while charging
 item.knightlySword.tooltip=Extra damage to armored targets
 item.knightlyPick.tooltip=Extra damage to armored targets

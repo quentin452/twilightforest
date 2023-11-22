@@ -32,6 +32,18 @@ public class ComponentTFNagaCourtyardTerraceAbstract extends ComponentTFNagaCour
         this.fillWithBlocks(
                 world,
                 structureBoundingBox,
+                1,
+                2,
+                1,
+                15,
+                3,
+                15,
+                Blocks.air,
+                Blocks.air,
+                false);
+        this.fillWithBlocks(
+                world,
+                structureBoundingBox,
                 0,
                 1,
                 0,

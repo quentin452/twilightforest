@@ -589,16 +589,17 @@ public class BlockTFNagastone extends Block {
      */
     @Override
     public int damageDropped(int meta) {
-        return meta;
-        // // only drop meta 1 for head or 13 for body
-        // if (meta < 4)
-        // {
-        // return 1;
-        // }
-        // else
-        // {
-        // return 13;
-        // }
+        if (meta > 3)
+        {
+            return 1;
+        }
+        else
+        {
+            if (meta > 1)
+                return 0;
+            else
+                return meta;
+        }
     }
 
     @Override

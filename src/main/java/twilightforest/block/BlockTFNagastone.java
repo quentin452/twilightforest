@@ -155,24 +155,17 @@ public class BlockTFNagastone extends Block {
         par1World.setTileEntity(x, y, z, te);
     }
 
-    // /**
-    // * Old metadata texture info. Left here just in case
-    // *
-    // * 0 - 3 head directions
-    // * 4 - 7 bend down
-    // * 8 - 11 bend up
-    // * 12 straight n/s
-    // * 13 straight e/w
-    // * 14 straight u/d
-    // * 15 weird middle piece
-    // */
-    // @Override
-    // public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int
-    // metadata)
-    // {
-    // world.setTileEntity(x, y, z, new TileEntityTFNagastone(side, hitX, hitZ));
-    // return metadata;
-    // }
+    /**
+    * Old metadata texture info. Left here just in case
+    *
+    * 0 - 3 head directions
+    * 4 - 7 bend down
+    * 8 - 11 bend up
+    * 12 straight n/s
+    * 13 straight e/w
+    * 14 straight u/d
+    * 15 weird middle piece
+    */
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are

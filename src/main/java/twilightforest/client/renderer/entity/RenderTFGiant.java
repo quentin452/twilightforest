@@ -7,11 +7,10 @@ import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import twilightforest.TwilightForestMod;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.Loader;
+import twilightforest.TwilightForestMod;
 
 public class RenderTFGiant extends RenderBiped {
 
@@ -35,7 +34,7 @@ public class RenderTFGiant extends RenderBiped {
             skin = textureLoc;
         }
         if (TwilightForestMod.isSkinportLoaded) {
-        	skin = RenderTFGiantSkinportIntegration.getSkin(player, skin, textureLoc);
+            skin = RenderTFGiantSkinportIntegration.getSkin(player, skin, textureLoc);
         }
         return skin;
     }

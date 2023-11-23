@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -156,16 +155,11 @@ public class BlockTFNagastone extends Block {
     }
 
     /**
-    * Old metadata texture info. Left here just in case
-    *
-    * 0 - 3 head directions
-    * 4 - 7 bend down
-    * 8 - 11 bend up
-    * 12 straight n/s
-    * 13 straight e/w
-    * 14 straight u/d
-    * 15 weird middle piece
-    */
+     * Old metadata texture info. Left here just in case
+     *
+     * 0 - 3 head directions 4 - 7 bend down 8 - 11 bend up 12 straight n/s 13 straight e/w 14 straight u/d 15 weird
+     * middle piece
+     */
 
     /**
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are

@@ -74,7 +74,6 @@ public class BlockTFNagastone extends Block {
         this.setResistance(10.0F);
         this.setStepSound(Block.soundTypeStone);
         this.setCreativeTab(TFItems.creativeTab);
-        this.setTickRandomly(true);
     }
 
     /**
@@ -93,44 +92,6 @@ public class BlockTFNagastone extends Block {
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
         return new TileEntityTFNagastone();
-    }
-
-    @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        /*
-         * TileEntityTFNagastone te = (TileEntityTFNagastone)world.getTileEntity(x, y, z); if(te.blockMetadata == -1) {
-         * WorldClient worldClient = Minecraft.getMinecraft().theWorld; switch(world.getBlockMetadata(x, y, z)) {
-         * default: case 0: worldClient.setBlockMetadataWithNotify(x, y, z, 0, 2); worldClient.setTileEntity(x, y, z,
-         * new TileEntityTFNagastone(Direction.SIDE, Facing.NORTH)); break; case 1:
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 0, 2); worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(Direction.SIDE, Facing.SOUTH)); break; case 2:
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 0, 2); worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(Direction.SIDE, Facing.WEST)); break; case 3: worldClient.setBlockMetadataWithNotify(x,
-         * y, z, 0, 2); worldClient.setTileEntity(x, y, z, new TileEntityTFNagastone(Direction.SIDE, Facing.EAST));
-         * break; case 4: case 8: worldClient.setBlockMetadataWithNotify(x, y, z, 1, 2); worldClient.setTileEntity(x, y,
-         * z, new TileEntityTFNagastone(Direction.SIDE, Facing.NORTH)); break; case 5: case 9:
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 1, 2); worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(Direction.SIDE, Facing.SOUTH)); break; case 6: case 10:
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 1, 2); worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(Direction.SIDE, Facing.WEST)); break; case 7: case 11:
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 1, 2); worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(Direction.SIDE, Facing.EAST)); break; case 12:
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 1, 2); worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(Direction.SIDE, Facing.WEST)); break; case 13:
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 1, 2); worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(Direction.SIDE, Facing.NORTH)); break; case 14: {
-         * worldClient.setBlockMetadataWithNotify(x, y, z, 1, 2); Direction direction = Direction.UP; Facing facing;
-         * TileEntityTFNagastone neighbour = (TileEntityTFNagastone)world.getTileEntity(x, y - 1, z); if(neighbour ==
-         * null) neighbour = (TileEntityTFNagastone)world.getTileEntity(x, y + 1, z); if(neighbour == null) facing =
-         * Facing.NORTH; else facing = neighbour.facing; worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(direction, facing)); break; } case 15: { worldClient.setBlockMetadataWithNotify(x, y,
-         * z, 1, 2); Direction direction = Direction.SIDE; Facing facing; TileEntityTFNagastone neighbourZminus =
-         * (TileEntityTFNagastone)world.getTileEntity(x, y, z - 1); TileEntityTFNagastone neighbourZplus =
-         * (TileEntityTFNagastone)world.getTileEntity(x, y, z + 1); if(neighbourZminus != null || neighbourZplus !=
-         * null) facing = Facing.WEST; else facing = Facing.NORTH; worldClient.setTileEntity(x, y, z, new
-         * TileEntityTFNagastone(direction, facing)); break; } } }
-         */
-        return super.getLightValue(world, x, y, z);
     }
 
     /**
@@ -195,7 +156,7 @@ public class BlockTFNagastone extends Block {
     }
 
     // /**
-    // * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
+    // * Old metadata texture info. Left here just in case
     // *
     // * 0 - 3 head directions
     // * 4 - 7 bend down

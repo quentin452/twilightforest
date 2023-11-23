@@ -87,6 +87,9 @@ public class TwilightForestMod {
     public static boolean disableUncrafting;
     public static boolean oldMapGen;
     public static String portalCreationItemString;
+    
+    // integration
+    public static boolean isSkinportLoaded = false;
 
     // performance
     public static float canopyCoverage;
@@ -228,6 +231,9 @@ public class TwilightForestMod {
 
         // just call this so that we register structure IDs correctly
         new StructureTFMajorFeatureStart();
+        
+        // check if Skinport integration is required
+        isSkinportLoaded = Loader.isModLoaded("skinport");
 
         // check for biome conflicts, load biomes
         TFBiomeBase.assignBlankBiomeIds();

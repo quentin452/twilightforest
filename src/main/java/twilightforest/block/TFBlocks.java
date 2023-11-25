@@ -13,6 +13,23 @@ import twilightforest.item.ItemBlockTFMeta;
 public class TFBlocks {
 
     public static Block log;
+    public static Block planks;
+    public static Block doorTwilight;
+    public static Block doorCanopy;
+    public static Block doorMangrove;
+    public static Block doorDarkwood;
+    public static Block doorTime;
+    public static Block doorTrans;
+    public static Block doorMine;
+    public static Block doorSort;
+    public static Block trapdoorTwilight;
+    public static Block trapdoorCanopy;
+    public static Block trapdoorMangrove;
+    public static Block trapdoorDarkwood;
+    public static Block trapdoorTime;
+    public static Block trapdoorTrans;
+    public static Block trapdoorMine;
+    public static Block trapdoorSort;
     public static Block leaves;
     public static Block firefly;
     public static Block portal;
@@ -91,6 +108,23 @@ public class TFBlocks {
     public static void registerBlocks() {
 
         log = (new BlockTFLog()).setBlockName("TFLog");
+        planks = (new BlockTFWood()).setBlockName("TFPlanks");
+        doorTwilight = (new BlockTFDoor(0)).setBlockName("TFDoorTwilight");
+        doorCanopy = (new BlockTFDoor(1)).setBlockName("TFDoorCanopy");
+        doorMangrove = (new BlockTFDoor(2)).setBlockName("TFDoorMangrove");
+        doorDarkwood = (new BlockTFDoor(3)).setBlockName("TFDoorDarkwood");
+        doorTime = (new BlockTFDoor(4)).setBlockName("TFDoorTime");
+        doorTrans = (new BlockTFDoor(5)).setBlockName("TFDoorTrans");
+        doorMine = (new BlockTFDoor(6)).setBlockName("TFDoorMine");
+        doorSort = (new BlockTFDoor(7)).setBlockName("TFDoorSort");
+        trapdoorTwilight = (new BlockTFTrapDoor(0)).setBlockName("TFTrapDoorTwilight");
+        trapdoorCanopy = (new BlockTFTrapDoor(1)).setBlockName("TFTrapDoorCanopy");
+        trapdoorMangrove = (new BlockTFTrapDoor(2)).setBlockName("TFTrapDoorMangrove");
+        trapdoorDarkwood = (new BlockTFTrapDoor(3)).setBlockName("TFTrapDoorDarkwood");
+        trapdoorTime = (new BlockTFTrapDoor(4)).setBlockName("TFTrapDoorTime");
+        trapdoorTrans = (new BlockTFTrapDoor(5)).setBlockName("TFTrapDoorTrans");
+        trapdoorMine = (new BlockTFTrapDoor(6)).setBlockName("TFTrapDoorMine");
+        trapdoorSort = (new BlockTFTrapDoor(7)).setBlockName("TFTrapDoorSort");
         leaves = (new BlockTFLeaves()).setBlockName("TFLeaves").setBlockTextureName("leaves_oak");
         firefly = (new BlockTFFirefly()).setBlockName("TFFirefly");
         cicada = (new BlockTFCicada()).setBlockName("TFCicada");
@@ -172,6 +206,23 @@ public class TFBlocks {
 
         // register blocks with their pickup values
         registerMyBlock(log);
+        registerMyBlock(planks);
+        registerMyBlock(doorTwilight);
+        registerMyBlock(doorCanopy);
+        registerMyBlock(doorMangrove);
+        registerMyBlock(doorDarkwood);
+        registerMyBlock(doorTime);
+        registerMyBlock(doorTrans);
+        registerMyBlock(doorMine);
+        registerMyBlock(doorSort);
+        registerMyBlock(trapdoorTwilight);
+        registerMyBlock(trapdoorCanopy);
+        registerMyBlock(trapdoorMangrove);
+        registerMyBlock(trapdoorDarkwood);
+        registerMyBlock(trapdoorTime);
+        registerMyBlock(trapdoorTrans);
+        registerMyBlock(trapdoorMine);
+        registerMyBlock(trapdoorSort);
         registerMyBlock(root);
         registerMyBlock(leaves);
         registerMyBlock(firefly, ItemBlock.class);
@@ -261,6 +312,7 @@ public class TFBlocks {
 
         // fire info
         Blocks.fire.setFireInfo(log, 5, 5);
+        Blocks.fire.setFireInfo(planks, 5, 20);
         Blocks.fire.setFireInfo(leaves, 30, 60);
         Blocks.fire.setFireInfo(leaves3, 30, 60);
     }

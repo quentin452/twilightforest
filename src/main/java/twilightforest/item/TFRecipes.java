@@ -28,6 +28,8 @@ public class TFRecipes {
         OreDictionary.registerOre("treeLeaves", new ItemStack(TFBlocks.leaves, 1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("treeLeaves", new ItemStack(TFBlocks.magicLeaves, 1, OreDictionary.WILDCARD_VALUE));
         OreDictionary.registerOre("plankWood", new ItemStack(TFBlocks.towerWood, 1, OreDictionary.WILDCARD_VALUE));
+        for (int i = 0; i < 8; i++)
+            OreDictionary.registerOre("plankWood", new ItemStack(TFBlocks.planks, i, OreDictionary.WILDCARD_VALUE));
 
         // register my ores, just for fun
         OreDictionary.registerOre("ingotFiery", new ItemStack(TFItems.fieryIngot));
@@ -50,17 +52,44 @@ public class TFRecipes {
 
         // recipes
         GameRegistry.addRecipe(
-                new ItemStack(Blocks.planks, 4, 0),
+                new ItemStack(TFBlocks.planks, 4, 0),
                 new Object[] { "w", 'w', new ItemStack(TFBlocks.log, 1, 0) });
         GameRegistry.addRecipe(
-                new ItemStack(Blocks.planks, 4, 1),
+                new ItemStack(TFBlocks.planks, 4, 1),
                 new Object[] { "w", 'w', new ItemStack(TFBlocks.log, 1, 1) });
         GameRegistry.addRecipe(
-                new ItemStack(Blocks.planks, 4, 2),
+                new ItemStack(TFBlocks.planks, 4, 2),
                 new Object[] { "w", 'w', new ItemStack(TFBlocks.log, 1, 2) });
         GameRegistry.addRecipe(
-                new ItemStack(Blocks.planks, 4, 1),
+                new ItemStack(TFBlocks.planks, 4, 3),
                 new Object[] { "w", 'w', new ItemStack(TFBlocks.log, 1, 3) });
+        GameRegistry.addRecipe(
+                new ItemStack(TFBlocks.planks, 4, 4),
+                new Object[] { "w", 'w', new ItemStack(TFBlocks.magicLog, 1, 0) });
+        GameRegistry.addRecipe(
+                new ItemStack(TFBlocks.planks, 4, 5),
+                new Object[] { "w", 'w', new ItemStack(TFBlocks.magicLog, 1, 1) });
+        GameRegistry.addRecipe(
+                new ItemStack(TFBlocks.planks, 4, 6),
+                new Object[] { "w", 'w', new ItemStack(TFBlocks.magicLog, 1, 2) });
+        GameRegistry.addRecipe(
+                new ItemStack(TFBlocks.planks, 4, 7),
+                new Object[] { "w", 'w', new ItemStack(TFBlocks.magicLog, 1, 3) });
+
+        Item[] doors = new Item[] { TFItems.doorTwilight, TFItems.doorCanopy, TFItems.doorMangrove,
+                TFItems.doorDarkwood, TFItems.doorTime, TFItems.doorTrans, TFItems.doorMine, TFItems.doorSort };
+        ItemStack[] trapdoors = new ItemStack[] { new ItemStack(TFBlocks.trapdoorTwilight, 2, 0),
+                new ItemStack(TFBlocks.trapdoorCanopy, 2, 0), new ItemStack(TFBlocks.trapdoorMangrove, 2, 0),
+                new ItemStack(TFBlocks.trapdoorDarkwood, 2, 0), new ItemStack(TFBlocks.trapdoorTime, 2, 0),
+                new ItemStack(TFBlocks.trapdoorTrans, 2, 0), new ItemStack(TFBlocks.trapdoorMine, 2, 0),
+                new ItemStack(TFBlocks.trapdoorSort, 2, 0) };
+        for (int i = 0; i < doors.length; i++) {
+            GameRegistry.addRecipe(
+                    new ItemStack(doors[i], 1, 0),
+                    new Object[] { "##", "##", "##", '#', new ItemStack(TFBlocks.planks, 1, i) });
+            GameRegistry
+                    .addRecipe(trapdoors[i], new Object[] { "###", "###", '#', new ItemStack(TFBlocks.planks, 1, i) });
+        }
 
         GameRegistry.addRecipe(
                 new ItemStack(TFBlocks.nagastoneStairsLeft, 8, 0),

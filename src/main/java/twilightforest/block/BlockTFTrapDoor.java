@@ -95,10 +95,10 @@ public class BlockTFTrapDoor extends BlockTrapDoor {
         icons = new IIcon[4];
         this.icons[0] = reg
                 .registerIcon(TwilightForestMod.ID + ":wood/trapdoor/" + names[material] + "_trapdoor_vertical");
-        this.icons[1] = new BetterIconFlipped(this.icons[0], false, true);
+        this.icons[1] = new BetterIconFlipped(this.icons[0], true, true);
         this.icons[2] = reg
                 .registerIcon(TwilightForestMod.ID + ":wood/trapdoor/" + names[material] + "_trapdoor_horizontal");
-        this.icons[3] = new BetterIconFlipped(this.icons[2], true, false);
+        this.icons[3] = new BetterIconFlipped(this.icons[2], true, true);
     }
 
     @Override

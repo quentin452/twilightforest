@@ -28,6 +28,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import twilightforest.TwilightForestMod;
 import twilightforest.item.TFItems;
+import twilightforest.world.TFGenBigMushgloom;
 
 public class BlockTFPlant extends BlockBush implements IShearable {
 
@@ -478,6 +479,37 @@ public class BlockTFPlant extends BlockBush implements IShearable {
         if (meta == META_MOSSPATCH && random.nextInt(10) == 0) {
             world.spawnParticle("townaura", x + random.nextFloat(), y + 0.1F, z + random.nextFloat(), 0.0D, 0.0D, 0.0D);
         }
+    }
+
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    @Override
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX,
+            float subY, float subZ) {
+        if (worldIn.getBlockMetadata(x, y, z) == META_MUSHGLOOM) {
+            ItemStack heldItem = player.getHeldItem();
+            Random random = new Random();
+            if (heldItem != null) if (heldItem.getItem() == Items.dye && heldItem.getItem().getDamage(heldItem) == 15) {
+                if (random.nextFloat() < 0.4D) {
+                    int l = worldIn.getBlockMetadata(x, y, z);
+                    worldIn.setBlockToAir(x, y, z);
+                    TFGenBigMushgloom worldgenbigmushroom = new TFGenBigMushgloom();
+
+                    if (worldgenbigmushroom.generate(worldIn, random, x, y, z)) {
+                        heldItem.stackSize--;
+                        return true;
+                    } else {
+                        worldIn.setBlock(x, y, z, this, l, 3);
+                        return false;
+                    }
+                } else {
+                    heldItem.stackSize--;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

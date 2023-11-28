@@ -40,6 +40,8 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
+import baubles.common.container.InventoryBaubles;
+import baubles.common.lib.PlayerHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -69,6 +71,7 @@ import twilightforest.world.WorldProviderTwilightForest;
 public class TFEventListener {
 
     protected HashMap<String, InventoryPlayer> playerKeepsMap = new HashMap<>();
+    protected HashMap<String, ItemStack[]> playerBaublesMap = new HashMap<>();
     private boolean isBreakingWithGiantPick = false;
     private boolean shouldMakeGiantCobble = false;
     private int amountOfCobbleToReplace = 0;
@@ -385,9 +388,11 @@ public class TFEventListener {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
 
             boolean charm1 = false;
-            boolean charm2 = player.inventory.consumeInventoryItem(TFItems.charmOfLife2);
+            boolean charm2 = TFBaublesIntegration.consumeBaublesItem(player, TFItems.charmOfLife2)
+                    || player.inventory.consumeInventoryItem(TFItems.charmOfLife2);
             if (!charm2) {
-                charm1 = player.inventory.consumeInventoryItem(TFItems.charmOfLife1);
+                charm1 = TFBaublesIntegration.consumeBaublesItem(player, TFItems.charmOfLife1)
+                        || player.inventory.consumeInventoryItem(TFItems.charmOfLife1);
             }
 
             // do they have a charm of life? OM NOM NOM!
@@ -484,15 +489,18 @@ public class TFEventListener {
      * 
      * Also keep tower keys
      */
+    @SuppressWarnings("unused")
     @SubscribeEvent
     public void livingDies(LivingDeathEvent event) {
         if (event.entityLiving instanceof EntityPlayer player
                 && !event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
 
             // TODO: Add support for keeping Bauble slot items on all tiers
-            if (player.inventory.consumeInventoryItem(TFItems.charmOfKeeping3)) {
+            if (TFBaublesIntegration.consumeBaublesItem(player, TFItems.charmOfKeeping3)
+                    || player.inventory.consumeInventoryItem(TFItems.charmOfKeeping3)) {
                 FMLLog.info("[TwilightForest] Player died with charm of keeping III!  Keep it all!");
                 InventoryPlayer keepInventory = new InventoryPlayer(null);
+                ItemStack[] baublesInventory = TFBaublesIntegration.keepAllBaubles(player);
 
                 // armor and full inventory
                 keepAllArmor(player, keepInventory);
@@ -504,38 +512,49 @@ public class TFEventListener {
                 keepInventory.setItemStack(new ItemStack(TFItems.charmOfKeeping3));
 
                 playerKeepsMap.put(player.getCommandSenderName(), keepInventory);
-            } else if (player.inventory.consumeInventoryItem(TFItems.charmOfKeeping2)) {
-                FMLLog.info("[TwilightForest] Player died with charm of keeping II!  Keep armor and hotbar!");
-                InventoryPlayer keepInventory = new InventoryPlayer(null);
+                if (baublesInventory != null) playerBaublesMap.put(player.getCommandSenderName(), baublesInventory);
+            } else if (TFBaublesIntegration.consumeBaublesItem(player, TFItems.charmOfKeeping2)
+                    || player.inventory.consumeInventoryItem(TFItems.charmOfKeeping2)) {
+                        FMLLog.info("[TwilightForest] Player died with charm of keeping II!  Keep armor and hotbar!");
+                        InventoryPlayer keepInventory = new InventoryPlayer(null);
+                        ItemStack[] baublesInventory = TFBaublesIntegration.keepAllBaubles(player);
 
-                keepAllArmor(player, keepInventory);
-                for (int i = 0; i < 9; i++) {
-                    keepInventory.mainInventory[i] = ItemStack.copyItemStack(player.inventory.mainInventory[i]);
-                    player.inventory.mainInventory[i] = null;
-                }
-                // TODO: Add support for keeping all M&B Battlegear slot items.
-                keepInventory.setItemStack(new ItemStack(TFItems.charmOfKeeping2));
+                        keepAllArmor(player, keepInventory);
+                        for (int i = 0; i < 9; i++) {
+                            keepInventory.mainInventory[i] = ItemStack.copyItemStack(player.inventory.mainInventory[i]);
+                            player.inventory.mainInventory[i] = null;
+                        }
+                        // TODO: Add support for keeping all M&B Battlegear slot items.
+                        keepInventory.setItemStack(new ItemStack(TFItems.charmOfKeeping2));
 
-                playerKeepsMap.put(player.getCommandSenderName(), keepInventory);
-            } else if (player.inventory.consumeInventoryItem(TFItems.charmOfKeeping1)) {
-                FMLLog.info("[TwilightForest] Player died with charm of keeping I!  Keep armor and current item!");
-                InventoryPlayer keepInventory = new InventoryPlayer(null);
+                        playerKeepsMap.put(player.getCommandSenderName(), keepInventory);
+                        if (baublesInventory != null)
+                            playerBaublesMap.put(player.getCommandSenderName(), baublesInventory);
+                    } else
+                if (TFBaublesIntegration.consumeBaublesItem(player, TFItems.charmOfKeeping1)
+                        || player.inventory.consumeInventoryItem(TFItems.charmOfKeeping1)) {
+                            FMLLog.info(
+                                    "[TwilightForest] Player died with charm of keeping I!  Keep armor and current item!");
+                            InventoryPlayer keepInventory = new InventoryPlayer(null);
+                            ItemStack[] baublesInventory = TFBaublesIntegration.keepAllBaubles(player);
 
-                keepAllArmor(player, keepInventory);
-                if (player.inventory.getCurrentItem() != null) {
-                    int currentItem = player.inventory.currentItem;
-                    // Fixed crash when holding a M&B Battlegear item.
-                    if (currentItem <= 8 & currentItem >= 0) {
-                        keepInventory.mainInventory[currentItem] = ItemStack
-                                .copyItemStack(player.inventory.mainInventory[currentItem]);
-                        player.inventory.mainInventory[currentItem] = null;
-                    }
-                    // TODO: Add support for keeping held M&B Battlegear slot items.
-                }
-                keepInventory.setItemStack(new ItemStack(TFItems.charmOfKeeping1));
+                            keepAllArmor(player, keepInventory);
+                            if (player.inventory.getCurrentItem() != null) {
+                                int currentItem = player.inventory.currentItem;
+                                // Fixed crash when holding a M&B Battlegear item.
+                                if (currentItem <= 8 & currentItem >= 0) {
+                                    keepInventory.mainInventory[currentItem] = ItemStack
+                                            .copyItemStack(player.inventory.mainInventory[currentItem]);
+                                    player.inventory.mainInventory[currentItem] = null;
+                                }
+                                // TODO: Add support for keeping held M&B Battlegear slot items.
+                            }
+                            keepInventory.setItemStack(new ItemStack(TFItems.charmOfKeeping1));
 
-                playerKeepsMap.put(player.getCommandSenderName(), keepInventory);
-            }
+                            playerKeepsMap.put(player.getCommandSenderName(), keepInventory);
+                            if (baublesInventory != null)
+                                playerBaublesMap.put(player.getCommandSenderName(), baublesInventory);
+                        }
 
             // check for tower keys
             if (player.inventory.hasItem(TFItems.towerKey)) {
@@ -585,21 +604,32 @@ public class TFEventListener {
     @SubscribeEvent
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         EntityPlayer player = event.player;
-        if (playerKeepsMap.containsKey(player.getCommandSenderName())) {
+        if (playerKeepsMap.containsKey(player.getCommandSenderName())
+                || playerBaublesMap.containsKey(player.getCommandSenderName())) {
             FMLLog.info(
                     "[TwilightForest] Player %s respawned and recieved items held in storage",
                     player.getCommandSenderName());
 
             InventoryPlayer keepInventory = playerKeepsMap.get(player.getCommandSenderName());
+            ItemStack[] baublesInventory = playerBaublesMap.get(player.getCommandSenderName());
 
-            for (int i = 0; i < player.inventory.armorInventory.length; i++) {
-                if (keepInventory.armorInventory[i] != null) {
-                    player.inventory.armorInventory[i] = keepInventory.armorInventory[i];
+            if (keepInventory != null) {
+                for (int i = 0; i < player.inventory.armorInventory.length; i++) {
+                    if (keepInventory.armorInventory[i] != null) {
+                        player.inventory.armorInventory[i] = keepInventory.armorInventory[i];
+                    }
+                }
+                for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+                    if (keepInventory.mainInventory[i] != null) {
+                        player.inventory.mainInventory[i] = keepInventory.mainInventory[i];
+                    }
                 }
             }
-            for (int i = 0; i < player.inventory.mainInventory.length; i++) {
-                if (keepInventory.mainInventory[i] != null) {
-                    player.inventory.mainInventory[i] = keepInventory.mainInventory[i];
+
+            if (TwilightForestMod.areBaublesLoaded && baublesInventory != null) {
+                InventoryBaubles inventoryBaubles = PlayerHandler.getPlayerBaubles(player);
+                for (int i = 0; i < inventoryBaubles.getSizeInventory(); i++) {
+                    if (baublesInventory[i] != null) inventoryBaubles.setInventorySlotContents(i, baublesInventory[i]);
                 }
             }
 

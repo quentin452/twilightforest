@@ -10,6 +10,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
+import baubles.api.BaubleType;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
@@ -90,6 +91,7 @@ public class TwilightForestMod {
 
     // integration
     public static boolean isSkinportLoaded = false;
+    public static boolean areBaublesLoaded = false;
 
     // performance
     public static float canopyCoverage;
@@ -232,8 +234,13 @@ public class TwilightForestMod {
         // just call this so that we register structure IDs correctly
         new StructureTFMajorFeatureStart();
 
-        // check if Skinport integration is required
+        // check if various integrations are required
         isSkinportLoaded = Loader.isModLoaded("skinport");
+        if (Loader.isModLoaded("Baubles")) {
+            areBaublesLoaded = BaubleType.values().length > 3;
+        } else {
+            areBaublesLoaded = false;
+        }
 
         // check for biome conflicts, load biomes
         TFBiomeBase.assignBlankBiomeIds();

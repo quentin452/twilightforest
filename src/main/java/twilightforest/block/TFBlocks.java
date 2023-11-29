@@ -92,6 +92,11 @@ public class TFBlocks {
     public static Block unripeTrollBer;
     public static Block trollBer;
     public static Block knightmetalStorage;
+    public static Block arcticFurStorage;
+    public static Block carminiteStorage;
+    public static Block fieryMetalStorage;
+    public static Block ironwoodStorage;
+    public static Block steeleafStorage;
     public static Block hugeLilyPad;
     public static Block hugeWaterLily;
     public static Block slider;
@@ -190,6 +195,11 @@ public class TFBlocks {
         unripeTrollBer = (new BlockTFUnripeTorchCluster()).setBlockName("UnripeTrollBer");
         trollBer = (new BlockTFRipeTorchCluster()).setBlockName("TrollBer");
         knightmetalStorage = (new BlockTFKnightmetalBlock()).setBlockName("KnightmetalBlock");
+        arcticFurStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.ARCTIC_FUR)).setBlockName("ArcticFurBlock");
+        carminiteStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.CARMINITE)).setBlockName("CarminiteBlock");
+        fieryMetalStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.FIERY_METAL)).setBlockName("FieryBlock");
+        ironwoodStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.IRONWOOD)).setBlockName("IronwoodBlock");
+        steeleafStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.STEELEAF)).setBlockName("SteeleafBlock");
         hugeLilyPad = (new BlockTFHugeLilyPad()).setBlockName("HugeLilyPad");
         hugeWaterLily = (new BlockTFHugeWaterLily()).setBlockName("HugeWaterLily")
                 .setBlockTextureName(TwilightForestMod.ID + ":huge_waterlily");
@@ -298,6 +308,11 @@ public class TFBlocks {
         registerMyBlock(unripeTrollBer, ItemBlock.class);
         registerMyBlock(trollBer, ItemBlock.class);
         registerMyBlock(knightmetalStorage, ItemBlock.class);
+        registerMyBlock(arcticFurStorage, ItemBlock.class);
+        registerMyBlock(carminiteStorage, ItemBlock.class);
+        registerMyBlock(fieryMetalStorage, ItemBlock.class);
+        registerMyBlock(ironwoodStorage, ItemBlock.class);
+        registerMyBlock(steeleafStorage, ItemBlock.class);
         registerMyBlock(hugeLilyPad, twilightforest.item.ItemBlockTFHugeLilyPad.class);
         registerMyBlock(hugeWaterLily, twilightforest.item.ItemBlockTFHugeWaterLily.class);
         registerMyBlock(slider);

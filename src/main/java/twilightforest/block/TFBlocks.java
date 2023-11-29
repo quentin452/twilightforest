@@ -195,8 +195,10 @@ public class TFBlocks {
         unripeTrollBer = (new BlockTFUnripeTorchCluster()).setBlockName("UnripeTrollBer");
         trollBer = (new BlockTFRipeTorchCluster()).setBlockName("TrollBer");
         knightmetalStorage = (new BlockTFKnightmetalBlock()).setBlockName("KnightmetalBlock");
-        arcticFurStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.ARCTIC_FUR)).setBlockName("ArcticFurBlock");
-        carminiteStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.CARMINITE)).setBlockName("CarminiteBlock");
+        arcticFurStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.ARCTIC_FUR))
+                .setBlockName("ArcticFurBlock");
+        carminiteStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.CARMINITE))
+                .setBlockName("CarminiteBlock");
         fieryMetalStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.FIERY_METAL)).setBlockName("FieryBlock");
         ironwoodStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.IRONWOOD)).setBlockName("IronwoodBlock");
         steeleafStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.STEELEAF)).setBlockName("SteeleafBlock");

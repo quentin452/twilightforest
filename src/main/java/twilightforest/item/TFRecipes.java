@@ -30,6 +30,7 @@ public class TFRecipes {
         OreDictionary.registerOre("plankWood", new ItemStack(TFBlocks.towerWood, 1, OreDictionary.WILDCARD_VALUE));
         for (int i = 0; i < 8; i++)
             OreDictionary.registerOre("plankWood", new ItemStack(TFBlocks.planks, i, OreDictionary.WILDCARD_VALUE));
+        OreDictionary.registerOre("feather", new ItemStack(TFItems.feather, 1, OreDictionary.WILDCARD_VALUE));
 
         // register my ores, just for fun
         OreDictionary.registerOre("ingotFiery", new ItemStack(TFItems.fieryIngot));

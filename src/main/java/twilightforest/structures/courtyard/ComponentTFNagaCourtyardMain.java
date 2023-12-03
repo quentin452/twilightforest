@@ -27,10 +27,10 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
         EAST,
         WEST
     };
-
-    CellType[][] courtyard;
+    
     int tableWidth = ROW_OF_CELLS * 2 - 1;
     int terraceLeft;
+    CellType[][] courtyard = new CellType[tableWidth][tableWidth];
 
     static int ROW_OF_CELLS = 8;
     static int RADIUS = (int) ((((ROW_OF_CELLS - 2) / 2.0F) * 12.0F) + 8);

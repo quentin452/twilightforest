@@ -84,12 +84,23 @@ public class TFRecipes {
                 new ItemStack(TFBlocks.trapdoorDarkwood, 2, 0), new ItemStack(TFBlocks.trapdoorTime, 2, 0),
                 new ItemStack(TFBlocks.trapdoorTrans, 2, 0), new ItemStack(TFBlocks.trapdoorMine, 2, 0),
                 new ItemStack(TFBlocks.trapdoorSort, 2, 0) };
+        ItemStack[] stairs = new ItemStack[] { new ItemStack(TFBlocks.woodenStairsTwilight, 8, 0),
+                new ItemStack(TFBlocks.woodenStairsCanopy, 8, 0), new ItemStack(TFBlocks.woodenStairsMangrove, 8, 0),
+                new ItemStack(TFBlocks.woodenStairsDarkwood, 8, 0), new ItemStack(TFBlocks.woodenStairsTime, 8, 0),
+                new ItemStack(TFBlocks.woodenStairsTrans, 8, 0), new ItemStack(TFBlocks.woodenStairsMine, 8, 0),
+                new ItemStack(TFBlocks.woodenStairsSort, 8, 0) };
         for (int i = 0; i < doors.length; i++) {
             GameRegistry.addRecipe(
                     new ItemStack(doors[i], 1, 0),
                     new Object[] { "##", "##", "##", '#', new ItemStack(TFBlocks.planks, 1, i) });
             GameRegistry
                     .addRecipe(trapdoors[i], new Object[] { "###", "###", '#', new ItemStack(TFBlocks.planks, 1, i) });
+            GameRegistry.addRecipe(
+                    stairs[i],
+                    new Object[] { "#  ", "## ", "###", '#', new ItemStack(TFBlocks.planks, 1, i) });
+            GameRegistry.addRecipe(
+                    new ItemStack(TFBlocks.woodenSlab, 6, i),
+                    new Object[] { "###", '#', new ItemStack(TFBlocks.planks, 1, i) });
         }
 
         GameRegistry.addRecipe(

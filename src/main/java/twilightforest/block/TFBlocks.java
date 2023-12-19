@@ -14,6 +14,16 @@ public class TFBlocks {
 
     public static Block log;
     public static Block planks;
+    public static Block doubleWoodenSlab;
+    public static Block woodenSlab;
+    public static Block woodenStairsTwilight;
+    public static Block woodenStairsCanopy;
+    public static Block woodenStairsMangrove;
+    public static Block woodenStairsDarkwood;
+    public static Block woodenStairsTime;
+    public static Block woodenStairsTrans;
+    public static Block woodenStairsMine;
+    public static Block woodenStairsSort;
     public static Block doorTwilight;
     public static Block doorCanopy;
     public static Block doorMangrove;
@@ -114,6 +124,16 @@ public class TFBlocks {
 
         log = (new BlockTFLog()).setBlockName("TFLog");
         planks = (new BlockTFWood()).setBlockName("TFPlanks");
+        doubleWoodenSlab = new BlockTFWoodSlab(true).setBlockName("TFWoodSlabDouble");
+        woodenSlab = new BlockTFWoodSlab(false).setBlockName("TFWoodSlab");
+        woodenStairsTwilight = (new BlockTFWoodStairs(0)).setBlockName("TFWoodStairsTwilight");
+        woodenStairsCanopy = (new BlockTFWoodStairs(1)).setBlockName("TFWoodStairsCanopy");
+        woodenStairsMangrove = (new BlockTFWoodStairs(2)).setBlockName("TFWoodStairsMangrove");
+        woodenStairsDarkwood = (new BlockTFWoodStairs(3)).setBlockName("TFWoodStairsDarkwood");
+        woodenStairsTime = (new BlockTFWoodStairs(4)).setBlockName("TFWoodStairsTime");
+        woodenStairsTrans = (new BlockTFWoodStairs(5)).setBlockName("TFWoodStairsTrans");
+        woodenStairsMine = (new BlockTFWoodStairs(6)).setBlockName("TFWoodStairsMine");
+        woodenStairsSort = (new BlockTFWoodStairs(7)).setBlockName("TFWoodStairsSort");
         doorTwilight = (new BlockTFDoor(0)).setBlockName("TFDoorTwilight");
         doorCanopy = (new BlockTFDoor(1)).setBlockName("TFDoorCanopy");
         doorMangrove = (new BlockTFDoor(2)).setBlockName("TFDoorMangrove");
@@ -219,6 +239,26 @@ public class TFBlocks {
         // register blocks with their pickup values
         registerMyBlock(log);
         registerMyBlock(planks);
+        registerMyBlock(
+                woodenSlab,
+                twilightforest.item.ItemBlockTFWoodenSlab.class,
+                ((BlockSlab) woodenSlab),
+                ((BlockSlab) doubleWoodenSlab),
+                false);
+        registerMyBlock(
+                doubleWoodenSlab,
+                twilightforest.item.ItemBlockTFWoodenSlab.class,
+                ((BlockSlab) woodenSlab),
+                ((BlockSlab) doubleWoodenSlab),
+                true);
+        registerMyBlock(woodenStairsTwilight);
+        registerMyBlock(woodenStairsCanopy);
+        registerMyBlock(woodenStairsMangrove);
+        registerMyBlock(woodenStairsDarkwood);
+        registerMyBlock(woodenStairsTime);
+        registerMyBlock(woodenStairsTrans);
+        registerMyBlock(woodenStairsMine);
+        registerMyBlock(woodenStairsSort);
         registerMyBlock(doorTwilight);
         registerMyBlock(doorCanopy);
         registerMyBlock(doorMangrove);
@@ -330,6 +370,16 @@ public class TFBlocks {
         // fire info
         Blocks.fire.setFireInfo(log, 5, 5);
         Blocks.fire.setFireInfo(planks, 5, 20);
+        Blocks.fire.setFireInfo(woodenSlab, 5, 20);
+        Blocks.fire.setFireInfo(doubleWoodenSlab, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsTwilight, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsCanopy, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsMangrove, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsDarkwood, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsTime, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsTrans, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsMine, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsSort, 5, 20);
         Blocks.fire.setFireInfo(leaves, 30, 60);
         Blocks.fire.setFireInfo(leaves3, 30, 60);
     }

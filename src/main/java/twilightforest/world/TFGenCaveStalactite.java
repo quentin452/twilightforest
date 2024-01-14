@@ -201,7 +201,7 @@ public class TFGenCaveStalactite extends TFGenerator {
                             // Stone block before place gtOre
                             setBlock(world, x + dx, y + dy, z + dz, Blocks.stone);
                             // Place GT ore
-                            GT_Integration_Utils.placeGTOre(world, x + dx, y + dy, z + dz, blockID, false);
+                            GT_Integration_Utils.placeGTOre(world, x + dx, y + dy, z + dz, blockID);
 
                         } else {
                             // Place ore/stone

@@ -84,7 +84,7 @@ public class GT_Integration_Utils {
         return -1;
     }
 
-    public static boolean placeGTOre(World aWorld, int aX, int aY, int aZ, Block mcOreBlock, boolean isSmallOre) {
+    public static boolean placeGTOre(World aWorld, int aX, int aY, int aZ, Block mcOreBlock) {
 
         if (isIntegrationFailed()) {
             return false;
@@ -95,7 +95,7 @@ public class GT_Integration_Utils {
             return false;
         }
 
-        return setOreBlock(aWorld, aX, aY, aZ, mappedMeta, isSmallOre);
+        return setOreBlock(aWorld, aX, aY, aZ, mappedMeta, false);
 
     }
 

@@ -53,6 +53,7 @@ import twilightforest.tileentity.TileEntityTFSnowQueenSpawner;
 import twilightforest.tileentity.TileEntityTFTowerBossSpawner;
 import twilightforest.tileentity.TileEntityTFTowerBuilder;
 import twilightforest.tileentity.TileEntityTFTrophy;
+import twilightforest.world.TFGenCaveStalactite;
 import twilightforest.world.WorldProviderTwilightForest;
 
 @Mod(modid = TwilightForestMod.ID, name = "The Twilight Forest", version = TwilightForestMod.VERSION)
@@ -88,6 +89,34 @@ public class TwilightForestMod {
     // performance
     public static float canopyCoverage;
     public static int twilightOakChance;
+
+    // Ore Balance
+
+    public static double stalactiteOrePopulationDensity = 75;
+    public static boolean gregifyStalactiteOres;
+
+    public static boolean diamondOreStal;
+    public static boolean lapisOreStal;
+    public static boolean emeraldOreStal;
+    public static boolean goldOreStal;
+    public static boolean redstoneOreStal;
+    public static boolean ironOreStal;
+    public static boolean coalOreStal;
+    public static boolean glowstoneStal;
+
+    boolean GT_useSmallOres;
+
+    public static int GT_diamondOreMeta;
+    public static int GT_lapisOreMeta;
+    public static int GT_emeraldOreMeta;
+    public static int GT_goldOreMeta;
+    public static int GT_redstoneOreMeta;
+    public static int GT_ironOreMeta;
+    public static int GT_coalOreMeta;
+
+    // Major feature spawn chance
+    public static double majorFeatureGenChance = 100;
+    public static double minorFeatureGenChance = 100;
 
     public static int idMobWildBoar;
     public static int idMobBighornSheep;
@@ -318,6 +347,11 @@ public class TwilightForestMod {
             TFThaumcraftIntegration.registerThaumcraftIntegration();
         } else {
             FMLLog.info("[TwilightForest] Did not find Thaumcraft, did not load ThaumcraftApi integration.");
+        }
+
+        // GT Ore
+        if (gregifyStalactiteOres) {
+            GT_Integration_Utils.init();
         }
 
         // final check for biome ID conflicts
@@ -925,6 +959,37 @@ public class TwilightForestMod {
                 "Performance",
                 "TwilightOakChance",
                 48).comment = "Chance that a chunk in the Twilight Forest will contain a twilight oak tree.  Higher numbers reduce the number of trees, increasing performance.";
+
+        // Ore in Stalactites
+        // Toggle gen
+
+        diamondOreStal = configFile.get("Stalactites", "Diamond Ore Stalactites", true).getBoolean(true);
+        lapisOreStal = configFile.get("Stalactites", "Lapis Ore Stalactites", true).getBoolean(true);
+        emeraldOreStal = configFile.get("Stalactites", "Emerald Ore Stalactites", true).getBoolean(true);
+        goldOreStal = configFile.get("Stalactites", "Gold Ore Stalactites", true).getBoolean(true);
+        redstoneOreStal = configFile.get("Stalactites", "Redstone Ore Stalactites", true).getBoolean(true);
+        ironOreStal = configFile.get("Stalactites", "Iron Ore Stalactites", true).getBoolean(true);
+        coalOreStal = configFile.get("Stalactites", "Coal Ore Stalactites", true).getBoolean(true);
+        glowstoneStal = configFile.get("Stalactites", "Glowstone Stalactites", true).getBoolean(true);
+
+        // Toggle ore
+        TFGenCaveStalactite.configStalactites();
+
+        gregifyStalactiteOres = configFile.get("Stalactites", "Use Gregified ores", true).getBoolean(true);
+
+        // GT Ore Mapping
+        GT_coalOreMeta = configFile.get("GT_OreMapping", "GT_coalOreMeta", 535).getInt();
+        GT_lapisOreMeta = configFile.get("GT_OreMapping", "GT_lapisOreMeta", 526).getInt();
+        GT_redstoneOreMeta = configFile.get("GT_OreMapping", "GT_redstoneOreMeta", 810).getInt();
+        GT_emeraldOreMeta = configFile.get("GT_OreMapping", "GT_emeraldOreMeta", 501).getInt();
+        GT_diamondOreMeta = configFile.get("GT_OreMapping", "GT_diamondOreMeta", 500).getInt();
+        GT_ironOreMeta = configFile.get("GT_OreMapping", "GT_ironOreMeta", 32).getInt();
+        GT_goldOreMeta = configFile.get("GT_OreMapping", "GT_goldOreMeta", 86).getInt();
+
+        // Gen chance
+        majorFeatureGenChance = configFile.get("WorldGen", "Major Feature Generation Chance", 100).getDouble(100);
+        minorFeatureGenChance = configFile.get("WorldGen", "Minor Feature Generation Chance", 100).getDouble(100);
+        stalactiteOrePopulationDensity = configFile.get("WorldGen", "Ore density in stalactites", 100).getDouble(100);
 
         // fixed values, don't even read the config
         idMobWildBoar = 177;

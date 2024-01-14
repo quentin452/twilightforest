@@ -7,6 +7,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
+import twilightforest.GT_Integration_Utils;
+import twilightforest.TFFeature;
+import twilightforest.TwilightForestMod;
+
 public class TFGenCaveStalactite extends TFGenerator {
 
     public static TFGenCaveStalactite diamond = new TFGenCaveStalactite(Blocks.diamond_ore, 0.5F, 4, 16);
@@ -23,6 +27,9 @@ public class TFGenCaveStalactite extends TFGenerator {
     public float sizeFactor;
     public int maxLength;
     public int minHeight;
+
+    // Greg?
+    public boolean doOreGen;
 
     /**
      * Initializes a stalactite builder. Actually also makes stalagmites
@@ -153,6 +160,11 @@ public class TFGenCaveStalactite extends TFGenerator {
 
     public boolean makeSpike(World world, Random random, int x, int y, int z, int maxLength) {
 
+        // Disable ore gen
+        if (!doOreGen) {
+            blockID = Blocks.stone;
+        }
+
         int diameter = (int) (maxLength / 4.5); // diameter of the base
 
         // let's see...
@@ -180,12 +192,49 @@ public class TFGenCaveStalactite extends TFGenerator {
                 }
 
                 for (int dy = 0; dy != (spikeLength * dir); dy += dir) {
-                    setBlock(world, x + dx, y + dy, z + dz, blockID);
+
+                    // Density
+                    if (TFFeature.getRandom(random, TwilightForestMod.stalactiteOrePopulationDensity)) {
+
+                        // Just set mcOre
+                        if (TwilightForestMod.gregifyStalactiteOres && doOreGen) {
+                            // Stone block before place gtOre
+                            setBlock(world, x + dx, y + dy, z + dz, Blocks.stone);
+                            // Place GT ore
+                            GT_Integration_Utils.placeGTOre(world, x + dx, y + dy, z + dz, blockID, false);
+
+                        } else {
+                            // Place ore/stone
+                            setBlock(world, x + dx, y + dy, z + dz, blockID);
+                        }
+
+                    } else {
+                        // No ore just place stone
+                        setBlock(world, x + dx, y + dy, z + dz, Blocks.stone);
+                    }
+
                 }
             }
         }
 
         return true;
+    }
+
+    public static void configStalactites() {
+
+        diamond.setDoOreGen(TwilightForestMod.diamondOreStal);
+        lapis.setDoOreGen(TwilightForestMod.lapisOreStal);
+        emerald.setDoOreGen(TwilightForestMod.emeraldOreStal);
+        gold.setDoOreGen(TwilightForestMod.goldOreStal);
+        redstone.setDoOreGen(TwilightForestMod.redstoneOreStal);
+        iron.setDoOreGen(TwilightForestMod.ironOreStal);
+        coal.setDoOreGen(TwilightForestMod.coalOreStal);
+        glowstone.setDoOreGen(TwilightForestMod.glowstoneStal);
+
+    }
+
+    public void setDoOreGen(boolean doGenOre) {
+        this.doOreGen = doGenOre;
     }
 
 }

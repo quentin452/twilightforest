@@ -104,7 +104,7 @@ public class TwilightForestMod {
     public static boolean coalOreStal;
     public static boolean glowstoneStal;
 
-    boolean GT_useSmallOres;
+    public static boolean GT_useSmallOres;
 
     public static int GT_diamondOreMeta;
     public static int GT_lapisOreMeta;
@@ -351,7 +351,11 @@ public class TwilightForestMod {
 
         // GT Ore
         if (gregifyStalactiteOres) {
+            // Doing
             GT_Integration_Utils.init();
+            if (GT_Integration_Utils.isIntegrationFailed()) {
+                FMLLog.warning("[TwilightForest] Integration error with Gregtech - reflection is broken.");
+            }
         }
 
         // final check for biome ID conflicts
@@ -975,16 +979,21 @@ public class TwilightForestMod {
         // Toggle ore
         TFGenCaveStalactite.configStalactites();
 
-        gregifyStalactiteOres = configFile.get("Stalactites", "Use Gregified ores", true).getBoolean(true);
+        gregifyStalactiteOres = configFile.get("Stalactites", "Use Gregified ores", false).getBoolean(false);
 
-        // GT Ore Mapping
-        GT_coalOreMeta = configFile.get("GT_OreMapping", "GT_coalOreMeta", 535).getInt();
-        GT_lapisOreMeta = configFile.get("GT_OreMapping", "GT_lapisOreMeta", 526).getInt();
-        GT_redstoneOreMeta = configFile.get("GT_OreMapping", "GT_redstoneOreMeta", 810).getInt();
-        GT_emeraldOreMeta = configFile.get("GT_OreMapping", "GT_emeraldOreMeta", 501).getInt();
-        GT_diamondOreMeta = configFile.get("GT_OreMapping", "GT_diamondOreMeta", 500).getInt();
-        GT_ironOreMeta = configFile.get("GT_OreMapping", "GT_ironOreMeta", 32).getInt();
-        GT_goldOreMeta = configFile.get("GT_OreMapping", "GT_goldOreMeta", 86).getInt();
+        if (gregifyStalactiteOres) {
+            // GT Ore Mapping
+            // Show More config
+            GT_useSmallOres = configFile.get("GT_OreMapping", "GT_UseSmallOres", false).getBoolean(false);
+            GT_coalOreMeta = configFile.get("GT_OreMapping", "GT_coalOreMeta", 535).getInt();
+            GT_lapisOreMeta = configFile.get("GT_OreMapping", "GT_lapisOreMeta", 526).getInt();
+            GT_redstoneOreMeta = configFile.get("GT_OreMapping", "GT_redstoneOreMeta", 810).getInt();
+            GT_emeraldOreMeta = configFile.get("GT_OreMapping", "GT_emeraldOreMeta", 501).getInt();
+            GT_diamondOreMeta = configFile.get("GT_OreMapping", "GT_diamondOreMeta", 500).getInt();
+            GT_ironOreMeta = configFile.get("GT_OreMapping", "GT_ironOreMeta", 32).getInt();
+            GT_goldOreMeta = configFile.get("GT_OreMapping", "GT_goldOreMeta", 86).getInt();
+
+        }
 
         // Gen chance
         majorFeatureGenChance = configFile.get("WorldGen", "Major Feature Generation Chance", 100).getDouble(100);

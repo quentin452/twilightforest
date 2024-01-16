@@ -197,14 +197,22 @@ public class TFGenCaveStalactite extends TFGenerator {
                     if (TFFeature.getRandom(random, TwilightForestMod.stalactiteOrePopulationDensity)) {
 
                         // Just set mcOre
-                        if (TwilightForestMod.gregifyStalactiteOres && doOreGen) {
+                        if (TwilightForestMod.gregifyStalactiteOres && !GT_Integration_Utils.isIntegrationFailed()
+                                && doOreGen) {
                             // Stone block before place gtOre
-                            setBlock(world, x + dx, y + dy, z + dz, Blocks.stone);
-                            // Place GT ore
-                            GT_Integration_Utils.placeGTOre(world, x + dx, y + dy, z + dz, blockID);
+
+                            // Glowstone Stalactite
+                            if (this.blockID == Blocks.glowstone) {
+                                setBlock(world, x + dx, y + dy, z + dz, Blocks.glowstone);
+
+                            } else {
+                                setBlock(world, x + dx, y + dy, z + dz, Blocks.stone);
+                                // Slap GT ore over
+                                GT_Integration_Utils.placeGTOre(world, x + dx, y + dy, z + dz, blockID);
+                            }
 
                         } else {
-                            // Place ore/stone
+                            // Place MC Ore
                             setBlock(world, x + dx, y + dy, z + dz, blockID);
                         }
 

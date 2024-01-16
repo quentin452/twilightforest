@@ -95,7 +95,7 @@ public class GT_Integration_Utils {
             return false;
         }
 
-        return setOreBlock(aWorld, aX, aY, aZ, mappedMeta, false);
+        return setOreBlock(aWorld, aX, aY, aZ, mappedMeta, TwilightForestMod.GT_useSmallOres);
 
     }
 

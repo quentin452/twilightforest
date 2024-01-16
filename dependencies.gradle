@@ -6,5 +6,5 @@ dependencies {
 
     // For Thaumcraft runtime
     compileOnly files('libs/Baubles-1.0.1.16-3-g9f90908-dev.jar')
-    //runtimeOnlyNonPublishable("com.github.GTNewHorizons:Baubles:1.0.3:dev")
+    //runtimeOnlyNonPublishable("com.github.GTNewHorizons:Baubles:1.0.4:dev")
 }

@@ -350,12 +350,13 @@ public class TwilightForestMod {
         }
 
         // GT Ore
-        if (gregifyStalactiteOres) {
+        if (Loader.isModLoaded("gregtech") && gregifyStalactiteOres) {
             // Doing
             GT_Integration_Utils.init();
-            if (GT_Integration_Utils.isIntegrationFailed()) {
-                FMLLog.warning("[TwilightForest] Integration error with Gregtech - reflection is broken.");
-            }
+        } else {
+            FMLLog.warning("[TwilightForest] Did not load Gregtech integration.");
+            // Disable
+            gregifyStalactiteOres = false;
         }
 
         // final check for biome ID conflicts

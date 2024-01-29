@@ -197,8 +197,7 @@ public class TFGenCaveStalactite extends TFGenerator {
                     if (TFFeature.getRandom(random, TwilightForestMod.stalactiteOrePopulationDensity)) {
 
                         // Just set mcOre
-                        if (TwilightForestMod.gregifyStalactiteOres && !GT_Integration_Utils.isIntegrationFailed()
-                                && doOreGen) {
+                        if (TwilightForestMod.gregifyStalactiteOres && doOreGen) {
                             // Stone block before place gtOre
 
                             // Glowstone Stalactite

@@ -1,56 +1,14 @@
 package twilightforest;
 
-import java.lang.reflect.Method;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
+import gregtech.common.blocks.GT_TileEntity_Ores;
+
 public class GT_Integration_Utils {
 
-    ///
-
-    static Class<?> GT_TileEntity_OresClass;
-    static Method methodSetOreBlock;
-    //
-
-    static boolean isFailed;
-
-    public static void init() {
-
-        try {
-            // Try GetNeededClass
-            extractClasses();
-
-            extractMhetods();
-
-        } catch (Exception e) {
-            isFailed = true;
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean isIntegrationFailed() {
-        return isFailed;
-    }
-
-    static void extractClasses() throws ClassNotFoundException {
-        GT_TileEntity_OresClass = Class.forName("gregtech.common.blocks.GT_TileEntity_Ores");
-    }
-
-    static void extractMhetods() throws NoSuchMethodException {
-        // Extract Method
-
-        methodSetOreBlock = GT_TileEntity_OresClass.getDeclaredMethod(
-                "setOreBlock",
-                World.class,
-                int.class,
-                int.class,
-                int.class,
-                int.class,
-                boolean.class);
-
-    }
+    public static boolean isIntegrationEnabled = false;
 
     public static int getMappedGTMetaForOre(Block mOre) {
 
@@ -86,34 +44,25 @@ public class GT_Integration_Utils {
 
     public static boolean placeGTOre(World aWorld, int aX, int aY, int aZ, Block mcOreBlock) {
 
-        if (isIntegrationFailed()) {
+        if (!isIntegrationEnabled) {
             return false;
         }
+
         int mappedMeta = getMappedGTMetaForOre(mcOreBlock);
         // Something wrong
         if (mappedMeta <= 0) {
             return false;
         }
 
-        return setOreBlock(aWorld, aX, aY, aZ, mappedMeta, TwilightForestMod.GT_useSmallOres);
+        return GT_TileEntity_Ores.setOreBlock(aWorld, aX, aY, aZ, mappedMeta, TwilightForestMod.GT_useSmallOres, true);
 
     }
 
-    public static boolean setOreBlock(World aWorld, int aX, int aY, int aZ, int aMetaData, boolean isSmallOre) {
-
-        if (isIntegrationFailed()) {
-            return false;
-        }
-
-        try {
-            return (boolean) methodSetOreBlock.invoke(null, aWorld, aX, aY, aZ, aMetaData, isSmallOre);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            isFailed = true;
-        }
-
-        return false;
+    public static void init() {
+        isIntegrationEnabled = true;
     }
 
+    public static boolean isInit() {
+        return isIntegrationEnabled;
+    }
 }

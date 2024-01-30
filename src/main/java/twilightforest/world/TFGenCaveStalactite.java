@@ -7,9 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
-import twilightforest.GT_Integration_Utils;
 import twilightforest.TFFeature;
 import twilightforest.TwilightForestMod;
+import twilightforest.gt_integration.GT_Integration_Utils;
 
 public class TFGenCaveStalactite extends TFGenerator {
 
@@ -207,7 +207,8 @@ public class TFGenCaveStalactite extends TFGenerator {
                             } else {
                                 setBlock(world, x + dx, y + dy, z + dz, Blocks.stone);
                                 // Slap GT ore over
-                                GT_Integration_Utils.placeGTOre(world, x + dx, y + dy, z + dz, blockID);
+                                GT_Integration_Utils.doPlaceGTOre(world, x + dx, y + dy, z + dz, blockID);
+
                             }
 
                         } else {

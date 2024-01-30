@@ -28,6 +28,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import twilightforest.biomes.TFBiomeBase;
 import twilightforest.block.TFBlocks;
 import twilightforest.entity.TFCreatures;
+import twilightforest.gt_integration.GT_Integration_Utils;
 import twilightforest.item.BehaviorTFMobEggDispense;
 import twilightforest.item.ItemTFMagicMap;
 import twilightforest.item.ItemTFMazeMap;

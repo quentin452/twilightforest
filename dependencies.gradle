@@ -1,7 +1,7 @@
 // Add your dependencies here
 
 dependencies {
-    implementation("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") {transitive = false}
+    compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") {transitive = false}
     compileOnly("curse.maven:skinport-234948:3212017")
 
     // For Thaumcraft runtime

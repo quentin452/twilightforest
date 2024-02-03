@@ -3,6 +3,7 @@ package twilightforest.client.renderer.entity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -44,6 +45,19 @@ public class RenderTFGiant extends RenderBiped {
      * entityLiving, partialTickTime
      */
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
+        if (TwilightForestMod.isSkinportLoaded) {
+            if (RenderTFGiantSkinportIntegration.isSlim(Minecraft.getMinecraft().thePlayer)) {
+                this.modelBipedMain.bipedRightArm = new ModelRenderer(this.modelBipedMain, 40, 16);
+                this.modelBipedMain.bipedRightArm.addBox(-2.0F, -2.0F, -2.0F, 3, 12, 4, 0);
+                this.modelBipedMain.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
+
+                this.modelBipedMain.bipedLeftArm = new ModelRenderer(this.modelBipedMain, 40, 16);
+                this.modelBipedMain.bipedLeftArm.mirror = true;
+                this.modelBipedMain.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 3, 12, 4, 0);
+                this.modelBipedMain.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
+            }
+        }
+
         float scale = 4.0F;
         GL11.glScalef(scale, scale, scale);
     }

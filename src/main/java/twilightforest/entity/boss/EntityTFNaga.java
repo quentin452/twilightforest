@@ -297,8 +297,9 @@ public class EntityTFNaga extends EntityMob implements IMob, IBossDisplayData, I
          */
 
         // NAGA SMASH!
-        if (isCollidedHorizontally && hasTarget()) {
-            breakNearbyBlocks();
+        if (isCollidedHorizontally) {
+            if (hasTarget() || (hasHome() && this.posY < this.getHomePosition().posY - 2)) breakNearbyBlocks();
+            else wanderRandomly();
         }
 
         // break targeting if our target goes outside the walls
@@ -807,9 +808,14 @@ public class EntityTFNaga extends EntityMob implements IMob, IBossDisplayData, I
         int tz = -1;
         float worstweight = -99999F;
         for (int l = 0; l < 10; l++) {
-            int dx = MathHelper.floor_double((posX + rand.nextInt(21)) - 6D);
-            int dy = MathHelper.floor_double((posY + rand.nextInt(7)) - 3D);
-            int dz = MathHelper.floor_double((posZ + rand.nextInt(21)) - 6D);
+            int dx;
+            int dy;
+            int dz;
+            do {
+                dx = MathHelper.floor_double((posX + (rand.nextBoolean() ? 1 : -1) * rand.nextInt(21))/* - 6D */);
+                dy = MathHelper.floor_double((posY + rand.nextInt(7)) - 3D);
+                dz = MathHelper.floor_double((posZ + (rand.nextBoolean() ? 1 : -1) * rand.nextInt(21))/* - 6D */);
+            } while (!this.worldObj.isAirBlock(dx, dy, dz));
 
             // if we are thinking about out of bounds, head back home instead
             if (!this.isWithinHomeDistance(dx, dy, dz)) {

@@ -94,7 +94,7 @@ public class TileEntityTFNagastoneEtched extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("Direction", direction.ordinal());
+        if (direction != null) par1NBTTagCompound.setInteger("Direction", direction.ordinal());
     }
 
     /**

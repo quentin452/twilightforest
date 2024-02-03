@@ -10,6 +10,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,8 +20,8 @@ import twilightforest.TwilightForestMod;
 public class ItemTFKnightlySword extends ItemSword {
 
     private static final int BONUS_DAMAGE = 2;
-    private Entity bonusDamageEntity;
-    private EntityPlayer bonusDamagePlayer;
+    private Entity bonusDamageTarget;
+    private EntityPlayer bonusDamageAttacker;
 
     public ItemTFKnightlySword(Item.ToolMaterial par2EnumToolMaterial) {
         super(par2EnumToolMaterial);
@@ -60,32 +61,26 @@ public class ItemTFKnightlySword extends ItemSword {
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
         // extra damage to armored targets
         if (entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getTotalArmorValue() > 0) {
-            this.bonusDamageEntity = entity;
-            this.bonusDamagePlayer = player;
+            this.bonusDamageTarget = entity;
+            this.bonusDamageAttacker = player;
         }
 
         return false;
     }
 
-    // /**
-    // * Returns the damage against a given entity.
-    // */
-    // @Override
-    // public float getDamageVsEntity(Entity par1Entity, ItemStack itemStack)
-    // {
-    // if (this.bonusDamagePlayer != null && this.bonusDamageEntity != null && par1Entity == this.bonusDamageEntity)
-    // {
-    // //System.out.println("Minotaur Axe extra damage!");
-    // this.bonusDamagePlayer.onEnchantmentCritical(par1Entity);
-    // this.bonusDamagePlayer = null;
-    // this.bonusDamageEntity = null;
-    // return super.getDamageVsEntity(par1Entity, itemStack) + BONUS_DAMAGE;
-    // }
-    // else
-    // {
-    // return super.getDamageVsEntity(par1Entity, itemStack);
-    // }
-    // }
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        if (this.bonusDamageAttacker != null && this.bonusDamageTarget != null && target == this.bonusDamageTarget) {
+            // System.out.println("Knightly Sword extra damage!");
+            if (bonusDamageAttacker instanceof EntityPlayer)
+                ((EntityPlayer) this.bonusDamageAttacker).onEnchantmentCritical(bonusDamageTarget);
+            if (this.bonusDamageTarget instanceof EntityLivingBase) target.lastDamage = 0;
+            this.bonusDamageTarget.attackEntityFrom(DamageSource.causeMobDamage(bonusDamageAttacker), BONUS_DAMAGE);
+            this.bonusDamageAttacker = null;
+            this.bonusDamageTarget = null;
+        }
+        return super.hitEntity(stack, target, attacker);
+    }
 
     /**
      * Properly register icon source

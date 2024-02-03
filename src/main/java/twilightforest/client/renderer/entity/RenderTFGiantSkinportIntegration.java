@@ -48,4 +48,13 @@ public class RenderTFGiantSkinportIntegration {
         }
         return skin1;
     }
+
+    public static boolean isSlim(EntityClientPlayerMP player) {
+        GameProfile profile = player.getGameProfile();
+        if (profile != null) {
+            ISkin iskin = SkinProviderAPI.SKIN.getSkin(PlayerProfile.wrapGameProfile(profile));
+            return iskin.getSkinType() == "slim";
+        }
+        return false;
+    }
 }

@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 
 public class GT_Integration_Utils {
 
-    static GT_OrePlacer orePlacer;
+    private static GT_OrePlacer orePlacer;
 
     public static void init() {
         // Create worker obj
@@ -22,10 +22,6 @@ public class GT_Integration_Utils {
             return false;
         }
         return orePlacer.placeGTOre(aWorld, aX, aY, aZ, mcOreBlock);
-    }
-
-    public static GT_OrePlacer getOrePlacer() {
-        return orePlacer;
     }
 
 }

@@ -28,7 +28,6 @@ public class TFGenCaveStalactite extends TFGenerator {
     public int maxLength;
     public int minHeight;
 
-    // Greg?
     public boolean doOreGen;
 
     /**

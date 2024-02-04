@@ -383,7 +383,10 @@ public class TFFeature {
         // get random value
         Random hillRNG = new Random(world.getSeed() + chunkX * 25117L + chunkZ * 151121L);
 
-        // Balance major features chance
+        // Modify major features (Bosses) generation rate
+        // 100% = default
+        // 50% = only 50% generation chance from default chance
+
         if (!getRandom(hillRNG, TwilightForestMod.majorFeatureGenChance)) {
             return nothing;
         }

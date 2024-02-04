@@ -160,15 +160,14 @@ public class TFBiomeDecorator extends BiomeDecorator {
         // random features!
         // now with chance
         if (TFFeature.getRandom(randomGenerator, TwilightForestMod.minorFeatureGenChance)) {
-            if (randomGenerator.nextInt(6) == 0) {
-                int rx = chunk_X + randomGenerator.nextInt(16) + 8;
-                int rz = chunk_Z + randomGenerator.nextInt(16) + 8;
-                int ry = currentWorld.getHeightValue(rx, rz);
-                if (ry < 75) {
-                    TFGenerator rf = randomFeature(randomGenerator);
-                    rf.generate(currentWorld, randomGenerator, rx, ry, rz);
-                }
+            int rx = chunk_X + randomGenerator.nextInt(16) + 8;
+            int rz = chunk_Z + randomGenerator.nextInt(16) + 8;
+            int ry = currentWorld.getHeightValue(rx, rz);
+            if (ry < 75) {
+                TFGenerator rf = randomFeature(randomGenerator);
+                rf.generate(currentWorld, randomGenerator, rx, ry, rz);
             }
+
         }
 
         // add canopy trees

@@ -9,6 +9,7 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 import baubles.api.BaubleType;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -125,7 +126,7 @@ public class TwilightForestMod {
 
     // Major feature spawn chance
     public static double majorFeatureGenChance = 100;
-    public static double minorFeatureGenChance = 100;
+    public static double minorFeatureGenChance = 14;
 
     public static int idMobWildBoar;
     public static int idMobBighornSheep;
@@ -1017,8 +1018,12 @@ public class TwilightForestMod {
         }
 
         // Gen chance
-        majorFeatureGenChance = configFile.get("WorldGen", "Major Feature Generation Chance", 100).getDouble(100);
-        minorFeatureGenChance = configFile.get("WorldGen", "Minor Feature Generation Chance", 100).getDouble(100);
+        Property majorGenChance = configFile.get("WorldGen", "Major Feature Generation Chance", 100);
+        majorGenChance.comment = "IT IS NOT RECOMMENDED TO CHANGE ON AN ALREADY CREATED WORLD! Since old dungeons can change/don't showing the icon on the magic map or will not be generated completely";
+        majorFeatureGenChance = majorGenChance.getDouble();
+
+        minorFeatureGenChance = configFile.get("WorldGen", "Minor Feature Generation Chance", 14).getDouble(14);
+
         stalactiteOrePopulationDensity = configFile.get("WorldGen", "Ore density in stalactites", 100).getDouble(100);
 
         // fixed values, don't even read the config

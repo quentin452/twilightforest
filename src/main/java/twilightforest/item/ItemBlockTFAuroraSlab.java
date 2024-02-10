@@ -1,10 +1,11 @@
 package twilightforest.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemSlab;
 
 import twilightforest.block.BlockTFAuroraSlab;
 
-public class ItemBlockTFAuroraSlab extends net.minecraft.item.ItemSlab {
+public class ItemBlockTFAuroraSlab extends ItemSlab {
 
     public ItemBlockTFAuroraSlab(Block block, BlockTFAuroraSlab singleSlab, BlockTFAuroraSlab doubleSlab,
             Boolean isDouble) {

@@ -63,11 +63,25 @@ public class BlockTFHugeGloomBlock extends Block {
     }
 
     /**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+    @Override
+    public int damageDropped(int par1) {
+        return BlockTFPlant.META_MUSHGLOOM;
+    }
+
+    /**
      * Gets an item for the block being called on. Args: world, x, y, z
      */
     @SideOnly(Side.CLIENT)
     public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
         return Item.getItemById(Block.getIdFromBlock(TFBlocks.plant));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getDamageValue(World worldIn, int x, int y, int z) {
+        return BlockTFPlant.META_MUSHGLOOM;
     }
 
     @SideOnly(Side.CLIENT)

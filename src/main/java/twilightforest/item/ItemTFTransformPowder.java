@@ -1,13 +1,16 @@
 package twilightforest.item;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityBat;
@@ -23,6 +26,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import twilightforest.TwilightForestMod;
@@ -32,6 +36,8 @@ import twilightforest.entity.EntityTFMinotaur;
 import twilightforest.entity.EntityTFRedcap;
 import twilightforest.entity.EntityTFSkeletonDruid;
 import twilightforest.entity.EntityTFSwarmSpider;
+import twilightforest.entity.EntityTFTowerGhast;
+import twilightforest.entity.EntityTFTowerTermite;
 import twilightforest.entity.EntityTFWraith;
 import twilightforest.entity.passive.EntityTFBighorn;
 import twilightforest.entity.passive.EntityTFBoar;
@@ -48,7 +54,7 @@ public class ItemTFTransformPowder extends ItemTF {
         this.maxStackSize = 64;
         this.setCreativeTab(TFItems.creativeTab);
 
-        transformMap = new HashMap<>();
+        transformMap = new HashMap<Class<? extends EntityLivingBase>, Class<? extends EntityLivingBase>>();
 
         addTwoWayTransformation(EntityTFMinotaur.class, EntityPigZombie.class);
         addTwoWayTransformation(EntityTFDeer.class, EntityCow.class);
@@ -62,6 +68,9 @@ public class ItemTFTransformPowder extends ItemTF {
         addTwoWayTransformation(EntityTFWraith.class, EntityBlaze.class);
         addTwoWayTransformation(EntityTFRedcap.class, EntityVillager.class);
         addTwoWayTransformation(EntityTFSkeletonDruid.class, EntityWitch.class);
+        addTwoWayTransformation(EntityTFTowerGhast.class, EntityGhast.class);
+        addTwoWayTransformation(EntityTFTowerTermite.class, EntitySilverfish.class);
+        // addTwoWayTransformation(EntityTFMazeSlime.class, EntitySlime.class);
     }
 
     public void addTwoWayTransformation(Class<? extends EntityLivingBase> class1,
@@ -103,6 +112,19 @@ public class ItemTFTransformPowder extends ItemTF {
                 try {
                     newMonster = (EntityLivingBase) transformClass.getConstructor(new Class[] { World.class })
                             .newInstance(new Object[] { target.worldObj });
+                    if (newMonster instanceof EntitySheep) {
+                        ((EntitySheep) newMonster).setFleeceColor(((EntitySheep) target).getFleeceColor());
+                        ((EntitySheep) newMonster).setSheared(((EntitySheep) target).getSheared());
+                    }
+                    if (newMonster instanceof EntityVillager) {
+                        if (((EntityTFRedcap) target).getVillagerProfession() == -1)
+                            VillagerRegistry.applyRandomTrade((EntityVillager) newMonster, new Random());
+                        else((EntityVillager) newMonster)
+                                .setProfession(((EntityTFRedcap) target).getVillagerProfession());
+                    }
+                    if (newMonster instanceof EntityTFRedcap) {
+                        ((EntityTFRedcap) newMonster).setVillagerProfession(((EntityVillager) target).getProfession());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -117,6 +139,19 @@ public class ItemTFTransformPowder extends ItemTF {
                             target.rotationYaw,
                             target.rotationPitch);
                     // newMonster.initCreature();
+
+                    newMonster.cameraPitch = target.cameraPitch;
+                    newMonster.prevCameraPitch = target.prevCameraPitch;
+                    newMonster.rotationPitch = target.rotationPitch;
+                    newMonster.prevRotationPitch = target.prevRotationPitch;
+                    newMonster.renderYawOffset = target.renderYawOffset;
+                    newMonster.prevRenderYawOffset = target.prevRenderYawOffset;
+                    newMonster.rotationYaw = target.rotationYaw;
+                    newMonster.prevRotationYaw = target.prevRotationYaw;
+                    newMonster.rotationYawHead = target.rotationYawHead;
+                    newMonster.prevRotationYawHead = target.prevRotationYawHead;
+                    newMonster.field_70769_ao = target.field_70769_ao;
+                    newMonster.field_70770_ap = target.field_70770_ap;
 
                     target.worldObj.spawnEntityInWorld(newMonster);
 

@@ -27,6 +27,7 @@ import net.minecraft.stats.Achievement;
 import net.minecraft.stats.StatisticsFile;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
@@ -748,6 +749,15 @@ public class TFFeature {
         }
     }
 
+    private String formatBook(String address) {
+        String page = StatCollector.translateToLocal(address);
+        if (page == address) page = StatCollector.translateToFallback(address);
+        page = page.replaceAll("\\\\n", "\n");
+        page = page.replaceAll("\\\\u00A78", "\u00A78");
+        page = page.replaceAll("\\\\u00A70", "\u00A70");
+        return page;
+    }
+
     /**
      * Create a hint book for the specified feature. Only features with block protection will need this.
      */
@@ -757,149 +767,83 @@ public class TFFeature {
         NBTTagList bookPages = new NBTTagList();
 
         if (this == TFFeature.lichTower) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook, gnawed on by monsters]]\u00A70\n\nI have begun examining the strange aura surrounding this tower. The bricks of the tower are protected by a curse, stronger than any I've seen before. The magic from the curse"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "is boiling off into the surrounding area.\n\nIn my homeland I would have many options for dealing with this magic, but here my supplies are limited. I shall have to research..."));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[Many entries later]]\u00A70\n\nA breakthrough!  In my journeys I sighted a huge snake-like monster in a decorated courtyard. Nearby, I picked up a worn down, discarded green scale.\n\nThe magic in the scale seems to have the"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "curse-breaking properties I need, but the magic is too dim. I may need to acquire a fresher specimen, directly from the creature."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.lichTower.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.lichTower.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.lichTower.2")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.lichTower.3")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on a Pointy Tower"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.lichTower.title")));
         } else if (this == TFFeature.labyrinth) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook, written on waterproof paper]]\u00A70\n\nThe mosquitoes in this swamp are vexing, but strange. The vast majority of them seem to have no natural source, nor do they seem to have a role in the local ecology. I have begun to"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "suspect that they are some kind of magical curse.\n\n\u00A78[[Next entry]]\u00A70\n\nNow that I have encountered a protection spell on the ruined labyrinth here, I consider my suspicions confirmed. Both the protection"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "spell and the mosquitoes are a curse. This curse seems to have a different source from the others I have encountered. I will have to research further...\n\n\u00A78[[Next entry]]\u00A70\n\nThe curse seems to"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "be of a type too powerful for one being alone to produce. Several wizards working in combination would be necessary.\n\nIf one of the wizards stopped contributing, the whole of the curse over the entire swamp would fall. Strangely, "));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "my divinations do not show signs of any nearby living wizards. I did see something interesting in one of the nearby pointy-roofed towers though..."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.labyrinth.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.labyrinth.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.labyrinth.2")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.labyrinth.3")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.labyrinth.4")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on a Swampy Labyrinth"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.labyrinth.title")));
         } else if (this == TFFeature.hydraLair) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook, written on fireproof paper]]\u00A70\n\nFire is a trivial obstacle for a master explorer such as myself. I have traversed seas of fire, and swam through oceans of lava. The burning air here is an interesting variation,"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "but ultimately no hinderance.\n\nWhat does stop me though is that I have encountered another protection spell, this time surrounding a mighty creature that must be king of this fire swamp. This is not the first protection spell I have"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "encountered, and I am beginning to unravel the mysteries of how they work.\n\nIf this spell is like the others, it will be sustained by a powerful creature nearby. Surrounding the fire swamp are several wet swamps, and under those"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "swamps are labyrinths full of minotaurs. The logical choice to bind such a spell to would be some sort of powerful minotaur, different in some way from the others that surround it..."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.hydraLair.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.hydraLair.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.hydraLair.2")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.hydraLair.3")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on the Fire Swamp"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.hydraLair.title")));
         } else if (this == TFFeature.tfStronghold) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook, written on faintly glowing paper]]\u00A70\n\nThe tendrils of darkness surrounding this area are just a manifestation of a protective spell over the entire dark forest. The spell causes blindness, which is quite vexing. I have"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "seen several interesting things in the area and would like to keep exploring.\n\n\u00A78[[Next entry]]\u00A70\n\nI have found ruins in the dark forest.  They belong to a stronghold, of a type usually inhabited by knights. Rather than"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "knights though, this stronghold is full of goblins. They wear knightly armor, but their behavior is most un-knightly.\n\n\u00A78[[Next entry]]\u00A70\n\nDeep in the ruins, I have found a pedestal. The pedestal seems to be of a type that"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "knights would place trophies on to prove their strength.\n\nKilling a powerful creature would seem to weaken the curse on the dark forest, and placing a trophy associated with the creature on the pedestal would likely grant access into the"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "main part of the stronghold.\n\nThe only creature I have seen so far seen so far of sufficient power is the many-headed beast in the fire swamp. How vexing..."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.stronghold.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.stronghold.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.stronghold.2")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.stronghold.3")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.stronghold.4")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on a Stronghold"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.stronghold.title")));
         } else if (this == TFFeature.darkTower) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook that seems to have survived an explosion]]\u00A70\n\nThis tower clearly has mechanisms that are not responding to me. Their magic almost yearns to acknowledge my touch, but it cannot. It is if the devices of the tower are being"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "suppressed by a powerful group of beings nearby.\n\n\u00A78[[Next entry]]\u00A70\n\nThe magic seems to emanate from deep within the strongholds nearby. It can't come from the goblins, as their magic is charming, but unfocused. There"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "must still be some force still active in the strongholds.\n\n\u00A78[[Next entry]]\u00A70\n\nMy analysis indicates that it comes from several sources, operating as a group. I will head back to the stronghold after I resupply..."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.darkTower.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.darkTower.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.darkTower.2")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on a Wooden Tower"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.darkTower.title")));
         } else if (this == TFFeature.yetiCave) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook, covered in frost]]\u00A70\n\nThe blizzard surrounding these snowy lands is unceasing. This is no ordinary snowfall--this is a magical phenomenon. I will have to conduct experiments to find"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "what is capable of causing such an effect.\n\n\u00A78[[Next entry]]\u00A70\n\nAt the center of the dark forest, where the leaves turn red and the grass dies, there is a wooden tower. The tops of the tower are affixed with"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "structures acting as antennae. The antennae are not the source of the snowfall, but serve merely to boost the power of the curse causing it.\n\nA blizzard this intense must be caused by a powerful creature, most likely found"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "near the top of the dark forest tower. Stop the creature, and the blizzard will fade."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.yetiCave.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.yetiCave.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.yetiCave.2")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.yetiCave.3")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on an Icy Cave"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.yetiCave.title")));
         } else if (this == TFFeature.iceTower) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook, caked in ice]]\u00A70\n\nI overcame one blizzard, only to run into this terrible ice storm atop the glacier. My explorations have shown me the splendor of an ice palace, shining with the colors of the polar aurora. It"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "all seems protected by some sort of curse.\n\n\u00A78[[Next entry]]\u00A70\n\nI am no novice.  This curse is fed by the power of a creature nearby.  The cause of the curse surrounding the fire swamp was built off the power of the leader of the "));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "minotaurs nearby.\n\nSurrounding this glacier, there are masses of yetis.  Perhaps the yetis have some sort of leader..."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.iceTower.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.iceTower.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.iceTower.2")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on an Auroral Fortification"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.iceTower.title")));
         } else if (this == TFFeature.trollCave) {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[An explorer's notebook, damaged by acid]]\u00A70\n\nThere seems to be no way to protect myself from the toxic rainstorm surrounding this area. In my brief excursions, I have also encountered another protection spell, similar to the"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "others I have witnessed. The spell must be connected to the toxic storm in some way. Further research to follow...\n\n\u00A78[[Next entry]]\u00A70\n\nSuch supreme weather magic must be the result of an unequaled weather"));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "magician. Such a person would likely hide themselves in an extreme environment, far away.\n\nBased on my logic, I would expect to find such a person somewhere on the glacier, perhaps in some sort of fortress there..."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.trollCave.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.trollCave.1")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.trollCave.2")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on an the Highlands"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.trollCave.title")));
         } else {
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "\u00A78[[This book shows signs of having been copied many times]]\u00A70\n\nI cannot explain the field surrounding this structure, but the magic is powerful.  If this curse is like the others, than the answer to unlocking it lies elsewhere.  Perhaps there is "));
-            bookPages.appendTag(
-                    new NBTTagString(
-                            "something I have left undone, or some monster I have yet to defeat. I will have to turn back. I will return to this place later, to see if anything has changed."));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.default.0")));
+            bookPages.appendTag(new NBTTagString(formatBook("progressionBook.default.1")));
 
             book.setTagInfo("pages", bookPages);
-            book.setTagInfo("author", new NBTTagString("A Forgotten Explorer"));
-            book.setTagInfo("title", new NBTTagString("Notes on the Unexplained"));
+            book.setTagInfo("author", new NBTTagString(formatBook("progressionBook.author")));
+            book.setTagInfo("title", new NBTTagString(formatBook("progressionBook.default.title")));
         }
         return book;
     }

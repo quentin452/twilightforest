@@ -37,6 +37,8 @@ public class EntityTFRedcap extends EntityMob {
 
     private int tntLeft = 0;
 
+    private int villagerProfession = -1;
+
     public EntityTFRedcap(World world) {
         super(world);
         // texture = TwilightForestMod.MODEL_DIR + "redcap.png";
@@ -123,6 +125,14 @@ public class EntityTFRedcap extends EntityMob {
         return heldPick;
     }
 
+    public int getVillagerProfession() {
+        return villagerProfession;
+    }
+
+    public void setVillagerProfession(int profession) {
+        villagerProfession = profession;
+    }
+
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
@@ -130,6 +140,7 @@ public class EntityTFRedcap extends EntityMob {
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("TNTLeft", this.getTntLeft());
+        par1NBTTagCompound.setInteger("VillagerProfession", this.getVillagerProfession());
     }
 
     /**
@@ -139,6 +150,7 @@ public class EntityTFRedcap extends EntityMob {
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setTntLeft(par1NBTTagCompound.getInteger("TNTLeft"));
+        this.setVillagerProfession(par1NBTTagCompound.getInteger("VillagerProfession"));
     }
 
     /**
@@ -147,14 +159,15 @@ public class EntityTFRedcap extends EntityMob {
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
-            ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
+        if (par1DamageSource.getSourceOfDamage() instanceof EntityPlayer) {
+            ((EntityPlayer) par1DamageSource.getSourceOfDamage()).triggerAchievement(TFAchievementPage.twilightHunter);
             // are we in a level 1 hill?
             int chunkX = MathHelper.floor_double(posX) >> 4;
             int chunkZ = MathHelper.floor_double(posZ) >> 4;
             if (TFFeature.getNearestFeature(chunkX, chunkZ, worldObj) == TFFeature.hill1) {
                 // award level 1 hill cheevo
-                ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHill1);
+                ((EntityPlayer) par1DamageSource.getSourceOfDamage())
+                        .triggerAchievement(TFAchievementPage.twilightHill1);
             }
 
         }

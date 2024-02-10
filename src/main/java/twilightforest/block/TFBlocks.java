@@ -7,11 +7,39 @@ import net.minecraft.item.ItemBlock;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import twilightforest.TwilightForestMod;
+import twilightforest.block.BlockTFNagastonePillar.BlockType;
 import twilightforest.item.ItemBlockTFMeta;
 
 public class TFBlocks {
 
     public static Block log;
+    public static Block planks;
+    public static Block doubleWoodenSlab;
+    public static Block woodenSlab;
+    public static Block woodenStairsTwilight;
+    public static Block woodenStairsCanopy;
+    public static Block woodenStairsMangrove;
+    public static Block woodenStairsDarkwood;
+    public static Block woodenStairsTime;
+    public static Block woodenStairsTrans;
+    public static Block woodenStairsMine;
+    public static Block woodenStairsSort;
+    public static Block doorTwilight;
+    public static Block doorCanopy;
+    public static Block doorMangrove;
+    public static Block doorDarkwood;
+    public static Block doorTime;
+    public static Block doorTrans;
+    public static Block doorMine;
+    public static Block doorSort;
+    public static Block trapdoorTwilight;
+    public static Block trapdoorCanopy;
+    public static Block trapdoorMangrove;
+    public static Block trapdoorDarkwood;
+    public static Block trapdoorTime;
+    public static Block trapdoorTrans;
+    public static Block trapdoorMine;
+    public static Block trapdoorSort;
     public static Block leaves;
     public static Block firefly;
     public static Block portal;
@@ -25,6 +53,17 @@ public class TFBlocks {
     public static Block uncraftingTable;
     public static Block fireJet;
     public static Block nagastone;
+    public static Block nagastoneEtched;
+    public static Block nagastoneStairsLeft;
+    public static Block nagastoneStairsRight;
+    public static Block nagastoneStairsMossyLeft;
+    public static Block nagastoneStairsMossyRight;
+    public static Block nagastoneStairsWeatheredLeft;
+    public static Block nagastoneStairsWeatheredRight;
+    public static Block nagastonePillar;
+    public static Block nagastonePillarMossy;
+    public static Block nagastonePillarWeathered;
+    public static Block spiralStoneBricks;
     public static Block sapling;
     public static Block magicLog;
     public static Block magicLogSpecial;
@@ -34,6 +73,7 @@ public class TFBlocks {
     public static Block towerDevice;
     // public static Block towerAntenna;
     public static Block towerTranslucent;
+    public static Block experiment115;
     public static Block trophy;
     public static Block shield;
     public static Block trophyPedestal;
@@ -62,6 +102,11 @@ public class TFBlocks {
     public static Block unripeTrollBer;
     public static Block trollBer;
     public static Block knightmetalStorage;
+    public static Block arcticFurStorage;
+    public static Block carminiteStorage;
+    public static Block fieryMetalStorage;
+    public static Block ironwoodStorage;
+    public static Block steeleafStorage;
     public static Block hugeLilyPad;
     public static Block hugeWaterLily;
     public static Block slider;
@@ -74,11 +119,37 @@ public class TFBlocks {
     public static Block castleDoor;
     public static Block castleDoorVanished;
     public static Block castleUnlock;
-    public static Block plank;
 
     public static void registerBlocks() {
 
         log = (new BlockTFLog()).setBlockName("TFLog");
+        planks = (new BlockTFWood()).setBlockName("TFPlanks");
+        doubleWoodenSlab = new BlockTFWoodSlab(true).setBlockName("TFWoodSlabDouble");
+        woodenSlab = new BlockTFWoodSlab(false).setBlockName("TFWoodSlab");
+        woodenStairsTwilight = (new BlockTFWoodStairs(0)).setBlockName("TFWoodStairsTwilight");
+        woodenStairsCanopy = (new BlockTFWoodStairs(1)).setBlockName("TFWoodStairsCanopy");
+        woodenStairsMangrove = (new BlockTFWoodStairs(2)).setBlockName("TFWoodStairsMangrove");
+        woodenStairsDarkwood = (new BlockTFWoodStairs(3)).setBlockName("TFWoodStairsDarkwood");
+        woodenStairsTime = (new BlockTFWoodStairs(4)).setBlockName("TFWoodStairsTime");
+        woodenStairsTrans = (new BlockTFWoodStairs(5)).setBlockName("TFWoodStairsTrans");
+        woodenStairsMine = (new BlockTFWoodStairs(6)).setBlockName("TFWoodStairsMine");
+        woodenStairsSort = (new BlockTFWoodStairs(7)).setBlockName("TFWoodStairsSort");
+        doorTwilight = (new BlockTFDoor(0)).setBlockName("TFDoorTwilight");
+        doorCanopy = (new BlockTFDoor(1)).setBlockName("TFDoorCanopy");
+        doorMangrove = (new BlockTFDoor(2)).setBlockName("TFDoorMangrove");
+        doorDarkwood = (new BlockTFDoor(3)).setBlockName("TFDoorDarkwood");
+        doorTime = (new BlockTFDoor(4)).setBlockName("TFDoorTime");
+        doorTrans = (new BlockTFDoor(5)).setBlockName("TFDoorTrans");
+        doorMine = (new BlockTFDoor(6)).setBlockName("TFDoorMine");
+        doorSort = (new BlockTFDoor(7)).setBlockName("TFDoorSort");
+        trapdoorTwilight = (new BlockTFTrapDoor(0)).setBlockName("TFTrapDoorTwilight");
+        trapdoorCanopy = (new BlockTFTrapDoor(1)).setBlockName("TFTrapDoorCanopy");
+        trapdoorMangrove = (new BlockTFTrapDoor(2)).setBlockName("TFTrapDoorMangrove");
+        trapdoorDarkwood = (new BlockTFTrapDoor(3)).setBlockName("TFTrapDoorDarkwood");
+        trapdoorTime = (new BlockTFTrapDoor(4)).setBlockName("TFTrapDoorTime");
+        trapdoorTrans = (new BlockTFTrapDoor(5)).setBlockName("TFTrapDoorTrans");
+        trapdoorMine = (new BlockTFTrapDoor(6)).setBlockName("TFTrapDoorMine");
+        trapdoorSort = (new BlockTFTrapDoor(7)).setBlockName("TFTrapDoorSort");
         leaves = (new BlockTFLeaves()).setBlockName("TFLeaves").setBlockTextureName("leaves_oak");
         firefly = (new BlockTFFirefly()).setBlockName("TFFirefly");
         cicada = (new BlockTFCicada()).setBlockName("TFCicada");
@@ -92,6 +163,20 @@ public class TFBlocks {
         uncraftingTable = (new BlockTFUncraftingTable()).setBlockName("TFUncraftingTable");
         fireJet = (new BlockTFFireJet()).setBlockName("TFFireJet");
         nagastone = (new BlockTFNagastone()).setBlockName("TFNagastone");
+        nagastoneEtched = (new BlockTFNagastoneEtched()).setBlockName("TFNagastoneEtched");
+        nagastoneStairsLeft = (new BlockTFNagastoneStairs(0, false)).setBlockName("TFNagastoneStairsLeft");
+        nagastoneStairsRight = (new BlockTFNagastoneStairs(0, true)).setBlockName("TFNagastoneStairsRight");
+        nagastoneStairsMossyLeft = (new BlockTFNagastoneStairs(1, false)).setBlockName("TFNagastoneStairsMossyLeft");
+        nagastoneStairsMossyRight = (new BlockTFNagastoneStairs(1, true)).setBlockName("TFNagastoneStairsMossyRight");
+        nagastoneStairsWeatheredLeft = (new BlockTFNagastoneStairs(2, false))
+                .setBlockName("TFNagastoneStairsWeatheredLeft");
+        nagastoneStairsWeatheredRight = (new BlockTFNagastoneStairs(2, true))
+                .setBlockName("TFNagastoneStairsWeatheredRight");
+        nagastonePillar = (new BlockTFNagastonePillar(BlockType.NORMAL)).setBlockName("TFNagastonePillar");
+        nagastonePillarMossy = (new BlockTFNagastonePillar(BlockType.MOSSY)).setBlockName("TFNagastonePillarMossy");
+        nagastonePillarWeathered = (new BlockTFNagastonePillar(BlockType.WEATHERED))
+                .setBlockName("TFNagastonePillarWeathered");
+        spiralStoneBricks = (new BlockTFSpiralBricks()).setBlockName("TFSpiralBricks");
         sapling = (new BlockTFSapling()).setBlockName("TFSapling");
         magicLog = (new BlockTFMagicLog()).setBlockName("TFMagicLog");
         magicLogSpecial = (new BlockTFMagicLogSpecial()).setBlockName("TFMagicLogSpecial");
@@ -100,6 +185,7 @@ public class TFBlocks {
         towerWood = (new BlockTFTowerWood()).setBlockName("TFTowerStone");
         towerDevice = (new BlockTFTowerDevice()).setBlockName("TFTowerDevice");
         towerTranslucent = (new BlockTFTowerTranslucent()).setBlockName("TFTowerTranslucent");
+        experiment115 = (new BlockTFExperiment115()).setBlockName("TFExperiment115");
         trophy = (new BlockTFTrophy()).setBlockName("TFTrophy");
         shield = (new BlockTFShield()).setBlockName("TFShield");
         trophyPedestal = (new BlockTFTrophyPedestal()).setBlockName("TFTrophyPedestal");
@@ -129,6 +215,13 @@ public class TFBlocks {
         unripeTrollBer = (new BlockTFUnripeTorchCluster()).setBlockName("UnripeTrollBer");
         trollBer = (new BlockTFRipeTorchCluster()).setBlockName("TrollBer");
         knightmetalStorage = (new BlockTFKnightmetalBlock()).setBlockName("KnightmetalBlock");
+        arcticFurStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.ARCTIC_FUR))
+                .setBlockName("ArcticFurBlock");
+        carminiteStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.CARMINITE))
+                .setBlockName("CarminiteBlock");
+        fieryMetalStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.FIERY_METAL)).setBlockName("FieryBlock");
+        ironwoodStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.IRONWOOD)).setBlockName("IronwoodBlock");
+        steeleafStorage = (new BlockTFCompressed(BlockTFCompressed.BlockType.STEELEAF)).setBlockName("SteeleafBlock");
         hugeLilyPad = (new BlockTFHugeLilyPad()).setBlockName("HugeLilyPad");
         hugeWaterLily = (new BlockTFHugeWaterLily()).setBlockName("HugeWaterLily")
                 .setBlockTextureName(TwilightForestMod.ID + ":huge_waterlily");
@@ -142,10 +235,46 @@ public class TFBlocks {
         castleDoor = (new BlockTFCastleDoor(false)).setBlockName("CastleDoor");
         castleDoorVanished = (new BlockTFCastleDoor(true)).setBlockName("CastleDoorVanished");
         castleUnlock = (new BlockTFCastleUnlock()).setBlockName("CastleUnlock");
-        plank = (new BlockTFPlanks().setBlockName("TFPlank"));
 
         // register blocks with their pickup values
         registerMyBlock(log);
+        registerMyBlock(planks);
+        registerMyBlock(
+                woodenSlab,
+                twilightforest.item.ItemBlockTFWoodenSlab.class,
+                ((BlockSlab) woodenSlab),
+                ((BlockSlab) doubleWoodenSlab),
+                false);
+        registerMyBlock(
+                doubleWoodenSlab,
+                twilightforest.item.ItemBlockTFWoodenSlab.class,
+                ((BlockSlab) woodenSlab),
+                ((BlockSlab) doubleWoodenSlab),
+                true);
+        registerMyBlock(woodenStairsTwilight);
+        registerMyBlock(woodenStairsCanopy);
+        registerMyBlock(woodenStairsMangrove);
+        registerMyBlock(woodenStairsDarkwood);
+        registerMyBlock(woodenStairsTime);
+        registerMyBlock(woodenStairsTrans);
+        registerMyBlock(woodenStairsMine);
+        registerMyBlock(woodenStairsSort);
+        registerMyBlock(doorTwilight);
+        registerMyBlock(doorCanopy);
+        registerMyBlock(doorMangrove);
+        registerMyBlock(doorDarkwood);
+        registerMyBlock(doorTime);
+        registerMyBlock(doorTrans);
+        registerMyBlock(doorMine);
+        registerMyBlock(doorSort);
+        registerMyBlock(trapdoorTwilight);
+        registerMyBlock(trapdoorCanopy);
+        registerMyBlock(trapdoorMangrove);
+        registerMyBlock(trapdoorDarkwood);
+        registerMyBlock(trapdoorTime);
+        registerMyBlock(trapdoorTrans);
+        registerMyBlock(trapdoorMine);
+        registerMyBlock(trapdoorSort);
         registerMyBlock(root);
         registerMyBlock(leaves);
         registerMyBlock(firefly, ItemBlock.class);
@@ -159,6 +288,17 @@ public class TFBlocks {
         registerMyBlock(uncraftingTable, ItemBlock.class);
         registerMyBlock(fireJet);
         registerMyBlock(nagastone);
+        registerMyBlock(nagastoneEtched);
+        registerMyBlock(nagastoneStairsLeft);
+        registerMyBlock(nagastoneStairsRight);
+        registerMyBlock(nagastoneStairsMossyLeft);
+        registerMyBlock(nagastoneStairsMossyRight);
+        registerMyBlock(nagastoneStairsWeatheredLeft);
+        registerMyBlock(nagastoneStairsWeatheredRight);
+        registerMyBlock(nagastonePillar);
+        registerMyBlock(nagastonePillarMossy);
+        registerMyBlock(nagastonePillarWeathered);
+        registerMyBlock(spiralStoneBricks);
         registerMyBlock(sapling);
         registerMyBlock(moonworm, ItemBlock.class);
         registerMyBlock(magicLog);
@@ -167,6 +307,7 @@ public class TFBlocks {
         registerMyBlock(towerWood);
         registerMyBlock(towerDevice);
         registerMyBlock(towerTranslucent);
+        registerMyBlock(experiment115);
         registerMyBlock(trophy);
         registerMyBlock(shield);
         registerMyBlock(trophyPedestal);
@@ -186,14 +327,14 @@ public class TFBlocks {
         registerMyBlock(
                 auroraSlab,
                 twilightforest.item.ItemBlockTFAuroraSlab.class,
-                auroraSlab,
-                auroraDoubleSlab,
+                ((BlockSlab) auroraSlab),
+                ((BlockSlab) auroraDoubleSlab),
                 false);
         registerMyBlock(
                 auroraDoubleSlab,
                 twilightforest.item.ItemBlockTFAuroraSlab.class,
-                auroraSlab,
-                auroraDoubleSlab,
+                ((BlockSlab) auroraSlab),
+                ((BlockSlab) auroraDoubleSlab),
                 true);
         registerMyBlock(trollSteinn, ItemBlock.class);
         registerMyBlock(wispyCloud, ItemBlock.class);
@@ -209,6 +350,11 @@ public class TFBlocks {
         registerMyBlock(unripeTrollBer, ItemBlock.class);
         registerMyBlock(trollBer, ItemBlock.class);
         registerMyBlock(knightmetalStorage, ItemBlock.class);
+        registerMyBlock(arcticFurStorage, ItemBlock.class);
+        registerMyBlock(carminiteStorage, ItemBlock.class);
+        registerMyBlock(fieryMetalStorage, ItemBlock.class);
+        registerMyBlock(ironwoodStorage, ItemBlock.class);
+        registerMyBlock(steeleafStorage, ItemBlock.class);
         registerMyBlock(hugeLilyPad, twilightforest.item.ItemBlockTFHugeLilyPad.class);
         registerMyBlock(hugeWaterLily, twilightforest.item.ItemBlockTFHugeWaterLily.class);
         registerMyBlock(slider);
@@ -220,10 +366,20 @@ public class TFBlocks {
         registerMyBlock(cinderLog);
         registerMyBlock(castleDoor);
         registerMyBlock(castleDoorVanished);
-        registerMyBlock(plank);
 
         // fire info
         Blocks.fire.setFireInfo(log, 5, 5);
+        Blocks.fire.setFireInfo(planks, 5, 20);
+        Blocks.fire.setFireInfo(woodenSlab, 5, 20);
+        Blocks.fire.setFireInfo(doubleWoodenSlab, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsTwilight, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsCanopy, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsMangrove, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsDarkwood, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsTime, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsTrans, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsMine, 5, 20);
+        Blocks.fire.setFireInfo(woodenStairsSort, 5, 20);
         Blocks.fire.setFireInfo(leaves, 30, 60);
         Blocks.fire.setFireInfo(leaves3, 30, 60);
     }

@@ -146,6 +146,14 @@ public class TFItems {
     public static Item chainBlock;
     public static Item cubeTalisman;
     public static Item cubeOfAnnihilation;
+    public static Item doorTwilight;
+    public static Item doorCanopy;
+    public static Item doorMangrove;
+    public static Item doorDarkwood;
+    public static Item doorTime;
+    public static Item doorTrans;
+    public static Item doorMine;
+    public static Item doorSort;
 
     public static Item metaItem;
 
@@ -323,6 +331,14 @@ public class TFItems {
         chainBlock = new ItemTFChainBlock().setUnlocalizedName("chainBlock").setMaxStackSize(1);
         cubeTalisman = new ItemTF().setUnlocalizedName("cubeTalisman");
         cubeOfAnnihilation = new ItemTFCubeOfAnnihilation().setUnlocalizedName("cubeOfAnnihilation").setMaxStackSize(1);
+        doorTwilight = new ItemTFDoor(0).setUnlocalizedName("doorTwilight").setMaxStackSize(1);
+        doorCanopy = new ItemTFDoor(1).setUnlocalizedName("doorCanopy").setMaxStackSize(1);
+        doorMangrove = new ItemTFDoor(2).setUnlocalizedName("doorMangrove").setMaxStackSize(1);
+        doorDarkwood = new ItemTFDoor(3).setUnlocalizedName("doorDarkwood").setMaxStackSize(1);
+        doorTime = new ItemTFDoor(4).setUnlocalizedName("doorTime").setMaxStackSize(1);
+        doorTrans = new ItemTFDoor(5).setUnlocalizedName("doorTrans").setMaxStackSize(1);
+        doorMine = new ItemTFDoor(6).setUnlocalizedName("doorMine").setMaxStackSize(1);
+        doorSort = new ItemTFDoor(7).setUnlocalizedName("doorSort").setMaxStackSize(1);
 
         metaItem = new ItemTFMeta();
 
@@ -436,6 +452,14 @@ public class TFItems {
         registerTFItem(chainBlock);
         registerTFItem(cubeTalisman);
         registerTFItem(cubeOfAnnihilation);
+        registerTFItem(doorTwilight);
+        registerTFItem(doorCanopy);
+        registerTFItem(doorMangrove);
+        registerTFItem(doorDarkwood);
+        registerTFItem(doorTime);
+        registerTFItem(doorTrans);
+        registerTFItem(doorMine);
+        registerTFItem(doorSort);
 
         registerTFItem(metaItem);
 

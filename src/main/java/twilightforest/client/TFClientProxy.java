@@ -85,10 +85,12 @@ import twilightforest.client.renderer.TFGiantItemRenderer;
 import twilightforest.client.renderer.TFIceItemRenderer;
 import twilightforest.client.renderer.TFMagicMapRenderer;
 import twilightforest.client.renderer.TFMazeMapRenderer;
+import twilightforest.client.renderer.TileEntityTFCakeRenderer;
 import twilightforest.client.renderer.TileEntityTFCicadaRenderer;
 import twilightforest.client.renderer.TileEntityTFFireflyRenderer;
 import twilightforest.client.renderer.TileEntityTFMoonwormRenderer;
 import twilightforest.client.renderer.TileEntityTFTrophyRenderer;
+import twilightforest.client.renderer.blocks.RenderBlockTFCake;
 import twilightforest.client.renderer.blocks.RenderBlockTFCastleMagic;
 import twilightforest.client.renderer.blocks.RenderBlockTFCritters;
 import twilightforest.client.renderer.blocks.RenderBlockTFFireflyJar;
@@ -96,8 +98,11 @@ import twilightforest.client.renderer.blocks.RenderBlockTFHugeLilyPad;
 import twilightforest.client.renderer.blocks.RenderBlockTFKnightMetal;
 import twilightforest.client.renderer.blocks.RenderBlockTFMagicLeaves;
 import twilightforest.client.renderer.blocks.RenderBlockTFNagastone;
+import twilightforest.client.renderer.blocks.RenderBlockTFNagastoneEtched;
+import twilightforest.client.renderer.blocks.RenderBlockTFNagastoneStairs;
 import twilightforest.client.renderer.blocks.RenderBlockTFPedestal;
 import twilightforest.client.renderer.blocks.RenderBlockTFPlants;
+import twilightforest.client.renderer.blocks.RenderBlockTFSpiralBricks;
 import twilightforest.client.renderer.blocks.RenderBlockTFThorns;
 import twilightforest.client.renderer.entity.RenderTFAdherent;
 import twilightforest.client.renderer.entity.RenderTFBighorn;
@@ -155,6 +160,7 @@ import twilightforest.client.renderer.entity.RenderTFWinterWolf;
 import twilightforest.client.renderer.entity.RenderTFWraith;
 import twilightforest.client.renderer.entity.RenderTFYeti;
 import twilightforest.item.TFItems;
+import twilightforest.tileentity.TileEntityTFCake;
 import twilightforest.tileentity.TileEntityTFCicada;
 import twilightforest.tileentity.TileEntityTFFirefly;
 import twilightforest.tileentity.TileEntityTFMoonworm;
@@ -164,8 +170,12 @@ public class TFClientProxy extends TFCommonProxy {
 
     int critterRenderID;
     int plantRenderID;
+    int blockCakeRenderID;
     int blockComplexRenderID;
     int nagastoneRenderID;
+    int nagastoneEtchedRenderID;
+    int nagastoneEtchedStairsRenderID;
+    int spiralBricksRenderID;
     int magicLeavesRenderID;
     int pedestalRenderID;
     int thornsRenderID;
@@ -489,6 +499,7 @@ public class TFClientProxy extends TFCommonProxy {
         // TileEntityMobSpawnerRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTFMoonworm.class, new TileEntityTFMoonwormRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTFTrophy.class, new TileEntityTFTrophyRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTFCake.class, new TileEntityTFCakeRenderer());
 
         // map item renderer
         MinecraftForgeClient.registerItemRenderer(
@@ -526,6 +537,9 @@ public class TFClientProxy extends TFCommonProxy {
         MinecraftForgeClient.registerItemRenderer(TFItems.iceBow, iceRenderer);
 
         // block render ids
+        blockCakeRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderBlockTFCake(blockCakeRenderID));
+
         blockComplexRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFFireflyJar(blockComplexRenderID));
 
@@ -537,6 +551,15 @@ public class TFClientProxy extends TFCommonProxy {
 
         nagastoneRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFNagastone(nagastoneRenderID));
+
+        nagastoneEtchedRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderBlockTFNagastoneEtched(nagastoneEtchedRenderID));
+
+        nagastoneEtchedStairsRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderBlockTFNagastoneStairs(nagastoneEtchedStairsRenderID));
+
+        spiralBricksRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderBlockTFSpiralBricks(spiralBricksRenderID));
 
         magicLeavesRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFMagicLeaves(magicLeavesRenderID));
@@ -595,12 +618,28 @@ public class TFClientProxy extends TFCommonProxy {
         return plantRenderID;
     }
 
+    public int getCakeBlockRenderID() {
+        return blockCakeRenderID;
+    }
+
     public int getComplexBlockRenderID() {
         return blockComplexRenderID;
     }
 
     public int getNagastoneBlockRenderID() {
         return nagastoneRenderID;
+    }
+
+    public int getNagastoneEtchedBlockRenderID() {
+        return nagastoneEtchedRenderID;
+    }
+
+    public int getNagastoneEtchedStairsBlockRenderID() {
+        return nagastoneEtchedStairsRenderID;
+    }
+
+    public int getSpiralBricksBlockRenderID() {
+        return spiralBricksRenderID;
     }
 
     public int getMagicLeavesBlockRenderID() {
@@ -658,34 +697,28 @@ public class TFClientProxy extends TFCommonProxy {
             // check for particle max distance
             if (distX * distX + distY * distY + distZ * distZ < maxDist * maxDist) {
 
-                switch (particleType) {
-                    case "largeflame" -> particle = new EntityTFLargeFlameFX(world, x, y, z, velX, velY, velZ);
-                    case "hugesmoke" -> particle = new EntitySmokeFX(world, x, y, z, velX, velY, velZ, 8.0f);
-                    case "leafrune" -> particle = new EntityTFLeafRuneFX(world, x, y, z, velX, velY, velZ);
-                    case "bosstear" -> particle = new EntityTFBossTearFX(
-                            world,
-                            x,
-                            y,
-                            z,
-                            velX,
-                            velY,
-                            velZ,
-                            Items.ghast_tear);
-                    case "ghasttrap" -> particle = new EntityTFGhastTrapFX(world, x, y, z, velX, velY, velZ);
-                    case "protection" -> particle = new EntityTFProtectionFX(world, x, y, z, velX, velY, velZ);
-                    case "snowstuff" -> particle = new EntityTFSnowFX(world, x, y, z, velX, velY, velZ);
-                    case "snowwarning" -> particle = new EntityTFSnowWarningFX(world, x, y, z, velX, velY, velZ, 1F);
-                    case "snowguardian" -> particle = new EntityTFSnowGuardianFX(
-                            world,
-                            x,
-                            y,
-                            z,
-                            velX,
-                            velY,
-                            velZ,
-                            0.75F);
-                    case "icebeam" -> particle = new EntityTFIceBeamFX(world, x, y, z, velX, velY, velZ, 0.75F);
-                    case "annihilate" -> particle = new EntityTFAnnihilateFX(world, x, y, z, velX, velY, velZ, 0.75F);
+                if (particleType.equals("largeflame")) {
+                    particle = new EntityTFLargeFlameFX(world, x, y, z, velX, velY, velZ);
+                } else if (particleType.equals("hugesmoke")) {
+                    particle = new EntitySmokeFX(world, x, y, z, velX, velY, velZ, 8.0f);
+                } else if (particleType.equals("leafrune")) {
+                    particle = new EntityTFLeafRuneFX(world, x, y, z, velX, velY, velZ);
+                } else if (particleType.equals("bosstear")) {
+                    particle = new EntityTFBossTearFX(world, x, y, z, velX, velY, velZ, Items.ghast_tear);
+                } else if (particleType.equals("ghasttrap")) {
+                    particle = new EntityTFGhastTrapFX(world, x, y, z, velX, velY, velZ);
+                } else if (particleType.equals("protection")) {
+                    particle = new EntityTFProtectionFX(world, x, y, z, velX, velY, velZ);
+                } else if (particleType.equals("snowstuff")) {
+                    particle = new EntityTFSnowFX(world, x, y, z, velX, velY, velZ);
+                } else if (particleType.equals("snowwarning")) {
+                    particle = new EntityTFSnowWarningFX(world, x, y, z, velX, velY, velZ, 1F);
+                } else if (particleType.equals("snowguardian")) {
+                    particle = new EntityTFSnowGuardianFX(world, x, y, z, velX, velY, velZ, 0.75F);
+                } else if (particleType.equals("icebeam")) {
+                    particle = new EntityTFIceBeamFX(world, x, y, z, velX, velY, velZ, 0.75F);
+                } else if (particleType.equals("annihilate")) {
+                    particle = new EntityTFAnnihilateFX(world, x, y, z, velX, velY, velZ, 0.75F);
                 }
 
                 // if we made a partcle, go ahead and add it

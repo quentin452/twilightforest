@@ -1,6 +1,7 @@
 package twilightforest.structures;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +17,8 @@ import net.minecraft.world.gen.structure.StructureStrongholdPieces;
 import twilightforest.TFFeature;
 import twilightforest.biomes.TFBiomeBase;
 import twilightforest.block.TFBlocks;
+import twilightforest.structures.courtyard.ComponentTFNagaCourtyardMain;
+import twilightforest.structures.courtyard.TFNagaCourtyardPieces;
 import twilightforest.structures.darktower.ComponentTFDarkTowerMain;
 import twilightforest.structures.darktower.TFDarkTowerPieces;
 import twilightforest.structures.finalcastle.ComponentTFFinalCastleMain;
@@ -50,6 +53,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         MapGenStructureIO.registerStructure(StructureTFHollowTreeStart.class, "TFHollowTree");
 
         TFStrongholdPieces.registerPieces();
+        TFNagaCourtyardPieces.registerPieces();
         TFMinotaurMazePieces.registerPieces();
         TFDarkTowerPieces.registerPieces();
         TFLichTowerPieces.registerPieces();
@@ -64,13 +68,13 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         MapGenStructureIO.func_143031_a(ComponentTFHillMaze.class, "TFHillMaze");
         MapGenStructureIO.func_143031_a(ComponentTFHollowHill.class, "TFHill");
         MapGenStructureIO.func_143031_a(ComponentTFHydraLair.class, "TFHydra");
-        MapGenStructureIO.func_143031_a(ComponentTFNagaCourtyard.class, "TFNaga");
         MapGenStructureIO.func_143031_a(ComponentTFQuestGrove.class, "TFQuest1");
         MapGenStructureIO.func_143031_a(ComponentTFYetiCave.class, "TFYeti");
     }
 
     public StructureTFMajorFeatureStart() {}
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public StructureTFMajorFeatureStart(World world, Random rand, int chunkX, int chunkZ) {
         StructureStrongholdPieces.prepareStructurePieces();
         // TFStrongholdPieces.prepareStructurePieces();
@@ -91,11 +95,11 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         updateBoundingBox();
 
         if (firstComponent instanceof StructureStrongholdPieces.Stairs2) {
-            List<StructureComponent> var6 = ((StructureStrongholdPieces.Stairs2) firstComponent).field_75026_c;
+            List var6 = ((StructureStrongholdPieces.Stairs2) firstComponent).field_75026_c;
 
             while (!var6.isEmpty()) {
                 int var7 = rand.nextInt(var6.size());
-                StructureComponent var8 = var6.remove(var7);
+                StructureComponent var8 = (StructureComponent) var6.remove(var7);
                 var8.buildComponent(firstComponent, this.components, rand);
             }
 
@@ -105,7 +109,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
 
             boundingBox.offset(0, offY, 0);
 
-            for (StructureComponent com : getComponents()) {
+            for (StructureComponent com : (LinkedList<StructureComponent>) getComponents()) {
                 com.getBoundingBox().offset(0, offY, 0);
             }
 
@@ -119,11 +123,14 @@ public class StructureTFMajorFeatureStart extends StructureStart {
     }
 
     /**
+     * 
      * @return The first component we should add to our structure
      */
     public StructureComponent makeFirstComponent(World world, Random rand, TFFeature feature, int x, int y, int z) {
+
         if (feature == TFFeature.nagaCourtyard) {
-            return new ComponentTFNagaCourtyard(world, rand, 0, x, y, z);
+            // return new ComponentTFNagaCourtyard(world, rand, 0, x, y, z);
+            return new ComponentTFNagaCourtyardMain(world, rand, 0, x, y, z);
         }
         if (feature == TFFeature.hedgeMaze) {
             return new ComponentTFHedgeMaze(world, rand, 0, x, y, z);
@@ -170,6 +177,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         if (feature == TFFeature.finalCastle) {
             return new ComponentTFFinalCastleMain(world, rand, 0, x, y, z);
         }
+
         return null;
     }
 
@@ -183,6 +191,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
     /**
      * Move the whole structure up or down
      */
+    @SuppressWarnings("unchecked")
     protected void moveToAvgGroundLevel(World world, int x, int z) {
         if (world.getWorldChunkManager() instanceof TFWorldChunkManager) {
             // determine the biome at the origin
@@ -200,7 +209,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
 
                 boundingBox.offset(0, offY, 0);
 
-                for (StructureComponent com : getComponents()) {
+                for (StructureComponent com : (LinkedList<StructureComponent>) getComponents()) {
                     com.getBoundingBox().offset(0, offY, 0);
                 }
             }
@@ -249,6 +258,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         return (compBB.maxX + 1) >= chunkBB.minX && (compBB.minX - 1) <= chunkBB.maxX
                 && (compBB.maxZ + 1) >= chunkBB.minZ
                 && (compBB.minZ - 1) <= chunkBB.maxZ;
+
     }
 
     @SuppressWarnings("unused")
@@ -272,7 +282,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         shieldBox.maxY++;
         shieldBox.maxZ++;
 
-        ArrayList<StructureComponent> intersecting = new ArrayList<>();
+        ArrayList<StructureComponent> intersecting = new ArrayList<StructureComponent>();
 
         for (StructureComponent other : otherComponents) {
             if (other != component && shieldBox.intersectsWith(other.getBoundingBox())) {
@@ -302,6 +312,7 @@ public class StructureTFMajorFeatureStart extends StructureStart {
                             if (notIntersecting) {
                                 world.setBlock(x, y, z, TFBlocks.shield, calculateShieldMeta(shieldBox, x, y, z), 2);
                             }
+
                         }
                     }
                 }
@@ -313,36 +324,39 @@ public class StructureTFMajorFeatureStart extends StructureStart {
         int shieldMeta = 0;
         if (x == shieldBox.minX) {
             shieldMeta = 5;
-        } else if (x == shieldBox.maxX) {
+        }
+        if (x == shieldBox.maxX) {
             shieldMeta = 4;
         }
         if (z == shieldBox.minZ) {
             shieldMeta = 3;
-        } else if (z == shieldBox.maxZ) {
+        }
+        if (z == shieldBox.maxZ) {
             shieldMeta = 2;
         }
         if (y == shieldBox.minY) {
             shieldMeta = 1;
-        } else if (y == shieldBox.maxY) {
+        }
+        if (y == shieldBox.maxY) {
             shieldMeta = 0;
         }
         return shieldMeta;
     }
 
-    public void func_143022_a(NBTTagCompound tagCompound) {
-        super.func_143022_a(tagCompound);
-        tagCompound.setBoolean("Conquered", this.isConquered);
-        tagCompound.setInteger("FeatureID", this.feature.featureID);
-        tagCompound.setByteArray("Locks", this.lockBytes);
+    public void func_143022_a(NBTTagCompound par1NBTTagCompound) {
+        super.func_143022_a(par1NBTTagCompound);
+        par1NBTTagCompound.setBoolean("Conquered", this.isConquered);
+        par1NBTTagCompound.setInteger("FeatureID", this.feature.featureID);
+        par1NBTTagCompound.setByteArray("Locks", this.lockBytes);
 
         // System.out.println("Saved structure for feature " + feature.name);
     }
 
-    public void func_143017_b(NBTTagCompound tagCompound) {
-        super.func_143017_b(tagCompound);
-        this.isConquered = tagCompound.getBoolean("Conquered");
-        this.feature = TFFeature.featureList[tagCompound.getInteger("FeatureID")];
-        this.lockBytes = tagCompound.getByteArray("Locks");
+    public void func_143017_b(NBTTagCompound nbttagcompound) {
+        super.func_143017_b(nbttagcompound);
+        this.isConquered = nbttagcompound.getBoolean("Conquered");
+        this.feature = TFFeature.featureList[nbttagcompound.getInteger("FeatureID")];
+        this.lockBytes = nbttagcompound.getByteArray("Locks");
 
         // System.out.println("Loaded structure");
     }
@@ -354,4 +368,5 @@ public class StructureTFMajorFeatureStart extends StructureStart {
             return false;
         }
     }
+
 }

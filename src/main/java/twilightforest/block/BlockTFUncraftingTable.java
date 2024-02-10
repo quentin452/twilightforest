@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -34,7 +35,14 @@ public class BlockTFUncraftingTable extends Block {
      */
     @Override
     public IIcon getIcon(int side, int meta) {
-        return side == 1 ? tinkerTop : tinkerSide;
+        switch (side) {
+            case 0:
+                return Blocks.planks.getIcon(0, 3);
+            case 1:
+                return tinkerTop;
+            default:
+                return tinkerSide;
+        }
     }
 
     @Override
@@ -58,7 +66,7 @@ public class BlockTFUncraftingTable extends Block {
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
     @Override
-    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List<ItemStack> par3List) {
+    public void getSubBlocks(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
         par3List.add(new ItemStack(par1, 1, 0));
     }
 

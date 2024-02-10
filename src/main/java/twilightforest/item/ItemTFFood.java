@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import twilightforest.TwilightForestMod;
+import twilightforest.block.TFBlocks;
 
 public class ItemTFFood extends ItemFood {
 
@@ -66,6 +67,28 @@ public class ItemTFFood extends ItemFood {
             this.itemIcon = par1IconRegister
                     .registerIcon(TwilightForestMod.ID + ":" + this.getUnlocalizedName().substring(5));
         }
+    }
+
+    @Override
+    public boolean onItemUse(ItemStack itemStackIn, EntityPlayer player, World worldIn, int x, int y, int z, int side,
+            float p_77648_8_, float p_77648_9_, float p_77648_10_) {
+        if (player.isSneaking() && itemStackIn.getItem() == TFItems.experiment115) {
+            if (worldIn.getBlock(x, y, z) == TFBlocks.experiment115) {
+                int l = worldIn.getBlockMetadata(x, y, z) + 1;
+                if (l <= 8) {
+                    worldIn.setBlockMetadataWithNotify(x, y, z, l, 2);
+                    worldIn.notifyBlocksOfNeighborChange(x, y, z, worldIn.getBlock(x, y, z));
+                    itemStackIn.stackSize--;
+                }
+            } else {
+                if (worldIn.isAirBlock(x, y + 1, z) && side == 1) {
+                    worldIn.setBlock(x, y + 1, z, TFBlocks.experiment115, 1, 2);
+                    worldIn.notifyBlocksOfNeighborChange(x, y, z, worldIn.getBlock(x, y, z));
+                    itemStackIn.stackSize--;
+                }
+            }
+            return true;
+        } else return super.onItemUse(itemStackIn, player, worldIn, x, y, z, side, p_77648_8_, p_77648_9_, p_77648_10_);
     }
 
     public boolean isSoup() {

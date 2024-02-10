@@ -12,6 +12,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 
 import com.google.common.collect.Multimap;
@@ -23,8 +24,8 @@ import twilightforest.TwilightForestMod;
 public class ItemTFKnightlyPick extends ItemPickaxe {
 
     private static final int BONUS_DAMAGE = 2;
-    private EntityPlayer bonusDamagePlayer;
-    private Entity bonusDamageEntity;
+    private EntityPlayer bonusDamageAttacker;
+    private Entity bonusDamageTarget;
     private float damageVsEntity;
 
     protected ItemTFKnightlyPick(Item.ToolMaterial par2EnumToolMaterial) {
@@ -67,31 +68,26 @@ public class ItemTFKnightlyPick extends ItemPickaxe {
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
         // extra damage to armored targets
         if (entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getTotalArmorValue() > 0) {
-            this.bonusDamageEntity = entity;
-            this.bonusDamagePlayer = player;
+            this.bonusDamageTarget = entity;
+            this.bonusDamageAttacker = player;
         }
 
         return false;
     }
 
-    // /**
-    // * Returns the damage against a given entity.
-    // */
-    // @Override
-    // public float getDamageVsEntity(Entity par1Entity, ItemStack itemStack)
-    // {
-    // if (this.bonusDamagePlayer != null && this.bonusDamageEntity != null && par1Entity == this.bonusDamageEntity)
-    // {
-    // this.bonusDamagePlayer.onEnchantmentCritical(par1Entity);
-    // this.bonusDamagePlayer = null;
-    // this.bonusDamageEntity = null;
-    // return this.damageVsEntity + BONUS_DAMAGE;
-    // }
-    // else
-    // {
-    // return super.getDamageVsEntity(par1Entity, itemStack);
-    // }
-    // }
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        if (this.bonusDamageAttacker != null && this.bonusDamageTarget != null && target == this.bonusDamageTarget) {
+            // System.out.println("Knightly Pick extra damage!");
+            if (bonusDamageAttacker instanceof EntityPlayer)
+                ((EntityPlayer) this.bonusDamageAttacker).onEnchantmentCritical(bonusDamageTarget);
+            if (this.bonusDamageTarget instanceof EntityLivingBase) target.lastDamage = 0;
+            this.bonusDamageTarget.attackEntityFrom(DamageSource.causeMobDamage(bonusDamageAttacker), BONUS_DAMAGE);
+            this.bonusDamageAttacker = null;
+            this.bonusDamageTarget = null;
+        }
+        return super.hitEntity(stack, target, attacker);
+    }
 
     /**
      * Properly register icon source
@@ -116,6 +112,8 @@ public class ItemTFKnightlyPick extends ItemPickaxe {
 
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
+     * 
+     * Sergius Onesimus: Probably no need for this anymore since additional damage is now calculated on hit
      */
     public Multimap<String, AttributeModifier> getItemAttributeModifiers() {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();

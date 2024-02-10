@@ -15,13 +15,17 @@ public class TFCommonProxy implements IGuiHandler {
      * Called during the pre-load step. Register stuff here. Obviously most stuff in the common category will be just
      * registered in the mod file
      */
-    public void doPreLoadRegistration() {}
+    public void doPreLoadRegistration() {
+        ;
+    }
 
     /**
      * Called during the load step. Register stuff here. Obviously most stuff in the common category will be just
      * registered in the mod file
      */
-    public void doOnLoadRegistration() {}
+    public void doOnLoadRegistration() {
+        ;
+    }
 
     public int getCritterBlockRenderID() {
         return 0;
@@ -31,11 +35,27 @@ public class TFCommonProxy implements IGuiHandler {
         return 0;
     }
 
+    public int getCakeBlockRenderID() {
+        return 0;
+    }
+
     public int getComplexBlockRenderID() {
         return 0;
     }
 
     public int getNagastoneBlockRenderID() {
+        return 0;
+    }
+
+    public int getNagastoneEtchedBlockRenderID() {
+        return 0;
+    }
+
+    public int getNagastoneEtchedStairsBlockRenderID() {
+        return 0;
+    }
+
+    public int getSpiralBricksBlockRenderID() {
         return 0;
     }
 
@@ -76,7 +96,9 @@ public class TFCommonProxy implements IGuiHandler {
      * except on the client.
      */
     public void spawnParticle(World world, String particleType, double x, double y, double z, double velX, double velY,
-            double velZ) {}
+            double velZ) {
+        ;
+    }
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {

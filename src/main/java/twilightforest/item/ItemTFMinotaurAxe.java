@@ -5,12 +5,14 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 
 import com.google.common.collect.Multimap;
@@ -22,8 +24,8 @@ import twilightforest.TwilightForestMod;
 public class ItemTFMinotaurAxe extends ItemAxe {
 
     public static final int BONUS_CHARGING_DAMAGE = 7;
-    private Entity bonusDamageEntity;
-    private EntityPlayer bonusDamagePlayer;
+    private Entity bonusDamageTarget;
+    private EntityLivingBase bonusDamageAttacker;
     private float damageVsEntity;
 
     protected ItemTFMinotaurAxe(Item.ToolMaterial par2EnumToolMaterial) {
@@ -55,26 +57,26 @@ public class ItemTFMinotaurAxe extends ItemAxe {
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
         // if the player is sprinting, keep the entity, we will do extra damage to it
         if (player.isSprinting()) {
-            this.bonusDamageEntity = entity;
-            this.bonusDamagePlayer = player;
+            this.bonusDamageTarget = entity;
+            this.bonusDamageAttacker = player;
         }
 
         return false;
     }
 
-    /**
-     * Returns the damage against a given entity.
-     */
-    public float getDamageVsEntity(Entity par1Entity, ItemStack itemStack) {
-        if (this.bonusDamagePlayer != null && this.bonusDamageEntity != null && par1Entity == this.bonusDamageEntity) {
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        if (this.bonusDamageAttacker != null && this.bonusDamageTarget != null && target == this.bonusDamageTarget) {
             // System.out.println("Minotaur Axe extra damage!");
-            this.bonusDamagePlayer.onEnchantmentCritical(par1Entity);
-            this.bonusDamagePlayer = null;
-            this.bonusDamageEntity = null;
-            return damageVsEntity + BONUS_CHARGING_DAMAGE;
-        } else {
-            return damageVsEntity;
+            if (bonusDamageAttacker instanceof EntityPlayer)
+                ((EntityPlayer) this.bonusDamageAttacker).onEnchantmentCritical(bonusDamageTarget);
+            if (this.bonusDamageTarget instanceof EntityLivingBase) target.lastDamage = 0;
+            this.bonusDamageTarget
+                    .attackEntityFrom(DamageSource.causeMobDamage(bonusDamageAttacker), BONUS_CHARGING_DAMAGE);
+            this.bonusDamageAttacker = null;
+            this.bonusDamageTarget = null;
         }
+        return super.hitEntity(stack, target, attacker);
     }
 
     /**
@@ -108,6 +110,8 @@ public class ItemTFMinotaurAxe extends ItemAxe {
 
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
+     * 
+     * Sergius Onesimus: Probably no need for this anymore since additional damage is now calculated on hit
      */
     public Multimap<String, AttributeModifier> getItemAttributeModifiers() {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers();

@@ -527,6 +527,7 @@ achievement.twilightProgressCastle=§1So castle §cVery wow
 achievement.twilightProgressCastle.desc=Что же может быть в этом замке?!?
 
 chat.tf.wrongportalitem=Хмм, чего это ты ожидал? Попробуй лучше %s.
+chat.tf.pedestalunworthy=Ты недостоин.
 
 progressionBook.author=Забытый исследователь
 progressionBook.default.title=Заметки о необъяснимом

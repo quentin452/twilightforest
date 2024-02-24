@@ -20,6 +20,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -261,7 +262,7 @@ public class BlockTFTrophyPedestal extends Block {
 
         for (EntityPlayer player : nearbyPlayers) {
             if (!isPlayerEligible(player)) {
-                player.addChatMessage(new ChatComponentText("You are unworthy."));
+                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chat.tf.pedestalunworthy")));
             }
         }
     }
@@ -353,10 +354,10 @@ public class BlockTFTrophyPedestal extends Block {
      */
     @Override
     public float getPlayerRelativeBlockHardness(EntityPlayer par1EntityPlayer, World world, int x, int y, int z) {
-        // not breakable if meta > 0
+        // not breakable if meta > 7
         int meta = world.getBlockMetadata(x, y, z);
 
-        if (meta > 0) {
+        if (meta > 7) {
             return -1;
         } else {
             return super.getPlayerRelativeBlockHardness(par1EntityPlayer, world, x, y, z);

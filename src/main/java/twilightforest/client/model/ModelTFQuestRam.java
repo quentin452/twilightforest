@@ -20,19 +20,19 @@ import twilightforest.entity.passive.EntityTFQuestRam;
 public class ModelTFQuestRam extends ModelBase {
 
     // fields
-	public ModelRenderer frontbody;
-	public ModelRenderer rearbody;
-	public ModelRenderer leg1;
-	public ModelRenderer haunch1;
-	public ModelRenderer leg2;
-	public ModelRenderer haunch2;
-	public ModelRenderer leg3;
-	public ModelRenderer haunch3;
-	public ModelRenderer leg4;
-	public ModelRenderer haunch4;
-	public ModelRenderer neck;
-	public ModelRenderer nose;
-	public ModelRenderer head;
+    public ModelRenderer frontbody;
+    public ModelRenderer rearbody;
+    public ModelRenderer leg1;
+    public ModelRenderer haunch1;
+    public ModelRenderer leg2;
+    public ModelRenderer haunch2;
+    public ModelRenderer leg3;
+    public ModelRenderer haunch3;
+    public ModelRenderer leg4;
+    public ModelRenderer haunch4;
+    public ModelRenderer neck;
+    public ModelRenderer nose;
+    public ModelRenderer head;
 
     ModelRenderer[] segments;
     boolean[] segmentEnabled;

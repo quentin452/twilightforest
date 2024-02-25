@@ -90,13 +90,38 @@ public class BlockTFTrophy extends BlockContainer {
             this.setBlockBounds(0.25F, 0.5F, 0.25F, 0.75F, 1F, 0.75F);
         } else if (trophy != null && trophy.func_145904_a() == 7) {
             // alpha yeti skull bounds
-        	float pixel = 1f / 16;
+            float pixel = 1f / 16;
             switch (meta) {
-                default -> this.setBlockBounds(pixel * 3.2f, 0.0F, pixel * 3.2f, 1 - pixel * 3.2f, 0.665F, 1 - pixel * 3.2f);
-                case 2 -> this.setBlockBounds(pixel * 3.2f, pixel * 4, pixel * 4.4f * 2, 1 - pixel * 3.2f, 0.67F + pixel * 4, 1.0f);
-                case 3 -> this.setBlockBounds(pixel * 3.2f, pixel * 4, 0.0f, 1 - pixel * 3.2f, 0.67F + pixel * 4, 1.0f - pixel * 4.4f * 2);
-                case 4 -> this.setBlockBounds(pixel * 4.4f * 2, pixel * 4, pixel * 3.2f, 1.0f, 0.67F + pixel * 4, 1 - pixel * 3.2f);
-                case 5 -> this.setBlockBounds(0.0f, pixel * 4, pixel * 3.2f, 1.0f - pixel * 4.4f * 2, 0.67F + pixel * 4, 1 - pixel * 3.2f);
+                default -> this
+                        .setBlockBounds(pixel * 3.2f, 0.0F, pixel * 3.2f, 1 - pixel * 3.2f, 0.665F, 1 - pixel * 3.2f);
+                case 2 -> this.setBlockBounds(
+                        pixel * 3.2f,
+                        pixel * 4,
+                        pixel * 4.4f * 2,
+                        1 - pixel * 3.2f,
+                        0.67F + pixel * 4,
+                        1.0f);
+                case 3 -> this.setBlockBounds(
+                        pixel * 3.2f,
+                        pixel * 4,
+                        0.0f,
+                        1 - pixel * 3.2f,
+                        0.67F + pixel * 4,
+                        1.0f - pixel * 4.4f * 2);
+                case 4 -> this.setBlockBounds(
+                        pixel * 4.4f * 2,
+                        pixel * 4,
+                        pixel * 3.2f,
+                        1.0f,
+                        0.67F + pixel * 4,
+                        1 - pixel * 3.2f);
+                case 5 -> this.setBlockBounds(
+                        0.0f,
+                        pixel * 4,
+                        pixel * 3.2f,
+                        1.0f - pixel * 4.4f * 2,
+                        0.67F + pixel * 4,
+                        1 - pixel * 3.2f);
             }
         } else {
             // normal skull bounds

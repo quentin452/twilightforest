@@ -22,9 +22,11 @@ import twilightforest.block.TFBlocks;
 
 public class ItemTFTrophy extends ItemTF {
 
-    private static final String[] trophyTypes = new String[] { "hydra", "naga", "lich", "ur-ghast", "snowQueen", "minoshroom", "knightPhantom", "alphaYeti", "questingRam" };
+    private static final String[] trophyTypes = new String[] { "hydra", "naga", "lich", "ur-ghast", "snowQueen",
+            "minoshroom", "knightPhantom", "alphaYeti", "questingRam" };
     public static final String[] trophyTextures = new String[] { "hydraTrophy", "nagaTrophy", "lichTrophy",
-            "urGhastTrophy", "snowQueenTrophy", "minoshroomTrophy", "knightPhantomTrophy", "alphaYetiTrophy", "questingRamTrophy" };
+            "urGhastTrophy", "snowQueenTrophy", "minoshroomTrophy", "knightPhantomTrophy", "alphaYetiTrophy",
+            "questingRamTrophy" };
     public IIcon[] trophyIcons;
 
     public ItemTFTrophy() {

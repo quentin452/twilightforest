@@ -71,7 +71,7 @@ public class ModelTFYetiAlpha extends ModelBiped {
         addPairHorns(-36.0F, -5F);
 
     }
-    
+
     public ModelTFYetiAlpha trophySetup() {
         this.bipedBody = new ModelRenderer(this, 80, 0);
         this.bipedBody.addBox(-24.0F, -60.0F, -18.0F, 48, 54, 36);

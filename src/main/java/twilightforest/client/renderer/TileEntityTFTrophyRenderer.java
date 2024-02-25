@@ -245,7 +245,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
 
     private void renderKnightPhantomHead(float rotation, boolean onGround) {
 
-    	float scale = 0.89f;
+        float scale = 0.89f;
         GL11.glScalef(scale, scale, scale);
 
         GL11.glTranslatef(0, 0.97f, 0);
@@ -272,7 +272,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
 
     private void renderAlphaYetiHead(float rotation, boolean onGround) {
 
-    	float scale = 0.2f;
+        float scale = 0.2f;
         GL11.glScalef(scale, scale, scale);
 
         GL11.glTranslatef(0, -1.8f, 0);
@@ -293,7 +293,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
 
     private void renderQuestingRamHead(float rotation, boolean onGround) {
 
-    	float scale = 0.7f;
+        float scale = 0.7f;
         GL11.glScalef(scale, scale, scale);
 
         this.bindTexture(textureLocQuestingRam);

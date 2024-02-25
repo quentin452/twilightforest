@@ -262,7 +262,8 @@ public class BlockTFTrophyPedestal extends Block {
 
         for (EntityPlayer player : nearbyPlayers) {
             if (!isPlayerEligible(player)) {
-                player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("chat.tf.pedestalunworthy")));
+                player.addChatMessage(
+                        new ChatComponentText(StatCollector.translateToLocal("chat.tf.pedestalunworthy")));
             }
         }
     }

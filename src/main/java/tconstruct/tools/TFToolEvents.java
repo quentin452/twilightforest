@@ -1,6 +1,5 @@
 package tconstruct.tools;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -25,8 +25,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -128,7 +126,7 @@ public class TFToolEvents {
         int tooltipIndex = 1;
         int lastEmptyIndex = -1;
         int twilitID = tags.getInteger("TwilitID");
-        ChatFormatting color = colorFromID(twilitID);
+        EnumChatFormatting color = colorFromID(twilitID);
         for (int i = event.toolTip.size() - 1; i > 1; i--) {
             if (event.toolTip.get(i).contains(color.toString())) tooltipIndex = i;
             if (lastEmptyIndex == -1 && event.toolTip.get(i).isEmpty() && !event.toolTip.get(i - 1).isEmpty())
@@ -141,32 +139,33 @@ public class TFToolEvents {
         if (event.itemStack.getItem() instanceof ArrowAmmo || event.itemStack.getItem() instanceof BoltAmmo)
             if (tags.getInteger("Accessory") == 5) event.toolTip.add(
                     lastEmptyIndex + 1,
-                    "" + ChatFormatting.DARK_GRAY + StatCollector.translateToLocal("material.raven_feather.ability"));
+                    "" + EnumChatFormatting.DARK_GRAY
+                            + StatCollector.translateToLocal("material.raven_feather.ability"));
         if (tags.hasKey("TFFiery")) {
             event.toolTip.add(
                     tooltipIndex + 1,
-                    "" + ChatFormatting.GOLD + StatCollector.translateToLocal("modifier.tooltip.Auto-Smelt"));
+                    "" + EnumChatFormatting.GOLD + StatCollector.translateToLocal("modifier.tooltip.Auto-Smelt"));
             event.toolTip.add(
                     tooltipIndex + 2,
-                    "" + ChatFormatting.GOLD + StatCollector.translateToLocal("modifier.tooltip.Fiery"));
+                    "" + EnumChatFormatting.GOLD + StatCollector.translateToLocal("modifier.tooltip.Fiery"));
         }
     }
 
-    private ChatFormatting colorFromID(int materialID) {
-        ChatFormatting cf;
+    private EnumChatFormatting colorFromID(int materialID) {
+        EnumChatFormatting cf;
         switch (materialID) {
             default:
-                cf = ChatFormatting.DARK_GRAY;
+                cf = EnumChatFormatting.DARK_GRAY;
                 break;
             case MaterialID.FieryMetal:
-                cf = ChatFormatting.GOLD;
+                cf = EnumChatFormatting.GOLD;
                 break;
             case MaterialID.Knightmetal:
-                cf = ChatFormatting.GREEN;
+                cf = EnumChatFormatting.GREEN;
                 break;
             case MaterialID.NagaScale:
             case MaterialID.Steeleaf:
-                cf = ChatFormatting.DARK_GREEN;
+                cf = EnumChatFormatting.DARK_GREEN;
                 break;
         }
         return cf;
@@ -187,22 +186,20 @@ public class TFToolEvents {
 
     @SubscribeEvent
     public void onProjectileHit(LivingHurtEvent event) {
-        if (event.source instanceof EntityDamageSourceIndirect) {
-            EntityDamageSourceIndirect damageSource = (EntityDamageSourceIndirect) event.source;
-            Entity damageSourceEntity = getDamageSourceEntity(damageSource);
-            if (damageSourceEntity instanceof ProjectileBase) {
-                ProjectileBase entity = (ProjectileBase) damageSourceEntity;
+        if (event.source instanceof EntityDamageSourceIndirect damageSource) {
+            Entity damageSourceEntity = damageSource.damageSourceEntity;
+            if (damageSourceEntity instanceof ProjectileBase entity) {
                 ItemStack projectile = entity.getEntityItem();
                 if (projectile.getTagCompound().getCompoundTag("InfiTool").hasKey("Stalwart")) {
-                    Entity indirectEntity = getIndirectEntity(damageSource);
-                    if (indirectEntity instanceof EntityLivingBase) {
-                        stalwartBuff((EntityLivingBase) indirectEntity);
+                    Entity indirectEntity = damageSource.indirectEntity;
+                    if (indirectEntity instanceof EntityLivingBase entityLiving) {
+                        stalwartBuff(entityLiving);
                     }
                 }
                 if (damageSourceEntity instanceof ArrowEntity || damageSourceEntity instanceof BoltEntity) {
                     int accessory = projectile.getTagCompound().getCompoundTag("InfiTool").getInteger("Accessory");
                     if (accessory == 5) {
-                        setIndirectEntity(damageSource, null);
+                        damageSource.indirectEntity = null;
                     }
                 }
             }
@@ -224,87 +221,16 @@ public class TFToolEvents {
 
     @SubscribeEvent
     public void onProjectileKill(LivingDeathEvent event) {
-        if (event.source instanceof EntityDamageSourceIndirect) {
-            EntityDamageSourceIndirect damageSource = (EntityDamageSourceIndirect) event.source;
-            Entity damageSourceEntity = getDamageSourceEntity(damageSource);
+        if (event.source instanceof EntityDamageSourceIndirect damageSource) {
+            Entity damageSourceEntity = damageSource.damageSourceEntity;
             if (damageSourceEntity instanceof ArrowEntity || damageSourceEntity instanceof BoltEntity) {
                 ProjectileBase entity = (ProjectileBase) damageSourceEntity;
                 int accessory = entity.getEntityItem().getTagCompound().getCompoundTag("InfiTool")
                         .getInteger("Accessory");
                 if (accessory == 5) {
-                    setIndirectEntity(damageSource, null);
+                    damageSource.indirectEntity = null;
                 }
             }
-        }
-    }
-
-    private Entity getDamageSourceEntity(EntityDamageSourceIndirect damageSource) {
-        try {
-            Field field;
-            field = damageSource.getClass().getDeclaredField("damageSourceEntity");
-            field.setAccessible(true);
-            return (Entity) field.get(damageSource);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void setDamageSourceEntity(EntityDamageSourceIndirect damageSource, Entity entity) {
-        try {
-            Field field;
-            field = damageSource.getClass().getDeclaredField("damageSourceEntity");
-            field.setAccessible(true);
-            field.set(damageSource, entity);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Entity getIndirectEntity(EntityDamageSourceIndirect damageSource) {
-        try {
-            Field field;
-            field = damageSource.getClass().getDeclaredField("indirectEntity");
-            field.setAccessible(true);
-            return (Entity) field.get(damageSource);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void setIndirectEntity(EntityDamageSourceIndirect damageSource, Entity entity) {
-        try {
-            Field field;
-            field = damageSource.getClass().getDeclaredField("indirectEntity");
-            field.setAccessible(true);
-            field.set(damageSource, entity);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
         }
     }
 
@@ -339,8 +265,8 @@ public class TFToolEvents {
 
     @SubscribeEvent
     public void onEntityConstructing(EntityEvent.EntityConstructing event) {
-        if (event.entity instanceof EntityPlayer && TFTPlayerStats.get((EntityPlayer) event.entity) == null) {
-            TFTPlayerStats.register((EntityPlayer) event.entity);
+        if (event.entity instanceof EntityPlayer player && TFTPlayerStats.get(player) == null) {
+            TFTPlayerStats.register(player);
         }
     }
 

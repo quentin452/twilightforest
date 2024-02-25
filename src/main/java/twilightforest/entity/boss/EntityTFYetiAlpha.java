@@ -17,6 +17,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
@@ -237,6 +238,9 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
         for (int d = 0; d < drops; d++) {
             this.dropItem(bombs, 1);
         }
+
+        // trophy
+        this.entityDropItem(new ItemStack(TFItems.trophy, 1, 7), 0);
 
     }
 

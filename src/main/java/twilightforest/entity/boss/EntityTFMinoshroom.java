@@ -48,6 +48,9 @@ public class EntityTFMinoshroom extends EntityTFMinotaur {
         for (int i = 0; i < numDrops; ++i) {
             this.dropItem(TFItems.meefStroganoff, 1);
         }
+
+        // trophy
+        this.entityDropItem(new ItemStack(TFItems.trophy, 1, 5), 0);
     }
 
     /**

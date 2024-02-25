@@ -88,7 +88,7 @@ public class BlockTFTrophy extends BlockContainer {
         } else if (trophy != null && trophy.func_145904_a() == 3) {
             // urghast bounds
             this.setBlockBounds(0.25F, 0.5F, 0.25F, 0.75F, 1F, 0.75F);
-        } else if (trophy != null && trophy.func_145904_a() == 8) {
+        } else if (trophy != null && trophy.func_145904_a() == 7) {
             // alpha yeti skull bounds
         	float pixel = 1f / 16;
             switch (meta) {

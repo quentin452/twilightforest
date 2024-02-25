@@ -365,4 +365,45 @@ public class BlockTFTrophyPedestal extends Block {
         }
     }
 
+    /**
+     * If this returns true, then comparators facing away from this block will use the value from
+     * getComparatorInputOverride instead of the actual redstone signal strength.
+     */
+    @Override
+    public boolean hasComparatorInputOverride() {
+        return true;
+    }
+
+    /**
+     * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
+     * strength when this block inputs to a comparator.
+     */
+    @Override
+    public int getComparatorInputOverride(World worldIn, int x, int y, int z, int side) {
+        if (worldIn.getBlock(x, y + 1, z) == TFBlocks.trophy) {
+            // Gives power proportionally to boss' order (might change later)
+            switch (worldIn.getBlockMetadata(x, y + 1, z)) {
+                case 8:
+                    return 1; // Questing Ram
+                case 1:
+                    return 5; // Naga
+                case 2:
+                    return 6; // Lich
+                case 5:
+                    return 7; // Minoshroom
+                case 0:
+                    return 8; // Hydra
+                case 6:
+                    return 9; // Knight Phantom
+                case 3:
+                    return 10; // Ur-Ghast
+                case 7:
+                    return 11; // Alpha Yeti
+                case 4:
+                    return 12; // Snow Queen
+            }
+        }
+        return 0;
+    }
+
 }

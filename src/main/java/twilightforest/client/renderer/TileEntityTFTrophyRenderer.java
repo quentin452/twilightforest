@@ -45,14 +45,14 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
             TwilightForestMod.MODEL_DIR + "phantomskeleton.png");
     private static final ResourceLocation textureLocKnightPhantomArmor = new ResourceLocation(
             TwilightForestMod.ARMOR_DIR + "phantom_1.png");
+    private ModelTFYetiAlpha alphaYetiModel;
+    private static final ResourceLocation textureLocAlphaYeti = new ResourceLocation(
+            TwilightForestMod.MODEL_DIR + "yetialpha.png");
     private ModelTFQuestRam questingRamModel;
     private static final ResourceLocation textureLocQuestingRam = new ResourceLocation(
             TwilightForestMod.MODEL_DIR + "questram.png");
     private static final ResourceLocation textureLocQuestingRamLines = new ResourceLocation(
             TwilightForestMod.MODEL_DIR + "questram_lines.png");
-    private ModelTFYetiAlpha alphaYetiModel;
-    private static final ResourceLocation textureLocAlphaYeti = new ResourceLocation(
-            TwilightForestMod.MODEL_DIR + "yetialpha.png");
 
     public TileEntityTFTrophyRenderer() {
         hydraHeadModel = new ModelTFHydraHead();
@@ -63,8 +63,8 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
         minoshroomModel = new ModelTFMinoshroom();
         knightPhantomModel = new ModelTFKnightPhantom2();
         knightPhantomArmorModel = new ModelTFKnightlyArmor(0, 0.5F);
-        questingRamModel = new ModelTFQuestRam();
         alphaYetiModel = new ModelTFYetiAlpha().trophySetup();
+        questingRamModel = new ModelTFQuestRam();
     }
 
     @Override
@@ -108,8 +108,8 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
             case 4 -> renderSnowQueenHead(rotation, onGround);
             case 5 -> renderMinoshroomHead(rotation, onGround);
             case 6 -> renderKnightPhantomHead(rotation, onGround);
-            case 7 -> renderQuestingRamHead(rotation, onGround);
-            case 8 -> renderAlphaYetiHead(rotation, onGround);
+            case 7 -> renderAlphaYetiHead(rotation, onGround);
+            case 8 -> renderQuestingRamHead(rotation, onGround);
         }
 
         GL11.glPopMatrix();
@@ -270,27 +270,6 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
         knightPhantomArmorModel.bipedHeadwear.render(0.0625F);
     }
 
-    private void renderQuestingRamHead(float rotation, boolean onGround) {
-
-    	float scale = 0.7f;
-        GL11.glScalef(scale, scale, scale);
-
-        this.bindTexture(textureLocQuestingRam);
-
-        GL11.glScalef(1f, -1f, -1f);
-
-        // we seem to be getting a 180 degree rotation here
-        GL11.glRotatef(rotation, 0F, 1F, 0F);
-        GL11.glRotatef(180F, 0F, 1F, 0F);
-
-        GL11.glTranslatef(0, -0.25f, 0.67f);
-
-        GL11.glTranslatef(0, onGround ? 1.5F : 1.25F, onGround ? 0F : 0.24F);
-
-        // render the questing ram head
-        questingRamModel.head.render(0.0625F);
-    }
-
     private void renderAlphaYetiHead(float rotation, boolean onGround) {
 
     	float scale = 0.2f;
@@ -310,6 +289,27 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
 
         // render the alpha yeti head
         alphaYetiModel.bipedBody.render(0.0625F);
+    }
+
+    private void renderQuestingRamHead(float rotation, boolean onGround) {
+
+    	float scale = 0.7f;
+        GL11.glScalef(scale, scale, scale);
+
+        this.bindTexture(textureLocQuestingRam);
+
+        GL11.glScalef(1f, -1f, -1f);
+
+        // we seem to be getting a 180 degree rotation here
+        GL11.glRotatef(rotation, 0F, 1F, 0F);
+        GL11.glRotatef(180F, 0F, 1F, 0F);
+
+        GL11.glTranslatef(0, -0.25f, 0.67f);
+
+        GL11.glTranslatef(0, onGround ? 1.5F : 1.25F, onGround ? 0F : 0.24F);
+
+        // render the questing ram head
+        questingRamModel.head.render(0.0625F);
     }
 
 }

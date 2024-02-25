@@ -596,6 +596,7 @@ public class TFTreasure {
                 uncommon.addRandomEnchanted(TFItems.phantomPlate, 20);
                 rare.addRandomEnchanted(TFItems.phantomHelm, 30);
                 rare.addRandomEnchanted(TFItems.phantomPlate, 30);
+                rare.add(new ItemStack(TFItems.trophy, 1, 6));
             }
             case 18 -> {
                 // aurora cache

@@ -134,6 +134,9 @@ public class EntityTFQuestRam extends EntityAnimal {
         func_145778_a(Item.getItemFromBlock(Blocks.lapis_block), 1, 1.0F);
         func_145778_a(TFItems.crumbleHorn, 1, 1.0F);
 
+        // trophy
+        entityDropItem(new ItemStack(TFItems.trophy, 1, 8), 0);
+
         rewardNearbyPlayers(this.worldObj, this.posX, this.posY, this.posZ);
     }
 

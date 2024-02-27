@@ -61,7 +61,19 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false) {
+
+            /**
+             * Execute a one shot task or start executing a continuous task
+             */
+            @Override
+            public void startExecuting() {
+                this.taskOwner
+                        .playSound(TwilightForestMod.ID + ":mob.yeti.alert", 4F, 0.75F + rand.nextFloat() * 0.25F);
+                this.taskOwner.setAttackTarget(this.targetEntity);
+                super.startExecuting();
+            }
+        });
 
         this.experienceValue = 317;
 
@@ -196,6 +208,7 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
     @Override
     public boolean attackEntityAsMob(Entity par1Entity) {
         if (this.riddenByEntity == null && par1Entity.ridingEntity == null) {
+            this.playSound(TwilightForestMod.ID + ":mob.yeti.grab", 4F, 0.75F + rand.nextFloat() * 0.25F);
             par1Entity.mountEntity(this);
         }
 
@@ -413,7 +426,10 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
             float f1 = MathHelper.sqrt_double(d0 * d0 + d2 * d2) * 0.2F;
             ice.setThrowableHeading(d0, d1 + (double) f1, d2, 0.75F, 12.0F);
 
-            this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+            this.playSound(
+                    TwilightForestMod.ID + ":mob.yeti.pant",
+                    1.0F,
+                    1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
             this.worldObj.spawnEntityInWorld(ice);
         }
     }
@@ -430,6 +446,7 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
      * Set whether this yeti is currently in rampage mode.
      */
     public void setRampaging(boolean par1) {
+        if (par1) this.playSound(TwilightForestMod.ID + ":mob.yeti.roar", 4F, 0.75F + rand.nextFloat() * 0.25F);
         this.getDataWatcher().updateObject(RAMPAGE_FLAG, (byte) (par1 ? 1 : 0));
     }
 
@@ -463,7 +480,10 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
 
         if (this.isRampaging()) {
             // make jump effects
-            this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+            this.playSound(
+                    TwilightForestMod.ID + ":mob.yeti.pant",
+                    1.0F,
+                    1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
 
             int i = MathHelper.floor_double(this.posX);
             int j = MathHelper.floor_double(this.posY - 0.20000000298023224D - (double) this.yOffset);
@@ -547,6 +567,37 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
         if (!nbttagcompound.getBoolean("HasHome")) {
             this.detachHome();
         }
+    }
+
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return TwilightForestMod.ID + ":mob.yeti.growl";
+    }
+
+    /**
+     * Basically a public getter for living sounds
+     */
+    public String getTrophySound() {
+        return this.getLivingSound();
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return TwilightForestMod.ID + ":mob.yeti.hurt";
+    }
+
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    @Override
+    protected String getDeathSound() {
+        return TwilightForestMod.ID + ":mob.yeti.death";
     }
 
 }

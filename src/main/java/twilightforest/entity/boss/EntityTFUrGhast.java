@@ -760,6 +760,13 @@ public class EntityTFUrGhast extends EntityTFTowerGhast implements IBossDisplayD
     }
 
     /**
+     * Basically a public getter for living sounds
+     */
+    public String getTrophySound() {
+        return this.getLivingSound();
+    }
+
+    /**
      * Needed for boss health bar on the client
      */
     // @Override

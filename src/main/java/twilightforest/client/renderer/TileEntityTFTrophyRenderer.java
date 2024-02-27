@@ -293,7 +293,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
 
     private void renderQuestingRamHead(float rotation, boolean onGround) {
 
-        float scale = 0.7f;
+        float scale = 0.65f;
         GL11.glScalef(scale, scale, scale);
 
         this.bindTexture(textureLocQuestingRam);
@@ -306,7 +306,7 @@ public class TileEntityTFTrophyRenderer extends TileEntitySpecialRenderer {
 
         GL11.glTranslatef(0, -0.25f, 0.67f);
 
-        GL11.glTranslatef(0, onGround ? 1.5F : 1.25F, onGround ? 0F : 0.24F);
+        GL11.glTranslatef(0, onGround ? 1.5F : 1.175F, onGround ? 0.05F : 0.41F);
 
         // render the questing ram head
         questingRamModel.head.render(0.0625F);

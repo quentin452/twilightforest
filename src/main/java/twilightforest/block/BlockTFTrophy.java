@@ -21,6 +21,15 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import twilightforest.entity.boss.EntityTFHydra;
+import twilightforest.entity.boss.EntityTFKnightPhantom;
+import twilightforest.entity.boss.EntityTFLich;
+import twilightforest.entity.boss.EntityTFMinoshroom;
+import twilightforest.entity.boss.EntityTFNaga;
+import twilightforest.entity.boss.EntityTFSnowQueen;
+import twilightforest.entity.boss.EntityTFUrGhast;
+import twilightforest.entity.boss.EntityTFYetiAlpha;
+import twilightforest.entity.passive.EntityTFQuestRam;
 import twilightforest.item.TFItems;
 import twilightforest.tileentity.TileEntityTFTrophy;
 
@@ -182,6 +191,14 @@ public class BlockTFTrophy extends BlockContainer {
     }
 
     /**
+     * Gets an item for the block being called on. Args: world, x, y, z
+     */
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
+        return TFItems.trophy;
+    }
+
+    /**
      * Called when the block is attempted to be harvested
      */
     @Override
@@ -246,6 +263,53 @@ public class BlockTFTrophy extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
         // don't load anything
+    }
+
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    @Override
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX,
+            float subY, float subZ) {
+        String sound;
+        switch (((TileEntitySkull) worldIn.getTileEntity(x, y, z)).func_145904_a()) {
+            default:
+            case 0:
+                sound = new EntityTFHydra(worldIn).getTrophySound();
+                break;
+            case 1:
+                sound = new EntityTFNaga(worldIn).getTrophySound();
+                break;
+            case 2:
+                sound = new EntityTFLich(worldIn).getTrophySound();
+                break;
+            case 3:
+                sound = new EntityTFUrGhast(worldIn).getTrophySound();
+                break;
+            case 4:
+                sound = new EntityTFSnowQueen(worldIn).getTrophySound();
+                break;
+            case 5:
+                sound = new EntityTFMinoshroom(worldIn).getTrophySound();
+                break;
+            case 6:
+                sound = new EntityTFKnightPhantom(worldIn).getTrophySound();
+                break;
+            case 7:
+                sound = new EntityTFYetiAlpha(worldIn).getTrophySound();
+                break;
+            case 8:
+                sound = new EntityTFQuestRam(worldIn).getTrophySound();
+                break;
+        }
+        worldIn.playSoundEffect(
+                (double) x + 0.5D,
+                (double) y + 0.5D,
+                (double) z + 0.5D,
+                sound,
+                1.0F,
+                worldIn.rand.nextFloat() * 0.1F + 0.9F);
+        return true;
     }
 
 }

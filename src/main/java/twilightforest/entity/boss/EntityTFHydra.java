@@ -920,6 +920,13 @@ public class EntityTFHydra extends EntityLiving implements IBossDisplayData, IEn
     }
 
     /**
+     * Basically a public getter for living sounds
+     */
+    public String getTrophySound() {
+        return this.getLivingSound();
+    }
+
+    /**
      * Returns the sound this mob makes when it is hurt.
      */
     @Override

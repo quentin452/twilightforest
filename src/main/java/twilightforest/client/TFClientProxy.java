@@ -65,6 +65,7 @@ import twilightforest.client.model.ModelTFTinyBird;
 import twilightforest.client.model.ModelTFTowerBoss;
 import twilightforest.client.model.ModelTFTowerGolem;
 import twilightforest.client.model.ModelTFTroll;
+import twilightforest.client.model.ModelTFTrophyArmor;
 import twilightforest.client.model.ModelTFWraith;
 import twilightforest.client.model.ModelTFYeti;
 import twilightforest.client.model.ModelTFYetiAlpha;
@@ -188,6 +189,7 @@ public class TFClientProxy extends TFCommonProxy {
     ModelBiped[] yetiArmorModel;
     ModelBiped[] arcticArmorModel;
     ModelBiped[] fieryArmorModel;
+    ModelBiped[] trophyArmorModel;
 
     TFClientTicker clientTicker;
     TFClientEvents clientEvents;
@@ -608,6 +610,17 @@ public class TFClientProxy extends TFCommonProxy {
         fieryArmorModel[2] = new ModelTFFieryArmor(2, 0.5F);
         fieryArmorModel[3] = new ModelTFFieryArmor(3, 0.5F);
 
+        trophyArmorModel = new ModelBiped[9];
+        trophyArmorModel[0] = new ModelTFTrophyArmor(0, 0.5F);
+        trophyArmorModel[1] = new ModelTFTrophyArmor(1, 0.5F);
+        trophyArmorModel[2] = new ModelTFTrophyArmor(2, 0.5F);
+        trophyArmorModel[3] = new ModelTFTrophyArmor(3, 0.5F);
+        trophyArmorModel[4] = new ModelTFTrophyArmor(4, 0.5F);
+        trophyArmorModel[5] = new ModelTFTrophyArmor(5, 0.5F);
+        trophyArmorModel[6] = new ModelTFTrophyArmor(6, 0.5F);
+        trophyArmorModel[7] = new ModelTFTrophyArmor(7, 0.5F);
+        trophyArmorModel[8] = new ModelTFTrophyArmor(8, 0.5F);
+
     }
 
     public int getCritterBlockRenderID() {
@@ -754,6 +767,10 @@ public class TFClientProxy extends TFCommonProxy {
 
     public ModelBiped getFieryArmorModel(int armorSlot) {
         return this.fieryArmorModel[armorSlot];
+    }
+
+    public ModelBiped getTrophyArmorModel(int boss) {
+        return this.trophyArmorModel[boss];
     }
 
     public boolean isDangerOverlayShown() {

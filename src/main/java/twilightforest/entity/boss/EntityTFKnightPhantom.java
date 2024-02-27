@@ -612,6 +612,13 @@ public class EntityTFKnightPhantom extends EntityFlying implements IMob {
         return TwilightForestMod.ID + ":mob.wraith.wraith";
     }
 
+    /**
+     * Basically a public getter for living sounds
+     */
+    public String getTrophySound() {
+        return this.getLivingSound();
+    }
+
     @Override
     protected String getHurtSound() {
         return TwilightForestMod.ID + ":mob.wraith.wraith";

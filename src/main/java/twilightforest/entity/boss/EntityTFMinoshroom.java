@@ -70,4 +70,11 @@ public class EntityTFMinoshroom extends EntityTFMinotaur {
 
     }
 
+    /**
+     * Basically a public getter for living sounds
+     */
+    public String getTrophySound() {
+        return this.getLivingSound();
+    }
+
 }

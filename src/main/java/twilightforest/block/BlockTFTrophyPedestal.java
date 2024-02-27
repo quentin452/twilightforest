@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.stats.StatisticsFile;
+import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
@@ -186,8 +187,33 @@ public class BlockTFTrophyPedestal extends Block {
             if (isTrophyOnTop(par1World, x, y, z)) {
                 par1World.scheduleBlockUpdate(x, y, z, this, 1);
             }
+            updateComparators(par1World, x, y, z);
         }
 
+    }
+
+    private void updateComparators(World par1World, int x, int y, int z) {
+        for (int i = 1; i <= 4; i++) {
+            int neighbourX = x;
+            int neighbourZ = z;
+            switch (i) {
+                case 1:
+                    neighbourX++;
+                    break;
+                case 2:
+                    neighbourX--;
+                    break;
+                case 3:
+                    neighbourZ++;
+                    break;
+                case 4:
+                    neighbourZ--;
+                    break;
+            }
+            Block neighbour = par1World.getBlock(neighbourX, y, neighbourZ);
+            if (neighbour == Blocks.powered_comparator || neighbour == Blocks.unpowered_comparator)
+                par1World.scheduleBlockUpdate(neighbourX, y, neighbourZ, neighbour, 1);
+        }
     }
 
     /**
@@ -382,7 +408,7 @@ public class BlockTFTrophyPedestal extends Block {
     public int getComparatorInputOverride(World worldIn, int x, int y, int z, int side) {
         if (worldIn.getBlock(x, y + 1, z) == TFBlocks.trophy) {
             // Gives power proportionally to boss' order (might change later)
-            switch (worldIn.getBlockMetadata(x, y + 1, z)) {
+            switch (((TileEntitySkull) worldIn.getTileEntity(x, y + 1, z)).func_145904_a()) {
                 case 8:
                     return 1; // Questing Ram
                 case 1:

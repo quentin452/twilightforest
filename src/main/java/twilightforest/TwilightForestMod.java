@@ -248,7 +248,6 @@ public class TwilightForestMod {
 
         // register vanilla stalactite ores
         TFGenCaveStalactite.registerVanillaStalactites();
-        TFGenCaveStalactite.addNewStalactite(TFBlocks.arcticFurStorage, 1.0f, 50, 0, 1, 10);
 
         // check if various integrations are required
         isSkinportLoaded = Loader.isModLoaded("skinport");

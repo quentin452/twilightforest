@@ -28,7 +28,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.w3c.dom.Document;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mantle.blocks.BlockUtils;
 import mantle.lib.client.MantleClientRegistry;
@@ -835,6 +834,12 @@ public class TFTinkerConstructIntegration {
         manualBook = new TFManual();
         GameRegistry.registerItem(manualBook, "manualBook");
         readManuals();
+
+        GameRegistry.addShapelessRecipe(
+                new ItemStack(manualBook),
+                new ItemStack(TinkerTools.blankPattern, 1, 0),
+                new ItemStack(Items.paper),
+                new ItemStack(TFItems.magicMapFocus));
     }
 
     public static boolean isValidClayCast(int meta) {
@@ -847,9 +852,9 @@ public class TFTinkerConstructIntegration {
 
     public static void readManuals() {
         initManualIcons();
-        if (!Loader.isModLoaded("dreamcraft")) {
-            readTinkersConstructManuals();
-        }
+        // if (!Loader.isModLoaded("dreamcraft")) {
+        readTinkersConstructManuals();
+        // }
     }
 
     private static void readTinkersConstructManuals() {

@@ -16,7 +16,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -28,7 +27,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.w3c.dom.Document;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import mantle.blocks.BlockUtils;
 import mantle.lib.client.MantleClientRegistry;
 import tconstruct.TConstruct;
@@ -85,7 +86,7 @@ public class TFTinkerConstructIntegration {
         public static final int Steeleaf = 45;
     }
 
-    public static void registerTinkersConstructIntegration() {
+    public static void registerTinkersConstructIntegration(FMLPostInitializationEvent evt) {
         TFToolEvents toolEvents = new TFToolEvents();
         MinecraftForge.EVENT_BUS.register(toolEvents);
         FMLCommonHandler.instance().bus().register(toolEvents);
@@ -143,34 +144,6 @@ public class TFTinkerConstructIntegration {
             moltenFieryMetal = moltenFieryMetalFluid.getBlock().setCreativeTab(TConstructRegistry.blockTab);
             FluidType.registerFluidType("FieryMetal", TFBlocks.fieryMetalStorage, 0, 600, moltenFieryMetalFluid, true);
 
-            Item materialItem = TFItems.fieryIngot;
-            TConstructClientRegistry.addMaterialRenderMapping(MaterialID.FieryMetal, "tinker", "fierymetal", true);
-            TConstructRegistry.addToolMaterial(
-                    MaterialID.FieryMetal,
-                    "FieryMetal",
-                    3,
-                    720, // TiC2 value untouched
-                    720, // TiC2 value untouched
-                    3,
-                    1.2F, // Is 0.8 in TiC2, but in TiC1 metals' modifiers are always ≥1.0, so I used a netherrack value
-                          // to go with the fiery theme
-                    0,
-                    0f,
-                    GOLD.toString(),
-                    0x3C2323);
-            TConstructRegistry.toolMaterialStrings.put(
-                    StatCollector.translateToLocal("material.fierymetal"),
-                    TConstructRegistry.toolMaterials.get(MaterialID.FieryMetal)); // For the tutorial book to work
-                                                                                  // properly on languages other than
-                                                                                  // English
-            PatternBuilder.instance.registerFullMaterial(
-                    new ItemStack((Item) materialItem, 1, 0),
-                    2,
-                    "FieryMetal",
-                    new ItemStack(TinkerTools.toolShard, 1, MaterialID.FieryMetal),
-                    new ItemStack(TinkerTools.toolRod, 1, MaterialID.FieryMetal),
-                    MaterialID.FieryMetal);
-
             // Knightmetal
             moltenKnightmetalFluid = TinkerSmeltery.registerFluid("knightmetal");
             moltenKnightmetal = moltenKnightmetalFluid.getBlock().setCreativeTab(TConstructRegistry.blockTab);
@@ -181,33 +154,6 @@ public class TFTinkerConstructIntegration {
                     600,
                     moltenKnightmetalFluid,
                     true);
-
-            materialItem = TFItems.knightMetal;
-            TConstructClientRegistry.addMaterialRenderMapping(MaterialID.Knightmetal, "tinker", "knightmetal", true);
-            TConstructRegistry.addToolMaterial(
-                    MaterialID.Knightmetal,
-                    "Knightmetal",
-                    4,
-                    900, // TiC2 value untouched
-                    700, // TiC2 value untouched
-                    3, // The converted value was 2.75. Might have to decrease later
-                    1.25F, // TiC2 value untouched
-                    0,
-                    0f,
-                    GREEN.toString(),
-                    0xDBEEC1);
-            TConstructRegistry.toolMaterialStrings.put(
-                    StatCollector.translateToLocal("material.knightmetal"),
-                    TConstructRegistry.toolMaterials.get(MaterialID.Knightmetal)); // For the tutorial book to work
-                                                                                   // properly on languages other than
-                                                                                   // English
-            PatternBuilder.instance.registerFullMaterial(
-                    new ItemStack((Item) materialItem, 1, 0),
-                    2,
-                    "Knightmetal",
-                    new ItemStack(TinkerTools.toolShard, 1, MaterialID.Knightmetal),
-                    new ItemStack(TinkerTools.toolRod, 1, MaterialID.Knightmetal),
-                    MaterialID.Knightmetal);
 
             LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
 
@@ -634,6 +580,53 @@ public class TFTinkerConstructIntegration {
             TConstructRegistry.addDefaultToolPartMaterial(MaterialID.Knightmetal);
         }
 
+        // Fiery Metal
+        Item materialItem = TFItems.fieryIngot;
+        TConstructClientRegistry.addMaterialRenderMapping(MaterialID.FieryMetal, "tinker", "fierymetal", true);
+        TConstructRegistry.addToolMaterial(
+                MaterialID.FieryMetal,
+                "FieryMetal",
+                3,
+                720, // TiC2 value untouched
+                720, // TiC2 value untouched
+                3,
+                1.2F, // Is 0.8 in TiC2, but in TiC1 metals' modifiers are always ≥1.0, so I used a netherrack value
+                      // to go with the fiery theme
+                0,
+                0f,
+                GOLD.toString(),
+                0x3C2323);
+        PatternBuilder.instance.registerFullMaterial(
+                new ItemStack((Item) materialItem, 1, 0),
+                2,
+                "FieryMetal",
+                new ItemStack(TinkerTools.toolShard, 1, MaterialID.FieryMetal),
+                new ItemStack(TinkerTools.toolRod, 1, MaterialID.FieryMetal),
+                MaterialID.FieryMetal);
+
+        // Knightmetal
+        materialItem = TFItems.knightMetal;
+        TConstructClientRegistry.addMaterialRenderMapping(MaterialID.Knightmetal, "tinker", "knightmetal", true);
+        TConstructRegistry.addToolMaterial(
+                MaterialID.Knightmetal,
+                "Knightmetal",
+                4,
+                900, // TiC2 value untouched
+                700, // TiC2 value untouched
+                3, // The converted value was 2.75. Might have to decrease later
+                1.25F, // TiC2 value untouched
+                0,
+                0f,
+                GREEN.toString(),
+                0xDBEEC1);
+        PatternBuilder.instance.registerFullMaterial(
+                new ItemStack((Item) materialItem, 1, 0),
+                2,
+                "Knightmetal",
+                new ItemStack(TinkerTools.toolShard, 1, MaterialID.Knightmetal),
+                new ItemStack(TinkerTools.toolRod, 1, MaterialID.Knightmetal),
+                MaterialID.Knightmetal);
+
         // Register rods
         String[] matNames = { "NagaScale", "Steeleaf" };
         for (int i = 0; i < matNames.length; i++) {
@@ -644,7 +637,7 @@ public class TFTinkerConstructIntegration {
         // For materials that do not use casting
 
         // Naga Scale
-        Item materialItem = TFItems.nagaScale;
+        materialItem = TFItems.nagaScale;
         TConstructClientRegistry.addMaterialRenderMapping(MaterialID.NagaScale, "tinker", "nagascale", true);
         TConstructRegistry.addToolMaterial(
                 MaterialID.NagaScale,
@@ -658,10 +651,6 @@ public class TFTinkerConstructIntegration {
                 0f,
                 DARK_GREEN.toString(),
                 0x53763B);
-        TConstructRegistry.toolMaterialStrings.put(
-                StatCollector.translateToLocal("material.nagascale"),
-                TConstructRegistry.toolMaterials.get(MaterialID.NagaScale)); // For the tutorial book to work properly
-                                                                             // on languages other than English
         PatternBuilder.instance.registerFullMaterial(
                 new ItemStack((Item) materialItem, 1, 0),
                 2,
@@ -686,10 +675,6 @@ public class TFTinkerConstructIntegration {
                 0f,
                 DARK_GREEN.toString(),
                 0x1F3716);
-        TConstructRegistry.toolMaterialStrings.put(
-                StatCollector.translateToLocal("material.steeleaf"),
-                TConstructRegistry.toolMaterials.get(MaterialID.Steeleaf)); // For the tutorial book to work properly on
-                                                                            // languages other than English
         PatternBuilder.instance.registerFullMaterial(
                 new ItemStack((Item) materialItem, 1, 0),
                 2,
@@ -833,7 +818,7 @@ public class TFTinkerConstructIntegration {
         // Register books
         manualBook = new TFManual();
         GameRegistry.registerItem(manualBook, "manualBook");
-        readManuals();
+        if (evt.getSide() == Side.CLIENT) readManuals();
 
         GameRegistry.addShapelessRecipe(
                 new ItemStack(manualBook),

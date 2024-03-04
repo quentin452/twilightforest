@@ -349,12 +349,12 @@ public class TFBlocks {
         registerMyBlock(trollVidr, ItemBlock.class);
         registerMyBlock(unripeTrollBer, ItemBlock.class);
         registerMyBlock(trollBer, ItemBlock.class);
-        registerMyBlock(knightmetalStorage, ItemBlock.class);
-        registerMyBlock(arcticFurStorage, ItemBlock.class);
-        registerMyBlock(carminiteStorage, ItemBlock.class);
-        registerMyBlock(fieryMetalStorage, ItemBlock.class);
-        registerMyBlock(ironwoodStorage, ItemBlock.class);
-        registerMyBlock(steeleafStorage, ItemBlock.class);
+        registerMyBlock(knightmetalStorage, twilightforest.item.ItemBlockTFCompressed.class);
+        registerMyBlock(arcticFurStorage, twilightforest.item.ItemBlockTFCompressed.class);
+        registerMyBlock(carminiteStorage, twilightforest.item.ItemBlockTFCompressed.class);
+        registerMyBlock(fieryMetalStorage, twilightforest.item.ItemBlockTFCompressed.class);
+        registerMyBlock(ironwoodStorage, twilightforest.item.ItemBlockTFCompressed.class);
+        registerMyBlock(steeleafStorage, twilightforest.item.ItemBlockTFCompressed.class);
         registerMyBlock(hugeLilyPad, twilightforest.item.ItemBlockTFHugeLilyPad.class);
         registerMyBlock(hugeWaterLily, twilightforest.item.ItemBlockTFHugeWaterLily.class);
         registerMyBlock(slider);

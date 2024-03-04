@@ -31,7 +31,10 @@ public class BlockTFCompressed extends BlockCompressed {
         STEELEAF
     }
 
-    private BlockType type;
+    public BlockType type;
+
+    public IIcon[] fieryPattern;
+    public IIcon[] fieryCore; // 0 - single, 1 - horizontal, 2 - vertical, 3 - cross, 4 - full
 
     protected BlockTFCompressed(BlockType blockType) {
         super(typeToMapColor(blockType));
@@ -184,6 +187,103 @@ public class BlockTFCompressed extends BlockCompressed {
     public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side) {
         if (this.type == BlockType.FIERY_METAL && side == UP) return true;
         return false;
+    }
+
+    /**
+     * How bright to render this block based on the light its receiving. Args: iBlockAccess, x, y, z
+     */
+    @SideOnly(Side.CLIENT)
+    public int getMixedBrightnessForBlock(IBlockAccess worldIn, int x, int y, int z) {
+        if (this.type == BlockType.FIERY_METAL) return 255;
+        return super.getMixedBrightnessForBlock(worldIn, x, y, z);
+    }
+
+    /**
+     * Returns a integer with hex for 0xrrggbb with this color multiplied against the blocks color. Note only called
+     * when first determining what to render.
+     */
+    @SideOnly(Side.CLIENT)
+    public int colorMultiplier(IBlockAccess worldIn, int x, int y, int z) {
+        if (this.type == BlockType.FIERY_METAL) return 0xffffff;
+        return super.colorMultiplier(worldIn, x, y, z);
+    }
+
+    public boolean canConnectFieryTo(IBlockAccess worldIn, int x, int y, int z) {
+        return worldIn.getBlock(x, y, z) == TFBlocks.fieryMetalStorage;
+    }
+
+    /**
+     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+     */
+    @Override
+    public boolean renderAsNormalBlock() {
+        return this.type != BlockType.FIERY_METAL;
+    }
+
+    /**
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether or not to render the shared face of two
+     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     */
+    @Override
+    public boolean isOpaqueCube() {
+        return true;
+    }
+
+    /**
+     * Return true if the block is a normal, solid cube. This determines indirect power state, entity ejection from
+     * blocks, and a few others.
+     *
+     * @param world The current world
+     * @param x     X Position
+     * @param y     Y position
+     * @param z     Z position
+     * @return True if the block is a full cube
+     */
+    @Override
+    public boolean isNormalCube(IBlockAccess world, int x, int y, int z) {
+        return true;
+    }
+
+    /**
+     * Checks if the block is a solid face on the given side, used by placement logic.
+     *
+     * @param world The current world
+     * @param x     X Position
+     * @param y     Y position
+     * @param z     Z position
+     * @param side  The side to check
+     * @return True if the block is solid on the specified side.
+     */
+    @Override
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+        if (this.type == BlockType.FIERY_METAL) return side == ForgeDirection.UP;
+        return true;
+    }
+
+    /**
+     * The type of render function that is called for this block
+     */
+    @Override
+    public int getRenderType() {
+        if (this.type == BlockType.FIERY_METAL) return TwilightForestMod.proxy.getFieryMetalBlockRenderID();
+        else return super.getRenderType();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister reg) {
+        this.fieryPattern = new IIcon[4];
+        this.fieryPattern[0] = reg.registerIcon(TwilightForestMod.ID + ":fiery_pattern");
+        this.fieryPattern[1] = new BetterIconFlipped(this.fieryPattern[0], true, false);
+        this.fieryPattern[2] = new BetterIconFlipped(this.fieryPattern[0], false, true);
+        this.fieryPattern[3] = new BetterIconFlipped(this.fieryPattern[0], true, true);
+
+        this.fieryCore = new IIcon[5];
+        this.fieryCore[0] = reg.registerIcon(TwilightForestMod.ID + ":fiery_block_inner");
+        this.fieryCore[1] = reg.registerIcon(TwilightForestMod.ID + ":fiery_block_inner_horizontal");
+        this.fieryCore[2] = reg.registerIcon(TwilightForestMod.ID + ":fiery_block_inner_vertical");
+        this.fieryCore[3] = reg.registerIcon(TwilightForestMod.ID + ":fiery_block_inner_cross");
+        this.fieryCore[4] = reg.registerIcon(TwilightForestMod.ID + ":fiery_block_inner_full");
+        super.registerBlockIcons(reg);
     }
 
 }

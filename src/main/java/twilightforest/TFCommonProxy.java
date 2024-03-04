@@ -75,6 +75,10 @@ public class TFCommonProxy implements IGuiHandler {
         return 0;
     }
 
+    public int getFieryMetalBlockRenderID() {
+        return 0;
+    }
+
     public int getHugeLilyPadBlockRenderID() {
         return 0;
     }

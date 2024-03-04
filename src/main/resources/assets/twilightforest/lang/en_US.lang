@@ -451,6 +451,7 @@ item.fieryBlood.tooltip=Can be poured into Tinkers Construct tanks
 item.fieryTears.tooltip=Can be poured into Tinkers Construct tanks
 item.charm.tooltip=Can be equipped into any Baubles slot
 item.nagastone.outdatedTooltip=Outdated, place and break to update
+itemBlock.compressed.tooltip=Usable for Beacon bases
 tooltip.tf.adherent=An Adherent, but to whom?
 tooltip.tf.harbinger=A Harbinger, but of what?
 

@@ -94,6 +94,7 @@ import twilightforest.client.renderer.TileEntityTFTrophyRenderer;
 import twilightforest.client.renderer.blocks.RenderBlockTFCake;
 import twilightforest.client.renderer.blocks.RenderBlockTFCastleMagic;
 import twilightforest.client.renderer.blocks.RenderBlockTFCritters;
+import twilightforest.client.renderer.blocks.RenderBlockTFFieryMetal;
 import twilightforest.client.renderer.blocks.RenderBlockTFFireflyJar;
 import twilightforest.client.renderer.blocks.RenderBlockTFHugeLilyPad;
 import twilightforest.client.renderer.blocks.RenderBlockTFKnightMetal;
@@ -181,6 +182,7 @@ public class TFClientProxy extends TFCommonProxy {
     int pedestalRenderID;
     int thornsRenderID;
     int knightmetalBlockRenderID;
+    int fieryMetalBlockRenderID;
     int hugeLilyPadBlockRenderID;
     int castleMagicBlockRenderID;
 
@@ -575,6 +577,9 @@ public class TFClientProxy extends TFCommonProxy {
         knightmetalBlockRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFKnightMetal(knightmetalBlockRenderID));
 
+        fieryMetalBlockRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderBlockTFFieryMetal(fieryMetalBlockRenderID));
+
         hugeLilyPadBlockRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFHugeLilyPad(hugeLilyPadBlockRenderID));
 
@@ -669,6 +674,10 @@ public class TFClientProxy extends TFCommonProxy {
 
     public int getKnightmetalBlockRenderID() {
         return knightmetalBlockRenderID;
+    }
+
+    public int getFieryMetalBlockRenderID() {
+        return fieryMetalBlockRenderID;
     }
 
     public int getHugeLilyPadBlockRenderID() {

@@ -20,6 +20,8 @@ public class ItemBlockTFCompressed extends ItemBlock {
     public ItemBlockTFCompressed(Block block) {
         super(block);
         hasSubtypes = true;
+        if (block instanceof BlockTFCompressed && ((BlockTFCompressed) block).type == BlockType.FIERY_METAL)
+            MinecraftForgeClient.registerItemRenderer(this, new TFCompressedBlockRenderer());
     }
 
     /**

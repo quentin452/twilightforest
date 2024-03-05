@@ -46,7 +46,7 @@ public class TFFieryMetalBlockRenderer implements IItemRenderer {
         return true;
     }
 
-    public void renderInvJar(RenderBlocks renderblocks, Block par1Block, int meta) {
+    public static void renderInvJar(RenderBlocks renderblocks, Block par1Block, int meta) {
         Tessellator tessellator = Tessellator.instance;
 
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -67,7 +67,7 @@ public class TFFieryMetalBlockRenderer implements IItemRenderer {
         par1Block.setBlockBoundsForItemRender();
     }
 
-    public void renderInvSimpleBlock(RenderBlocks renderblocks, Block par1Block, int meta) {
+    public static void renderInvSimpleBlock(RenderBlocks renderblocks, Block par1Block, int meta) {
         Tessellator tessellator = Tessellator.instance;
 
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -81,7 +81,8 @@ public class TFFieryMetalBlockRenderer implements IItemRenderer {
         par1Block.setBlockBoundsForItemRender();
     }
 
-    protected void renderInvBlock(RenderBlocks renderblocks, Block par1Block, int meta, Tessellator tessellator) {
+    protected static void renderInvBlock(RenderBlocks renderblocks, Block par1Block, int meta,
+            Tessellator tessellator) {
         tessellator.startDrawingQuads();
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
         renderblocks.renderFaceYNeg(par1Block, 0.0D, 0.0D, 0.0D, par1Block.getIcon(0, meta));
@@ -108,7 +109,7 @@ public class TFFieryMetalBlockRenderer implements IItemRenderer {
         tessellator.draw();
     }
 
-    protected void renderInvOutline(RenderBlocks renderblocks, BlockTFCompressed block, int meta,
+    protected static void renderInvOutline(RenderBlocks renderblocks, BlockTFCompressed block, int meta,
             Tessellator tessellator) {
         renderblocks.renderFromInside = true;
         tessellator.startDrawingQuads();

@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import twilightforest.TwilightForestMod;
@@ -39,6 +40,8 @@ public class TFRecipes {
         OreDictionary.registerOre("ingotSteeleaf", new ItemStack(TFItems.steeleafIngot));
         OreDictionary.registerOre("oreKnightmetal", new ItemStack(TFItems.shardCluster));
         OreDictionary.registerOre("ingotKnightmetal", new ItemStack(TFItems.knightMetal));
+        OreDictionary.registerOre("fieryEssence", new ItemStack(TFItems.fieryBlood));
+        OreDictionary.registerOre("fieryEssence", new ItemStack(TFItems.fieryTears));
 
         // recipe sorter
         RecipeSorter.register(
@@ -300,12 +303,10 @@ public class TFRecipes {
 
         GameRegistry.addSmelting(TFItems.venisonRaw, new ItemStack(TFItems.venisonCooked), 0.3F);
 
-        GameRegistry.addShapelessRecipe(
-                new ItemStack(TFItems.fieryIngot),
-                new Object[] { TFItems.fieryBlood, Items.iron_ingot });
-        GameRegistry.addShapelessRecipe(
-                new ItemStack(TFItems.fieryIngot),
-                new Object[] { TFItems.fieryTears, Items.iron_ingot });
+        GameRegistry.addRecipe(
+                new ShapelessOreRecipe(
+                        new ItemStack(TFItems.fieryIngot),
+                        new Object[] { "fieryEssence", Items.iron_ingot }));
         GameRegistry
                 .addRecipe(new ItemStack(TFItems.fieryHelm), new Object[] { "###", "# #", '#', TFItems.fieryIngot });
         GameRegistry.addRecipe(

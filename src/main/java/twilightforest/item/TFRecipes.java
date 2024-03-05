@@ -317,6 +317,30 @@ public class TFRecipes {
                 new Object[] { "###", "# #", "# #", '#', TFItems.fieryIngot });
         GameRegistry
                 .addRecipe(new ItemStack(TFItems.fieryBoots), new Object[] { "# #", "# #", '#', TFItems.fieryIngot });
+
+        // Direct Fiery armor crafting
+        GameRegistry.addRecipe(
+                new ShapelessOreRecipe(
+                        new ItemStack(TFItems.fieryHelm),
+                        new Object[] { new ItemStack(Items.iron_helmet, 1, 0), "fieryEssence", "fieryEssence",
+                                "fieryEssence", "fieryEssence", "fieryEssence" }));
+        GameRegistry.addRecipe(
+                new ShapelessOreRecipe(
+                        new ItemStack(TFItems.fieryPlate),
+                        new Object[] { new ItemStack(Items.iron_chestplate, 1, 0), "fieryEssence", "fieryEssence",
+                                "fieryEssence", "fieryEssence", "fieryEssence", "fieryEssence", "fieryEssence",
+                                "fieryEssence" }));
+        GameRegistry.addRecipe(
+                new ShapelessOreRecipe(
+                        new ItemStack(TFItems.fieryLegs),
+                        new Object[] { new ItemStack(Items.iron_leggings, 1, 0), "fieryEssence", "fieryEssence",
+                                "fieryEssence", "fieryEssence", "fieryEssence", "fieryEssence", "fieryEssence" }));
+        GameRegistry.addRecipe(
+                new ShapelessOreRecipe(
+                        new ItemStack(TFItems.fieryBoots),
+                        new Object[] { new ItemStack(Items.iron_boots, 1, 0), "fieryEssence", "fieryEssence",
+                                "fieryEssence", "fieryEssence" }));
+
         addEnchantedRecipe(
                 TFItems.fierySword,
                 Enchantment.fireAspect,

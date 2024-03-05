@@ -9,9 +9,8 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import twilightforest.block.BlockTFCompressed;
-import twilightforest.block.BlockTFCompressed.BlockType;
 
-public class TFCompressedBlockRenderer implements IItemRenderer {
+public class TFFieryMetalBlockRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -19,14 +18,10 @@ public class TFCompressedBlockRenderer implements IItemRenderer {
     }
 
     public void renderInventoryItem(RenderBlocks renderer, ItemStack item, boolean fancyRender) {
-        BlockTFCompressed block = (BlockTFCompressed) Block.getBlockFromItem(item.getItem());
+        Block block = Block.getBlockFromItem(item.getItem());
         int metadata = item.getItemDamage();
-        if (block.type == BlockType.FIERY_METAL && fancyRender) renderInvJar(renderer, block, metadata);
-        else {
-            renderer.setRenderBounds(0, 0, 0, 1, 1, 1);
-            renderInvBlock(renderer, block, metadata, Tessellator.instance);
-
-        }
+        if (fancyRender) renderInvJar(renderer, block, metadata);
+        else renderInvSimpleBlock(renderer, block, metadata);
     }
 
     @SuppressWarnings("incomplete-switch")

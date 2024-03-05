@@ -227,8 +227,7 @@ public class RenderBlockTFFieryMetal implements ISimpleBlockRenderingHandler {
         par1Block.setBlockBoundsForItemRender();
     }
 
-    protected static void renderInvBlock(RenderBlocks renderblocks, Block par1Block, int meta,
-            Tessellator tessellator) {
+    public static void renderInvBlock(RenderBlocks renderblocks, Block par1Block, int meta, Tessellator tessellator) {
         tessellator.startDrawingQuads();
         tessellator.setNormal(0.0F, 1.0F, 0.0F);
         renderblocks.renderFaceYNeg(par1Block, 0.0D, 0.0D, 0.0D, par1Block.getIcon(0, meta));

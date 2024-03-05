@@ -38,7 +38,7 @@ public class TFFieryMetalBlockRenderer implements IItemRenderer {
                 renderInventoryItem((RenderBlocks) data[0], item, true);
                 break;
             default:
-            	break;
+                break;
         }
     }
 

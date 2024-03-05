@@ -24,6 +24,7 @@ public class TFFieryMetalBlockRenderer implements IItemRenderer {
         else renderInvSimpleBlock(renderer, block, metadata);
     }
 
+    @SuppressWarnings("incomplete-switch")
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         switch (type) {
@@ -37,8 +38,6 @@ public class TFFieryMetalBlockRenderer implements IItemRenderer {
             case ENTITY:
                 renderInventoryItem((RenderBlocks) data[0], item, true);
                 break;
-            default:
-            	break;
         }
     }
 

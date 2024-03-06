@@ -81,6 +81,7 @@ import twilightforest.client.particle.EntityTFSnowFX;
 import twilightforest.client.particle.EntityTFSnowGuardianFX;
 import twilightforest.client.particle.EntityTFSnowWarningFX;
 import twilightforest.client.renderer.TFFieryItemRenderer;
+import twilightforest.client.renderer.TFFieryMetalBlockRenderer;
 import twilightforest.client.renderer.TFGiantBlockRenderer;
 import twilightforest.client.renderer.TFGiantItemRenderer;
 import twilightforest.client.renderer.TFIceItemRenderer;
@@ -172,7 +173,7 @@ public class TFClientProxy extends TFCommonProxy {
 
     int critterRenderID;
     int plantRenderID;
-    int blockCakeRenderID;
+    int cakeRenderID;
     int blockComplexRenderID;
     int nagastoneRenderID;
     int nagastoneEtchedRenderID;
@@ -534,6 +535,10 @@ public class TFClientProxy extends TFCommonProxy {
         MinecraftForgeClient.registerItemRenderer(TFItems.fieryLegs, fieryRenderer);
         MinecraftForgeClient.registerItemRenderer(TFItems.fieryBoots, fieryRenderer);
 
+        MinecraftForgeClient.registerItemRenderer(
+                Item.getItemFromBlock(TFBlocks.fieryMetalStorage),
+                new TFFieryMetalBlockRenderer());
+
         // ice item renderers
         TFIceItemRenderer iceRenderer = new TFIceItemRenderer(mc.gameSettings, mc.getTextureManager());
         MinecraftForgeClient.registerItemRenderer(TFItems.iceSword, iceRenderer);
@@ -541,8 +546,8 @@ public class TFClientProxy extends TFCommonProxy {
         MinecraftForgeClient.registerItemRenderer(TFItems.iceBow, iceRenderer);
 
         // block render ids
-        blockCakeRenderID = RenderingRegistry.getNextAvailableRenderId();
-        RenderingRegistry.registerBlockHandler(new RenderBlockTFCake(blockCakeRenderID));
+        cakeRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderBlockTFCake(cakeRenderID));
 
         blockComplexRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFFireflyJar(blockComplexRenderID));
@@ -637,7 +642,7 @@ public class TFClientProxy extends TFCommonProxy {
     }
 
     public int getCakeBlockRenderID() {
-        return blockCakeRenderID;
+        return cakeRenderID;
     }
 
     public int getComplexBlockRenderID() {

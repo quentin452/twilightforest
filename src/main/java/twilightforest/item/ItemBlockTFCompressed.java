@@ -7,21 +7,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import twilightforest.block.BlockTFCompressed;
-import twilightforest.block.BlockTFCompressed.BlockType;
-import twilightforest.client.renderer.TFFieryMetalBlockRenderer;
 
 public class ItemBlockTFCompressed extends ItemBlock {
 
     public ItemBlockTFCompressed(Block block) {
         super(block);
         hasSubtypes = true;
-        if (block instanceof BlockTFCompressed && ((BlockTFCompressed) block).type == BlockType.FIERY_METAL)
-            MinecraftForgeClient.registerItemRenderer(this, new TFFieryMetalBlockRenderer());
+        /*
+         * if (block instanceof BlockTFCompressed && ((BlockTFCompressed) block).type == BlockType.FIERY_METAL)
+         * MinecraftForgeClient.registerItemRenderer(this, new TFFieryMetalBlockRenderer());
+         */
     }
 
     /**

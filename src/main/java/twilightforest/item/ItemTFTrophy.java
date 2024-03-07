@@ -36,10 +36,11 @@ public class ItemTFTrophy extends ItemArmor {
     public IIcon[] trophyIcons;
 
     public ItemTFTrophy() {
-        super(TFItems.ARMOR_TROPHY, 0, 0);
+        super(TFItems.ARMOR_DECORATIVE, 0, 0);
         this.setCreativeTab(TFItems.creativeTab);
         this.setMaxDamage(0);
         this.setHasSubtypes(true);
+        this.maxStackSize = 64;
     }
 
     /**

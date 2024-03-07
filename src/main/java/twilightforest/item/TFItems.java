@@ -26,8 +26,8 @@ public class TFItems {
             .addArmorMaterial("YETI", 20, new int[] { 4, 7, 6, 3 }, 15);
     public static ItemArmor.ArmorMaterial ARMOR_ARCTIC = EnumHelper
             .addArmorMaterial("ARCTIC", 10, new int[] { 2, 7, 5, 2 }, 8);
-    public static ItemArmor.ArmorMaterial ARMOR_TROPHY = EnumHelper
-            .addArmorMaterial("TROPHY", 0, new int[] { 0, 0, 0, 0 }, 0);
+    public static ItemArmor.ArmorMaterial ARMOR_DECORATIVE = EnumHelper
+            .addArmorMaterial("DECORATIVE", 0, new int[] { 0, 0, 0, 0 }, 0);
 
     public static Item.ToolMaterial TOOL_IRONWOOD = EnumHelper.addToolMaterial("IRONWOOD", 2, 512, 6.5F, 2, 25);
     public static Item.ToolMaterial TOOL_FIERY = EnumHelper.addToolMaterial("FIERY", 4, 1024, 9F, 4, 10);

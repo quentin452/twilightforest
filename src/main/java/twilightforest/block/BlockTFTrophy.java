@@ -271,45 +271,54 @@ public class BlockTFTrophy extends BlockContainer {
     @Override
     public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX,
             float subY, float subZ) {
-        String sound;
-        switch (((TileEntitySkull) worldIn.getTileEntity(x, y, z)).func_145904_a()) {
-            default:
-            case 0:
-                sound = new EntityTFHydra(worldIn).getTrophySound();
-                break;
-            case 1:
-                sound = new EntityTFNaga(worldIn).getTrophySound();
-                break;
-            case 2:
-                sound = new EntityTFLich(worldIn).getTrophySound();
-                break;
-            case 3:
-                sound = new EntityTFUrGhast(worldIn).getTrophySound();
-                break;
-            case 4:
-                sound = new EntityTFSnowQueen(worldIn).getTrophySound();
-                break;
-            case 5:
-                sound = new EntityTFMinoshroom(worldIn).getTrophySound();
-                break;
-            case 6:
-                sound = new EntityTFKnightPhantom(worldIn).getTrophySound();
-                break;
-            case 7:
-                sound = new EntityTFYetiAlpha(worldIn).getTrophySound();
-                break;
-            case 8:
-                sound = new EntityTFQuestRam(worldIn).getTrophySound();
-                break;
+        if (player.isSneaking() && player.inventory.armorInventory[3] == null) {
+            player.inventory.armorInventory[3] = new ItemStack(
+                    TFItems.trophy,
+                    1,
+                    this.getDamageValue(worldIn, x, y, z));
+            if (!player.capabilities.isCreativeMode) worldIn.setBlockToAir(x, y, z);
+            return true;
+        } else {
+            String sound;
+            switch (((TileEntitySkull) worldIn.getTileEntity(x, y, z)).func_145904_a()) {
+                default:
+                case 0:
+                    sound = new EntityTFHydra(worldIn).getTrophySound();
+                    break;
+                case 1:
+                    sound = new EntityTFNaga(worldIn).getTrophySound();
+                    break;
+                case 2:
+                    sound = new EntityTFLich(worldIn).getTrophySound();
+                    break;
+                case 3:
+                    sound = new EntityTFUrGhast(worldIn).getTrophySound();
+                    break;
+                case 4:
+                    sound = new EntityTFSnowQueen(worldIn).getTrophySound();
+                    break;
+                case 5:
+                    sound = new EntityTFMinoshroom(worldIn).getTrophySound();
+                    break;
+                case 6:
+                    sound = new EntityTFKnightPhantom(worldIn).getTrophySound();
+                    break;
+                case 7:
+                    sound = new EntityTFYetiAlpha(worldIn).getTrophySound();
+                    break;
+                case 8:
+                    sound = new EntityTFQuestRam(worldIn).getTrophySound();
+                    break;
+            }
+            worldIn.playSoundEffect(
+                    (double) x + 0.5D,
+                    (double) y + 0.5D,
+                    (double) z + 0.5D,
+                    sound,
+                    1.0F,
+                    worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            return true;
         }
-        worldIn.playSoundEffect(
-                (double) x + 0.5D,
-                (double) y + 0.5D,
-                (double) z + 0.5D,
-                sound,
-                1.0F,
-                worldIn.rand.nextFloat() * 0.1F + 0.9F);
-        return true;
     }
 
 }

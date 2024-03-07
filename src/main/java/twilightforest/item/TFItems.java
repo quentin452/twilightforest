@@ -70,6 +70,7 @@ public class TFItems {
     public static Item hydraChop;
     public static Item fieryBlood;
     public static Item trophy;
+    public static Item critter;
     public static Item fieryIngot;
     public static Item fieryHelm;
     public static Item fieryPlate;
@@ -234,6 +235,7 @@ public class TFItems {
                 .setUnlocalizedName("hydraChop");
         fieryBlood = new ItemTF().makeRare().setUnlocalizedName("fieryBlood");
         trophy = new ItemTFTrophy().setUnlocalizedName("trophy");
+        critter = new ItemTFCritter().setUnlocalizedName("critter");
         fieryIngot = new ItemTF().makeRare().setUnlocalizedName("fieryIngot");
         fieryHelm = new ItemTFFieryArmor(ARMOR_FIERY, fieryRenderID, 0).setUnlocalizedName("fieryHelm")
                 .setMaxStackSize(1);
@@ -376,6 +378,7 @@ public class TFItems {
         registerTFItem(hydraChop, "Hydra Chop");
         registerTFItem(fieryBlood, "Fiery Blood");
         registerTFItem(trophy, "Hydra Trophy");
+        registerTFItem(critter, "Firefly");
         registerTFItem(fieryIngot, "Fiery Ingot");
         registerTFItem(fieryHelm, "Fiery Helm");
         registerTFItem(fieryPlate, "Fiery Plate");

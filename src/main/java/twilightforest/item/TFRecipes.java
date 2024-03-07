@@ -43,6 +43,14 @@ public class TFRecipes {
         OreDictionary.registerOre("fieryEssence", new ItemStack(TFItems.fieryBlood));
         OreDictionary.registerOre("fieryEssence", new ItemStack(TFItems.fieryTears));
 
+        // in order for all critters recipes to work
+        OreDictionary.registerOre("firefly", new ItemStack(TFBlocks.firefly, 1, OreDictionary.WILDCARD_VALUE));
+        OreDictionary.registerOre("firefly", new ItemStack(TFItems.critter, 1, 0));
+        OreDictionary.registerOre("cicada", new ItemStack(TFBlocks.cicada, 1, OreDictionary.WILDCARD_VALUE));
+        OreDictionary.registerOre("cicada", new ItemStack(TFItems.critter, 1, 1));
+        OreDictionary.registerOre("moonworm", new ItemStack(TFBlocks.moonworm, 1, OreDictionary.WILDCARD_VALUE));
+        OreDictionary.registerOre("moonworm", new ItemStack(TFItems.critter, 1, 2));
+
         // recipe sorter
         RecipeSorter.register(
                 TwilightForestMod.ID + ":mapcloning",
@@ -175,9 +183,10 @@ public class TFRecipes {
                 3,
                 new Object[] { "###", "# #", "# #", '#', TFItems.nagaScale });
 
-        GameRegistry.addShapelessRecipe(
-                new ItemStack(TFBlocks.fireflyJar, 1, 0),
-                new Object[] { TFBlocks.firefly, Items.glass_bottle });
+        GameRegistry.addRecipe(
+                new ShapelessOreRecipe(
+                        new ItemStack(TFBlocks.fireflyJar, 1, 0),
+                        new Object[] { "firefly", Items.glass_bottle }));
 
         GameRegistry.addShapelessRecipe(
                 new ItemStack(TFItems.scepterTwilight),

@@ -30,6 +30,7 @@ import twilightforest.client.model.ModelTFBighornFur;
 import twilightforest.client.model.ModelTFBlockGoblin;
 import twilightforest.client.model.ModelTFBoar;
 import twilightforest.client.model.ModelTFBunny;
+import twilightforest.client.model.ModelTFCritterArmor;
 import twilightforest.client.model.ModelTFDeathTome;
 import twilightforest.client.model.ModelTFDeer;
 import twilightforest.client.model.ModelTFFieryArmor;
@@ -193,6 +194,7 @@ public class TFClientProxy extends TFCommonProxy {
     ModelBiped[] arcticArmorModel;
     ModelBiped[] fieryArmorModel;
     ModelBiped[] trophyArmorModel;
+    ModelBiped[] critterArmorModel;
 
     TFClientTicker clientTicker;
     TFClientEvents clientEvents;
@@ -631,6 +633,11 @@ public class TFClientProxy extends TFCommonProxy {
         trophyArmorModel[7] = new ModelTFTrophyArmor(7, 0.5F);
         trophyArmorModel[8] = new ModelTFTrophyArmor(8, 0.5F);
 
+        critterArmorModel = new ModelBiped[3];
+        critterArmorModel[0] = new ModelTFCritterArmor(0, 0.5F);
+        critterArmorModel[1] = new ModelTFCritterArmor(1, 0.5F);
+        critterArmorModel[2] = new ModelTFCritterArmor(2, 0.5F);
+
     }
 
     public int getCritterBlockRenderID() {
@@ -785,6 +792,10 @@ public class TFClientProxy extends TFCommonProxy {
 
     public ModelBiped getTrophyArmorModel(int boss) {
         return this.trophyArmorModel[boss];
+    }
+
+    public ModelBiped getCritterArmorModel(int critter) {
+        return this.critterArmorModel[critter];
     }
 
     public boolean isDangerOverlayShown() {

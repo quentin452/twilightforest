@@ -150,6 +150,10 @@ public class TFCommonProxy implements IGuiHandler {
         return null;
     }
 
+    public ModelBiped getCritterArmorModel(int boss) {
+        return null;
+    }
+
     public void doBlockAnnihilateEffect(World worldObj, int blockX, int blockY, int blockZ) {}
 
 }

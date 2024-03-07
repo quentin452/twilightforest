@@ -49,7 +49,7 @@ public class ItemBlockTFNagastone extends ItemBlock {
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean par4) {
         if (itemStack.getItemDamage() > 1) {
-            list.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("item.nagastone.outdatedTooltip"));
+            list.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("item.outdated.tooltip"));
         }
     }
 }

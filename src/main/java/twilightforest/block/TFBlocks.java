@@ -8,6 +8,7 @@ import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.BlockTFNagastonePillar.BlockType;
+import twilightforest.item.ItemBlockTFCritter;
 import twilightforest.item.ItemBlockTFMeta;
 
 public class TFBlocks {
@@ -277,8 +278,8 @@ public class TFBlocks {
         registerMyBlock(trapdoorSort);
         registerMyBlock(root);
         registerMyBlock(leaves);
-        registerMyBlock(firefly, ItemBlock.class);
-        registerMyBlock(cicada, ItemBlock.class);
+        registerMyBlock(firefly, ItemBlockTFCritter.class);
+        registerMyBlock(cicada, ItemBlockTFCritter.class);
         registerMyBlock(portal, ItemBlock.class);
         registerMyBlock(mazestone);
         registerMyBlock(hedge);
@@ -300,7 +301,7 @@ public class TFBlocks {
         registerMyBlock(nagastonePillarWeathered);
         registerMyBlock(spiralStoneBricks);
         registerMyBlock(sapling);
-        registerMyBlock(moonworm, ItemBlock.class);
+        registerMyBlock(moonworm, ItemBlockTFCritter.class);
         registerMyBlock(magicLog);
         registerMyBlock(magicLeaves);
         registerMyBlock(magicLogSpecial);

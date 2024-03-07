@@ -6,11 +6,13 @@ import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
 import static net.minecraftforge.common.util.ForgeDirection.WEST;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -255,7 +257,51 @@ public abstract class BlockTFCritter extends Block {
      */
     @Override
     public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List<ItemStack> itemList) {
-        itemList.add(new ItemStack(item, 1, 0));
+        // itemList.add(new ItemStack(item, 1, 0));
+        // We're using an item instead
+    }
+
+    @Override
+    public Item getItemDropped(int meta, Random random, int fortune) {
+        return TFItems.critter;
+    }
+
+    /**
+     * Determines the damage on the item the block drops. Used in cloth and wood.
+     */
+    @Override
+    public int damageDropped(int par1) {
+        int metadata = 0;
+        if (this == TFBlocks.cicada) metadata = 1;
+        else if (this == TFBlocks.moonworm) metadata = 2;
+        return metadata;
+    }
+
+    /**
+     * Gets an item for the block being called on. Args: world, x, y, z
+     */
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
+        return TFItems.critter;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getDamageValue(World worldIn, int x, int y, int z) {
+        return this.damageDropped(0);
+    }
+
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX,
+            float subY, float subZ) {
+        if (player.isSneaking() && player.inventory.armorInventory[3] == null) {
+            player.inventory.armorInventory[3] = new ItemStack(TFItems.critter, 1, this.damageDropped(0));
+            if (!player.capabilities.isCreativeMode) worldIn.setBlockToAir(x, y, z);
+            return true;
+        }
+        return false;
     }
 
     /**

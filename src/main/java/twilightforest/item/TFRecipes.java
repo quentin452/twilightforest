@@ -114,6 +114,10 @@ public class TFRecipes {
                     new Object[] { "###", '#', new ItemStack(TFBlocks.planks, 1, i) });
         }
 
+        // Dyes from TF plants
+        GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 2, 13), new Object[] { TFBlocks.hugeWaterLily });
+        GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 2, 1), new Object[] { TFBlocks.thornRose });
+
         GameRegistry.addRecipe(
                 new ItemStack(TFBlocks.nagastoneStairsLeft, 8, 0),
                 new Object[] { "#  ", "## ", "###", '#', new ItemStack(TFBlocks.nagastoneEtched, 1, 0) });

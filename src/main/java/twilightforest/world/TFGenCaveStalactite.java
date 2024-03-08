@@ -25,7 +25,6 @@ public class TFGenCaveStalactite extends TFGenerator {
     private static List<TFGenCaveStalactite> hill1 = new ArrayList<TFGenCaveStalactite>();
 
     public Block blockID;
-    public int blockMeta;
     public boolean hang;
     public float sizeFactor;
     public int maxLength;
@@ -38,18 +37,7 @@ public class TFGenCaveStalactite extends TFGenerator {
      * @param stone
      */
     public TFGenCaveStalactite(Block blockType, float size, boolean down) {
-        this(blockType, 0, size, down);
-    }
-
-    /**
-     * Initializes a stalactite builder. Actually also makes stalagmites
-     * 
-     * @param size
-     * @param stone
-     */
-    public TFGenCaveStalactite(Block blockType, int meta, float size, boolean down) {
         this.blockID = blockType;
-        this.blockMeta = meta;
         this.sizeFactor = size;
         this.maxLength = -1;
         this.minHeight = -1;
@@ -60,28 +48,11 @@ public class TFGenCaveStalactite extends TFGenerator {
      * Initializes a stalactite builder
      */
     public TFGenCaveStalactite(Block blockType, float size, int maxLength, int minHeight) {
-        this(blockType, 0, size, maxLength, minHeight);
-    }
-
-    /**
-     * Initializes a stalactite builder
-     */
-    public TFGenCaveStalactite(Block blockType, int meta, float size, int maxLength, int minHeight) {
         this.blockID = blockType;
-        this.blockMeta = meta;
         this.sizeFactor = size;
         this.maxLength = maxLength;
         this.minHeight = minHeight;
         this.hang = true;
-    }
-
-    /**
-     * !!!REMOVES ALL THE STALACTITES. ONLY CALL IF YOUR MOD OVERWRITES ORES ENTIRELY!!!
-     */
-    public static void removeAllStalactites() {
-        hill3.clear();
-        hill2.clear();
-        hill1.clear();
     }
 
     /**
@@ -100,60 +71,7 @@ public class TFGenCaveStalactite extends TFGenerator {
      */
     public static void addNewStalactite(Block block, float size, int maxLength, int minHeight, int hillLevel,
             int weight) {
-        addNewStalactite(block, 0, size, maxLength, minHeight, hillLevel, weight);
-    }
-
-    /**
-     * For other mods to add stalactites made of their blocks
-     * 
-     * @param block     Block to generate stalactite of. Most likely ore
-     * @param meta      Block metadata in case it needs one
-     * @param size      How much space between ceiling and floor stalactite takes. From 0.0f to 1.0f
-     * @param maxLength Maximum stalactite length. For when you want to make it big, but not too big
-     * @param minHeight Minimum stalactite length. For when you want to make it small, but not too small
-     * @param hillLevel Level of the hill for the resource to spawn in. From 1 to 3. Resources from low-level hills will
-     *                  spawn in high level hills as well. Examples: 3 level - diamond, lapis, emerald; 2 level - gold,
-     *                  redstone; 1 level - iron, coal, glowstone
-     * @param weight    How often should resource generate comparing to other resources of the same level. I.e. the
-     *                  larger this number is, the more often this resource will generate. Examples: diamond, lapis - 2;
-     *                  emerald - 1 | redstone - 2, gold - 1 | iron, coal - 2, glowstone - 1
-     */
-    public static void addNewStalactite(Block block, int meta, float size, int maxLength, int minHeight, int hillLevel,
-            int weight) {
-        addStalactite(new TFGenCaveStalactite(block, meta, size, maxLength, minHeight), hillLevel, weight);
-    }
-
-    /**
-     * For other mods to add stalactites made of their blocks
-     * 
-     * @param block     Block to generate stalactite of. Most likely ore
-     * @param meta      Block metadata in case it needs one
-     * @param size      How much space between ceiling and floor stalactite takes. From 0.0f to 1.0f
-     * @param hillLevel Level of the hill for the resource to spawn in. From 1 to 3. Resources from low-level hills will
-     *                  spawn in high level hills as well. Examples: 3 level - diamond, lapis, emerald; 2 level - gold,
-     *                  redstone; 1 level - iron, coal, glowstone
-     * @param weight    How often should resource generate comparing to other resources of the same level. I.e. the
-     *                  larger this number is, the more often this resource will generate. Examples: diamond, lapis - 2;
-     *                  emerald - 1 | redstone - 2, gold - 1 | iron, coal - 2, glowstone - 1
-     */
-    public static void addNewStalactite(Block block, int meta, float size, int hillLevel, int weight) {
-        addNewStalactite(block, meta, size, -1, -1, hillLevel, weight);
-    }
-
-    /**
-     * For other mods to add stalactites made of their blocks
-     * 
-     * @param block     Block to generate stalactite of. Most likely ore
-     * @param size      How much space between ceiling and floor stalactite takes. From 0.0f to 1.0f
-     * @param hillLevel Level of the hill for the resource to spawn in. From 1 to 3. Resources from low-level hills will
-     *                  spawn in high level hills as well. Examples: 3 level - diamond, lapis, emerald; 2 level - gold,
-     *                  redstone; 1 level - iron, coal, glowstone
-     * @param weight    How often should resource generate comparing to other resources of the same level. I.e. the
-     *                  larger this number is, the more often this resource will generate. Examples: diamond, lapis - 2;
-     *                  emerald - 1 | redstone - 2, gold - 1 | iron, coal - 2, glowstone - 1
-     */
-    public static void addNewStalactite(Block block, float size, int hillLevel, int weight) {
-        addNewStalactite(block, 0, size, -1, -1, hillLevel, weight);
+        addStalactite(new TFGenCaveStalactite(block, size, maxLength, minHeight), hillLevel, weight);
     }
 
     public static void addStalactite(TFGenCaveStalactite stalactite, int hillLevel, int weight) {
@@ -299,7 +217,7 @@ public class TFGenCaveStalactite extends TFGenerator {
                 }
 
                 for (int dy = 0; dy != (spikeLength * dir); dy += dir) {
-                    setBlockAndMetadata(world, x + dx, y + dy, z + dz, blockID, blockMeta);
+                    setBlock(world, x + dx, y + dy, z + dz, blockID);
                 }
             }
         }

@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 
 import twilightforest.TFAchievementPage;
 import twilightforest.TFFeature;
+import twilightforest.TwilightForestMod;
 import twilightforest.entity.EntityTFSwarmSpider;
 import twilightforest.item.TFItems;
 import twilightforest.world.ChunkProviderTwilightForest;
@@ -1026,7 +1027,8 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+        if (par1DamageSource.getEntity() instanceof EntityPlayer
+                && ((EntityPlayer) par1DamageSource.getEntity()).dimension == TwilightForestMod.dimensionID) {
             ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
             ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightKillLich);
 

@@ -26,6 +26,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import twilightforest.TFAchievementPage;
+import twilightforest.TwilightForestMod;
 import twilightforest.item.TFItems;
 
 public class EntityTFSkeletonDruid extends EntityMob implements IRangedAttackMob {
@@ -134,7 +135,8 @@ public class EntityTFSkeletonDruid extends EntityMob implements IRangedAttackMob
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+        if (par1DamageSource.getEntity() instanceof EntityPlayer
+                && ((EntityPlayer) par1DamageSource.getEntity()).dimension == TwilightForestMod.dimensionID) {
             ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
         }
     }

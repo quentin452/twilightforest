@@ -805,7 +805,8 @@ public class EntityTFUrGhast extends EntityTFTowerGhast implements IBossDisplayD
     @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
-        if (par1DamageSource.getEntity() instanceof EntityPlayer) {
+        if (par1DamageSource.getEntity() instanceof EntityPlayer
+                && ((EntityPlayer) par1DamageSource.getEntity()).dimension == TwilightForestMod.dimensionID) {
             ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightHunter);
             ((EntityPlayer) par1DamageSource.getEntity()).triggerAchievement(TFAchievementPage.twilightProgressUrghast);
 

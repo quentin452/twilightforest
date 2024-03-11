@@ -421,24 +421,19 @@ public class TFEventListener {
                 EntityTFCharmEffect effect = new EntityTFCharmEffect(
                         player.worldObj,
                         player,
-                        charm1 ? TFItems.charmOfLife1 : TFItems.charmOfLife2);
+                        charm1 ? TFItems.charmOfLife1 : TFItems.charmOfLife2,
+                        0);
                 player.worldObj.spawnEntityInWorld(effect);
 
                 EntityTFCharmEffect effect2 = new EntityTFCharmEffect(
                         player.worldObj,
                         player,
-                        charm1 ? TFItems.charmOfLife1 : TFItems.charmOfLife2);
-                effect2.offset = (float) Math.PI;
+                        charm1 ? TFItems.charmOfLife1 : TFItems.charmOfLife2,
+                        (float) Math.PI);
                 player.worldObj.spawnEntityInWorld(effect2);
 
                 // sound
-                player.worldObj.playSoundEffect(
-                        player.posX + 0.5D,
-                        player.posY + 0.5D,
-                        player.posZ + 0.5D,
-                        "mob.zombie.unfect",
-                        1.5F,
-                        1.0F);
+                player.worldObj.playSoundEffect(player.posX, player.posY, player.posZ, "mob.zombie.unfect", 1.5F, 1.0F);
 
             }
         }
@@ -639,23 +634,18 @@ public class TFEventListener {
                 EntityTFCharmEffect effect = new EntityTFCharmEffect(
                         player.worldObj,
                         player,
-                        keepInventory.getItemStack().getItem());
+                        keepInventory.getItemStack().getItem(),
+                        0);
                 player.worldObj.spawnEntityInWorld(effect);
 
                 EntityTFCharmEffect effect2 = new EntityTFCharmEffect(
                         player.worldObj,
                         player,
-                        keepInventory.getItemStack().getItem());
-                effect2.offset = (float) Math.PI;
+                        keepInventory.getItemStack().getItem(),
+                        (float) Math.PI);
                 player.worldObj.spawnEntityInWorld(effect2);
 
-                player.worldObj.playSoundEffect(
-                        player.posX + 0.5D,
-                        player.posY + 0.5D,
-                        player.posZ + 0.5D,
-                        "mob.zombie.unfect",
-                        1.5F,
-                        1.0F);
+                player.worldObj.playSoundEffect(player.posX, player.posY, player.posZ, "mob.zombie.unfect", 1.5F, 1.0F);
             }
             playerKeepsMap.remove(player.getCommandSenderName());
             playerBaublesMap.remove(player.getCommandSenderName());

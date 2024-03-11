@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.model.ModelWolf;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -116,7 +117,6 @@ import twilightforest.client.renderer.entity.RenderTFBlockGoblin;
 import twilightforest.client.renderer.entity.RenderTFBoar;
 import twilightforest.client.renderer.entity.RenderTFBunny;
 import twilightforest.client.renderer.entity.RenderTFChainBlock;
-import twilightforest.client.renderer.entity.RenderTFCharm;
 import twilightforest.client.renderer.entity.RenderTFCubeOfAnnihilation;
 import twilightforest.client.renderer.entity.RenderTFDeer;
 import twilightforest.client.renderer.entity.RenderTFFallingIce;
@@ -454,9 +454,8 @@ public class TFClientProxy extends TFCommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(
                 twilightforest.entity.EntityTFMoonwormShot.class,
                 new RenderTFMoonwormShot());
-        RenderingRegistry.registerEntityRenderingHandler(
-                twilightforest.entity.EntityTFCharmEffect.class,
-                new RenderTFCharm(TFItems.charmOfLife1.getIconFromDamage(0)));
+        RenderingRegistry
+                .registerEntityRenderingHandler(twilightforest.entity.EntityTFCharmEffect.class, new RenderItem());
         RenderingRegistry.registerEntityRenderingHandler(
                 twilightforest.entity.boss.EntityTFLichBomb.class,
                 new RenderSnowball(Items.magma_cream));

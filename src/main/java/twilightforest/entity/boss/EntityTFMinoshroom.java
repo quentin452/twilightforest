@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+
 import twilightforest.block.TFBlocks;
 import twilightforest.entity.EntityTFMinotaur;
 import twilightforest.item.TFItems;
@@ -83,10 +83,10 @@ public class EntityTFMinoshroom extends EntityTFMinotaur {
      * Despawn the minoshroom, and restore the boss spawner at our home location, if set
      */
     protected void despawnMe() {
-    	if(this.hasHome()) {
+        if (this.hasHome()) {
             ChunkCoordinates home = this.getHomePosition();
             worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 6, 2);
-    	}
+        }
         setDead();
     }
 

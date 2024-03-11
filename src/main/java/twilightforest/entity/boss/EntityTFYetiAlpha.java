@@ -113,7 +113,7 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
      */
     @Override
     public void onLivingUpdate() {
-    	despawnIfInvalid();
+        despawnIfInvalid();
         if (this.riddenByEntity != null) {
 
             // stop player sneaking so that they can't dismount!
@@ -182,10 +182,10 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
      * Despawn the alpha yeti, and restore the boss spawner at our home location, if set
      */
     protected void despawnMe() {
-    	if(this.hasHome()) {
+        if (this.hasHome()) {
             ChunkCoordinates home = this.getHomePosition();
             worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 7, 2);
-    	}
+        }
         setDead();
     }
 

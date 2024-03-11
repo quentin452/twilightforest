@@ -21,15 +21,19 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import twilightforest.TFAchievementPage;
 import twilightforest.TFFeature;
 import twilightforest.TwilightForestMod;
+import twilightforest.block.TFBlocks;
 import twilightforest.entity.EntityTFSwarmSpider;
 import twilightforest.item.TFItems;
 import twilightforest.world.ChunkProviderTwilightForest;
@@ -163,6 +167,24 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
         this.entityDropItem(goldThing, 0);
     }
 
+    protected void despawnIfInvalid() {
+        // check to see if we're valid
+        if (!worldObj.isRemote && worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
+            despawnMe();
+        }
+    }
+
+    /**
+     * Despawn the lich, and restore the boss spawner at our home location, if set
+     */
+    protected void despawnMe() {
+    	if(this.hasHome()) {
+            ChunkCoordinates home = this.getHomePosition();
+            worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 1, 2);
+    	}
+        setDead();
+    }
+
     /**
      * Sets the Entity inside a web block. We are immune to webs.
      */
@@ -215,6 +237,7 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
      */
     @Override
     public void onLivingUpdate() {
+        despawnIfInvalid();
         // determine the hand position
         float angle = ((renderYawOffset * 3.141593F) / 180F);
 
@@ -1008,6 +1031,9 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
     @Override
     public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
         super.writeEntityToNBT(nbttagcompound);
+        ChunkCoordinates home = this.getHomePosition();
+        nbttagcompound.setTag("Home", newDoubleNBTList(home.posX, home.posY, home.posZ));
+        nbttagcompound.setBoolean("HasHome", this.hasHome());
         nbttagcompound.setBoolean("ShadowClone", isShadowClone());
         nbttagcompound.setByte("ShieldStrength", getShieldStrength());
         nbttagcompound.setByte("MinionsToSummon", getMinionsToSummon());
@@ -1016,6 +1042,16 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
     @Override
     public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
         super.readEntityFromNBT(nbttagcompound);
+        if (nbttagcompound.hasKey("Home", 9)) {
+            NBTTagList nbttaglist = nbttagcompound.getTagList("Home", 6);
+            int hx = (int) nbttaglist.func_150309_d(0);
+            int hy = (int) nbttaglist.func_150309_d(1);
+            int hz = (int) nbttaglist.func_150309_d(2);
+            this.setHomeArea(hx, hy, hz, 20);
+        }
+        if (!nbttagcompound.getBoolean("HasHome")) {
+            this.detachHome();
+        }
         setShadowClone(nbttagcompound.getBoolean("ShadowClone"));
         setShieldStrength(nbttagcompound.getByte("ShieldStrength"));
         setMinionsToSummon(nbttagcompound.getByte("MinionsToSummon"));

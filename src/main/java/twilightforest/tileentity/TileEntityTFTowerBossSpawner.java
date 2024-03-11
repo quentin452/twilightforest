@@ -1,9 +1,11 @@
 package twilightforest.tileentity;
 
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 
 import twilightforest.entity.TFCreatures;
+import twilightforest.entity.boss.EntityTFUrGhast;
 
 public class TileEntityTFTowerBossSpawner extends TileEntityTFBossSpawner {
 
@@ -32,6 +34,16 @@ public class TileEntityTFTowerBossSpawner extends TileEntityTFBossSpawner {
 
         // spawn it
         worldObj.spawnEntityInWorld(myCreature);
+    }
+
+    /**
+     * Any post-creation initialization goes here
+     */
+    @Override
+    protected void initializeCreature(EntityLiving myCreature) {
+        if (myCreature instanceof EntityTFUrGhast) {
+            ((EntityTFUrGhast) myCreature).setHomeArea(xCoord, yCoord, zCoord, 46);
+        }
     }
 
 }

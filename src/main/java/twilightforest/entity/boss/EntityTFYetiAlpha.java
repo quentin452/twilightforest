@@ -25,11 +25,13 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import twilightforest.TFAchievementPage;
 import twilightforest.TFFeature;
 import twilightforest.TwilightForestMod;
+import twilightforest.block.TFBlocks;
 import twilightforest.entity.ai.EntityAIStayNearHome;
 import twilightforest.entity.ai.EntityAITFThrowRider;
 import twilightforest.entity.ai.EntityAITFYetiRampage;
@@ -111,6 +113,7 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
      */
     @Override
     public void onLivingUpdate() {
+    	despawnIfInvalid();
         if (this.riddenByEntity != null) {
 
             // stop player sneaking so that they can't dismount!
@@ -119,8 +122,6 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
 
                 this.riddenByEntity.setSneaking(false);
             }
-        } else {
-
         }
 
         super.onLivingUpdate();
@@ -168,6 +169,24 @@ public class EntityTFYetiAlpha extends EntityMob implements IRangedAttackMob {
             }
         }
 
+    }
+
+    protected void despawnIfInvalid() {
+        // check to see if we're valid
+        if (!worldObj.isRemote && worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
+            despawnMe();
+        }
+    }
+
+    /**
+     * Despawn the alpha yeti, and restore the boss spawner at our home location, if set
+     */
+    protected void despawnMe() {
+    	if(this.hasHome()) {
+            ChunkCoordinates home = this.getHomePosition();
+            worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 7, 2);
+    	}
+        setDead();
     }
 
     private void addSnowEffect(float rotation, float hgt) {

@@ -178,10 +178,10 @@ public class EntityTFLich extends EntityMob implements IBossDisplayData {
      * Despawn the lich, and restore the boss spawner at our home location, if set
      */
     protected void despawnMe() {
-    	if(this.hasHome()) {
+        if (this.hasHome()) {
             ChunkCoordinates home = this.getHomePosition();
             worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 1, 2);
-    	}
+        }
         setDead();
     }
 

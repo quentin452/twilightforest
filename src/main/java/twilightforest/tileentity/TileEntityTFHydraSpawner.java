@@ -3,6 +3,7 @@ package twilightforest.tileentity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+
 import twilightforest.entity.TFCreatures;
 import twilightforest.entity.boss.EntityTFHydra;
 

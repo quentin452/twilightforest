@@ -7,8 +7,8 @@ import twilightforest.entity.TFCreatures;
 import twilightforest.entity.boss.EntityTFKnightPhantom;
 
 public class TileEntityTFKnightPhantomsSpawner extends TileEntityTFBossSpawner {
-	
-	public int knightsCount = 6;
+
+    public int knightsCount = 6;
 
     public TileEntityTFKnightPhantomsSpawner() {
         this.mobID = TFCreatures.getSpawnerNameFor("Knight Phantom");

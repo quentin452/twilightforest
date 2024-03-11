@@ -325,33 +325,32 @@ public class EntityTFHydra extends EntityLiving implements IBossDisplayData, IEn
      * Despawn the hydra, and restore the boss spawner at our home location, if set
      */
     protected void despawnMe() {
-    	if(this.hasHome()) {
+        if (this.hasHome()) {
             ChunkCoordinates home = this.getHomePosition();
             worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 2, 2);
-    	}
-    	this.deathTime = 200; // For heads and stuff to despawn
+        }
+        this.deathTime = 200; // For heads and stuff to despawn
         setDead();
     }
 
     private ChunkCoordinates getHomePosition() {
-		return homePosition;
-	}
+        return homePosition;
+    }
 
     private boolean hasHome() {
-		return maximumHomeDistance > -1;
-	}
+        return maximumHomeDistance > -1;
+    }
 
     public void setHomeArea(int hx, int hy, int hz, int i) {
-    	homePosition = new ChunkCoordinates(hx, hy, hz);
-    	maximumHomeDistance = i;
-	}
+        homePosition = new ChunkCoordinates(hx, hy, hz);
+        maximumHomeDistance = i;
+    }
 
-    public void detachHome()
-    {
+    public void detachHome() {
         this.maximumHomeDistance = -1.0F;
     }
 
-	/**
+    /**
      * Save to disk.
      */
     @Override

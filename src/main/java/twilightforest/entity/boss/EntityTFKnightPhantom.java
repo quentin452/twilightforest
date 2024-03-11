@@ -119,7 +119,7 @@ public class EntityTFKnightPhantom extends EntityFlying implements IMob {
      * use this to react to sunlight and start to burn.
      */
     public void onLivingUpdate() {
-    	despawnIfInvalid();
+        despawnIfInvalid();
         super.onLivingUpdate();
 
         if (this.isChargingAtPlayer()) {
@@ -158,14 +158,15 @@ public class EntityTFKnightPhantom extends EntityFlying implements IMob {
      * Despawn the knight phantom, and restore the boss spawner at our home location, if set
      */
     protected void despawnMe() {
-    	if(this.hasHome()) {
+        if (this.hasHome()) {
             ChunkCoordinates home = this.getHomePosition();
-            if(worldObj.getBlock(home.posX, home.posY, home.posZ) != TFBlocks.bossSpawner) {
+            if (worldObj.getBlock(home.posX, home.posY, home.posZ) != TFBlocks.bossSpawner) {
                 worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 4, 2);
-                TileEntityTFKnightPhantomsSpawner spawner = (TileEntityTFKnightPhantomsSpawner)worldObj.getTileEntity(home.posX, home.posY, home.posZ);
+                TileEntityTFKnightPhantomsSpawner spawner = (TileEntityTFKnightPhantomsSpawner) worldObj
+                        .getTileEntity(home.posX, home.posY, home.posZ);
                 spawner.knightsCount = getNearbyKnights().size();
             }
-    	}
+        }
         setDead();
     }
 

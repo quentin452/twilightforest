@@ -174,7 +174,7 @@ public class EntityTFSnowQueen extends EntityMob implements IBossDisplayData, IE
      * use this to react to sunlight and start to burn.
      */
     public void onLivingUpdate() {
-    	despawnIfInvalid();
+        despawnIfInvalid();
         super.onLivingUpdate();
         // make snow particles
         for (int i = 0; i < 3; i++) {
@@ -267,10 +267,10 @@ public class EntityTFSnowQueen extends EntityMob implements IBossDisplayData, IE
      * Despawn the snow queen, and restore the boss spawner at our home location, if set
      */
     protected void despawnMe() {
-    	if(this.hasHome()) {
+        if (this.hasHome()) {
             ChunkCoordinates home = this.getHomePosition();
             worldObj.setBlock(home.posX, home.posY, home.posZ, TFBlocks.bossSpawner, 5, 2);
-    	}
+        }
         setDead();
     }
 

@@ -102,6 +102,9 @@ public class TFEventListener {
                     case 2 -> event.entityPlayer.triggerAchievement(TFAchievementPage.twilightKillLich);
                     case 3 -> event.entityPlayer.triggerAchievement(TFAchievementPage.twilightProgressUrghast);
                     case 4 -> event.entityPlayer.triggerAchievement(TFAchievementPage.twilightProgressGlacier);
+                    case 5 -> event.entityPlayer.triggerAchievement(TFAchievementPage.twilightProgressLabyrinth);
+                    case 6 -> event.entityPlayer.triggerAchievement(TFAchievementPage.twilightProgressKnights);
+                    case 7 -> event.entityPlayer.triggerAchievement(TFAchievementPage.twilightProgressYeti);
                 }
                 // mazebreaker
             } else if (item == TFItems.mazebreakerPick) {

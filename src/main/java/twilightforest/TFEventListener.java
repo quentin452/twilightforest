@@ -74,8 +74,6 @@ import twilightforest.world.WorldProviderTwilightForest;
  */
 public class TFEventListener {
 
-    // player directory
-    private File playerDirectory;
     public static String fileName = "tf";
     public static String fileNameBackup = "tfback";
 
@@ -608,7 +606,6 @@ public class TFEventListener {
     @SubscribeEvent
     public void playerLoad(PlayerEvent.LoadFromFile event) {
         playerLoadDo(event.entityPlayer, event.playerDirectory);
-        playerDirectory = event.playerDirectory;
     }
 
     private void playerLoadDo(EntityPlayer player, File directory) {
@@ -710,19 +707,8 @@ public class TFEventListener {
     @SubscribeEvent
     public void onPlayerLogout(PlayerLoggedOutEvent event) {
         EntityPlayer player = event.player;
-        if (playerKeepsMap.containsKey(player.getCommandSenderName())) {
-            FMLLog.warning(
-                    "[TwilightForest] Mod was keeping inventory items in reserve for player %s but they logged out!  Items are being dropped.",
-                    player.getCommandSenderName());
-            InventoryPlayer keepInventory = playerKeepsMap.get(player.getCommandSenderName());
-
-            // set player to the player logging out
-            /*
-             * keepInventory.player = player; keepInventory.dropAllItems();
-             */
-
+        if (playerKeepsMap.containsKey(player.getCommandSenderName()))
             playerKeepsMap.remove(player.getCommandSenderName());
-        }
     }
 
     /**

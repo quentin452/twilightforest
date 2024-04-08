@@ -64,6 +64,7 @@ import twilightforest.entity.EntityTFCharmEffect;
 import twilightforest.entity.EntityTFPinchBeetle;
 import twilightforest.entity.EntityTFYeti;
 import twilightforest.integration.TFBaublesIntegration;
+import twilightforest.item.ItemTFPhantomArmor;
 import twilightforest.item.TFItems;
 import twilightforest.world.ChunkProviderTwilightForest;
 import twilightforest.world.TFWorldChunkManager;
@@ -573,6 +574,17 @@ public class TFEventListener {
                     }
                 }
                 playerKeepsMap.put(player.getCommandSenderName(), keepInventory);
+            }
+
+            // check for phantom armor
+            for (int i = 0; i < 4; i++) {
+                if (player.inventory.armorInventory[i] != null
+                        && player.inventory.armorInventory[i].getItem() instanceof ItemTFPhantomArmor) {
+                    InventoryPlayer keepInventory = retrieveOrMakeKeepInventory(player);
+                    keepInventory.armorInventory[i] = ItemStack.copyItemStack(player.inventory.armorInventory[i]);
+                    player.inventory.armorInventory[i] = null;
+                    playerKeepsMap.put(player.getCommandSenderName(), keepInventory);
+                }
             }
         }
 

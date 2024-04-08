@@ -305,6 +305,10 @@ public class BlockTFNagastone extends Block {
                 default:
                     return false;
             }
+            if (currentBlock.direction == null) currentBlock.direction = Direction.SIDE;
+            if (currentBlock.facing == null) currentBlock.facing = Facing.EAST;
+            if (neighbourBlock.direction == null) neighbourBlock.direction = Direction.SIDE;
+            if (neighbourBlock.facing == null) neighbourBlock.facing = Facing.EAST;
             if (neighbourBlock.getBlockMetadata() == 0) {
                 switch (direction) {
                     case 0:

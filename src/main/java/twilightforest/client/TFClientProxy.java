@@ -90,12 +90,14 @@ import twilightforest.client.renderer.TFIceItemRenderer;
 import twilightforest.client.renderer.TFMagicMapRenderer;
 import twilightforest.client.renderer.TFMazeMapRenderer;
 import twilightforest.client.renderer.TileEntityTFCakeRenderer;
+import twilightforest.client.renderer.TileEntityTFChestRenderer;
 import twilightforest.client.renderer.TileEntityTFCicadaRenderer;
 import twilightforest.client.renderer.TileEntityTFFireflyRenderer;
 import twilightforest.client.renderer.TileEntityTFMoonwormRenderer;
 import twilightforest.client.renderer.TileEntityTFTrophyRenderer;
 import twilightforest.client.renderer.blocks.RenderBlockTFCake;
 import twilightforest.client.renderer.blocks.RenderBlockTFCastleMagic;
+import twilightforest.client.renderer.blocks.RenderBlockTFChest;
 import twilightforest.client.renderer.blocks.RenderBlockTFCritters;
 import twilightforest.client.renderer.blocks.RenderBlockTFFieryMetal;
 import twilightforest.client.renderer.blocks.RenderBlockTFFireflyJar;
@@ -165,6 +167,7 @@ import twilightforest.client.renderer.entity.RenderTFWraith;
 import twilightforest.client.renderer.entity.RenderTFYeti;
 import twilightforest.item.TFItems;
 import twilightforest.tileentity.TileEntityTFCake;
+import twilightforest.tileentity.TileEntityTFChest;
 import twilightforest.tileentity.TileEntityTFCicada;
 import twilightforest.tileentity.TileEntityTFFirefly;
 import twilightforest.tileentity.TileEntityTFMoonworm;
@@ -175,6 +178,7 @@ public class TFClientProxy extends TFCommonProxy {
     int critterRenderID;
     int plantRenderID;
     int cakeRenderID;
+    int chestRenderID;
     int blockComplexRenderID;
     int nagastoneRenderID;
     int nagastoneEtchedRenderID;
@@ -506,6 +510,7 @@ public class TFClientProxy extends TFCommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTFMoonworm.class, new TileEntityTFMoonwormRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTFTrophy.class, new TileEntityTFTrophyRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTFCake.class, new TileEntityTFCakeRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTFChest.class, new TileEntityTFChestRenderer());
 
         // map item renderer
         MinecraftForgeClient.registerItemRenderer(
@@ -549,6 +554,9 @@ public class TFClientProxy extends TFCommonProxy {
         // block render ids
         cakeRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFCake(cakeRenderID));
+
+        chestRenderID = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderBlockTFChest(chestRenderID));
 
         blockComplexRenderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderBlockTFFireflyJar(blockComplexRenderID));
@@ -649,6 +657,10 @@ public class TFClientProxy extends TFCommonProxy {
 
     public int getCakeBlockRenderID() {
         return cakeRenderID;
+    }
+
+    public int getChestBlockRenderID() {
+        return chestRenderID;
     }
 
     public int getComplexBlockRenderID() {

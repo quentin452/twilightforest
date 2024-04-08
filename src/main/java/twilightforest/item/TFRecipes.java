@@ -2,6 +2,7 @@ package twilightforest.item;
 
 import static net.minecraftforge.oredict.RecipeSorter.Category.SHAPELESS;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -100,6 +101,12 @@ public class TFRecipes {
                 new ItemStack(TFBlocks.woodenStairsDarkwood, 8, 0), new ItemStack(TFBlocks.woodenStairsTime, 8, 0),
                 new ItemStack(TFBlocks.woodenStairsTrans, 8, 0), new ItemStack(TFBlocks.woodenStairsMine, 8, 0),
                 new ItemStack(TFBlocks.woodenStairsSort, 8, 0) };
+        Block[] chests = new Block[] { TFBlocks.chestTwilight, TFBlocks.chestCanopy, TFBlocks.chestMangrove,
+                TFBlocks.chestDarkwood, TFBlocks.chestTime, TFBlocks.chestTrans, TFBlocks.chestMine,
+                TFBlocks.chestSort };
+        Block[] trappedChests = new Block[] { TFBlocks.trappedChestTwilight, TFBlocks.trappedChestCanopy,
+                TFBlocks.trappedChestMangrove, TFBlocks.trappedChestDarkwood, TFBlocks.trappedChestTime,
+                TFBlocks.trappedChestTrans, TFBlocks.trappedChestMine, TFBlocks.trappedChestSort };
         for (int i = 0; i < doors.length; i++) {
             GameRegistry.addRecipe(
                     new ItemStack(doors[i], 1, 0),
@@ -112,6 +119,13 @@ public class TFRecipes {
             GameRegistry.addRecipe(
                     new ItemStack(TFBlocks.woodenSlab, 6, i),
                     new Object[] { "###", '#', new ItemStack(TFBlocks.planks, 1, i) });
+            GameRegistry.addRecipe(
+                    new ItemStack(chests[i], 2),
+                    new Object[] { "###", "#0#", "###", '#', new ItemStack(TFBlocks.planks, 1, i), '0',
+                            new ItemStack(Blocks.chest) });
+            GameRegistry.addShapelessRecipe(
+                    new ItemStack(trappedChests[i]),
+                    new Object[] { new ItemStack(chests[i]), new ItemStack(Blocks.tripwire_hook) });
         }
 
         // Dyes from TF plants

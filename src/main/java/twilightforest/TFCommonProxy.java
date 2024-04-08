@@ -39,6 +39,10 @@ public class TFCommonProxy implements IGuiHandler {
         return 0;
     }
 
+    public int getChestBlockRenderID() {
+        return 0;
+    }
+
     public int getComplexBlockRenderID() {
         return 0;
     }

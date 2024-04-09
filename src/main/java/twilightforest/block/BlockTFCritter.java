@@ -12,7 +12,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -27,12 +31,36 @@ import twilightforest.item.TFItems;
 
 public abstract class BlockTFCritter extends Block {
 
+    protected Item dropItem = Items.glowstone_dust;
+    protected int dropMeta = 0;
+
     protected BlockTFCritter() {
         super(Material.circuits);
         this.setHardness(0.0F);
         this.setCreativeTab(TFItems.creativeTab);
 
         this.stepSound = new StepSoundTFInsect("squish", 0.25F, 0.6F);
+    }
+
+    /**
+     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
+     */
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        // squish
+        if (!world.isRemote && (entity instanceof IProjectile)) {
+            int metadata = world.getBlockMetadata(x, y, z);
+            world.playAuxSFX(2001, x, y, z, Block.getIdFromBlock(this) + (metadata << 12));
+            world.setBlockToAir(x, y, z);
+            double dx = this.getBlockBoundsMinX()
+                    + world.rand.nextDouble() * (this.getBlockBoundsMaxX() - this.getBlockBoundsMinX());
+            double dy = this.getBlockBoundsMinY()
+                    + world.rand.nextDouble() * (this.getBlockBoundsMaxY() - this.getBlockBoundsMinY());
+            double dz = this.getBlockBoundsMinZ()
+                    + world.rand.nextDouble() * (this.getBlockBoundsMaxZ() - this.getBlockBoundsMinZ());
+            EntityItem entityitem = new EntityItem(world, x + dx, y + dy, z + dz, new ItemStack(dropItem, 1, dropMeta));
+            entityitem.delayBeforeCanPickup = 10;
+            world.spawnEntityInWorld(entityitem);
+        }
     }
 
     // Updates the blocks bounds based on its current state. Args: world, x, y, z

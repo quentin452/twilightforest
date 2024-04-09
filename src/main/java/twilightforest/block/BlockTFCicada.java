@@ -1,5 +1,6 @@
 package twilightforest.block;
 
+import net.minecraft.init.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -11,6 +12,8 @@ public class BlockTFCicada extends BlockTFCritter {
 
     protected BlockTFCicada() {
         super();
+        this.dropItem = Items.dye;
+        this.dropMeta = 2;
     }
 
     @Override

@@ -1,5 +1,11 @@
 package twilightforest.tileentity;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.ResourceLocation;
+
 import twilightforest.TwilightForestMod;
 
 public class TileEntityTFCicada extends TileEntityTFCritter {
@@ -90,14 +96,22 @@ public class TileEntityTFCicada extends TileEntityTFCritter {
     }
 
     public void playSong() {
-        if (!TwilightForestMod.silentCicadas) {
-            worldObj.playSoundEffect(
-                    xCoord,
-                    yCoord,
-                    zCoord,
-                    TwilightForestMod.ID + ":mob.cicada",
-                    1.0f,
-                    (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F + 1.0F);
+        if (!TwilightForestMod.silentCicadas && worldObj.isRemote) {
+            ResourceLocation resource = new ResourceLocation(TwilightForestMod.ID + ":mob.cicada");
+            ChunkCoordinates chunkcoordinates = new ChunkCoordinates(xCoord, yCoord, zCoord);
+            Minecraft mc = Minecraft.getMinecraft();
+            ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+            if (isound == null) {
+                PositionedSoundRecord positionedsoundrecord = new PositionedSoundRecord(
+                        resource,
+                        1.0f,
+                        (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F + 1.0F,
+                        (float) xCoord,
+                        (float) yCoord,
+                        (float) zCoord);
+                mc.renderGlobal.mapSoundPositions.put(chunkcoordinates, positionedsoundrecord);
+                mc.getSoundHandler().playSound(positionedsoundrecord);
+            }
         }
     }
 }

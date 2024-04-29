@@ -97,6 +97,7 @@ public class TwilightForestMod {
     public static boolean isSkinportLoaded = false;
     public static boolean areBaublesLoaded = false;
     public static boolean isNeiLoaded = false;
+    public static boolean enableTiCIntegration = false;
 
     // performance
     public static float canopyCoverage;
@@ -343,11 +344,15 @@ public class TwilightForestMod {
         }
 
         // Tinkers Construct integration
-        if (Loader.isModLoaded("TConstruct") && !Loader.isModLoaded("dreamcraft")) {
-            TFTinkerConstructIntegration.registerTinkersConstructIntegration(evt);
+        if (enableTiCIntegration) {
+            if (Loader.isModLoaded("TConstruct") && !Loader.isModLoaded("dreamcraft")) {
+                TFTinkerConstructIntegration.registerTinkersConstructIntegration(evt);
+            } else {
+                FMLLog.info(
+                        "[TwilightForest] Did not find Tinkers Construct or detected GTNH, did not load Tinkers Construct integration.");
+            }
         } else {
-            FMLLog.info(
-                    "[TwilightForest] Did not find Tinkers Construct or detected GTNH, did not load Tinkers Construct integration.");
+            FMLLog.info("[TwilightForest] Tinkers Construct integration is disabled.");
         }
 
         // Remove certain things from NEI
@@ -970,7 +975,12 @@ public class TwilightForestMod {
                 "Performance",
                 "TwilightOakChance",
                 48).comment = "Chance that a chunk in the Twilight Forest will contain a twilight oak tree.  Higher numbers reduce the number of trees, increasing performance.";
-
+        enableTiCIntegration = configFile.get(Configuration.CATEGORY_GENERAL, "EnableTiConstructIntegration", true)
+                .getBoolean(true);
+        configFile.get(
+                Configuration.CATEGORY_GENERAL,
+                "EnableTiConstructIntegration",
+                true).comment = "Enable backport of 1.12.2 TiC integration including materials and modifiers.";
         // fixed values, don't even read the config
         idMobWildBoar = 177;
         idMobBighornSheep = 178;

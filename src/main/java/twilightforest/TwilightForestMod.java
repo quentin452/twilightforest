@@ -345,16 +345,11 @@ public class TwilightForestMod {
 
         // Tinkers Construct integration
         if (enableTiCIntegration) {
-            if (!Loader.isModLoaded("TConstruct")) FMLLog.info(
-                    "[TwilightForest] Could not find Tinkers Construct. Skipping load Tinkers Construct integration.");
+            if (!Loader.isModLoaded("TConstruct")) FMLLog
+                    .info("[TwilightForest] Could not find Tinkers Construct. Skipping Tinkers Construct integration.");
             else {
-                if (Loader.isModLoaded("dreamcraft"))
-                    FMLLog.info("[TwilightForest] GTNH instance detected. Skipping Tinkers Construct integration.");
-                else {
-                    FMLLog.info(
-                            "[TwilightForest] Tinkers Construct detected. Initiating Tinkers Construct integration.");
-                    TFTinkerConstructIntegration.registerTinkersConstructIntegration(evt);
-                }
+                FMLLog.info("[TwilightForest] Tinkers Construct detected. Initiating Tinkers Construct integration.");
+                TFTinkerConstructIntegration.registerTinkersConstructIntegration(evt);
             }
         } else {
             FMLLog.info("[TwilightForest] Tinkers Construct integration is disabled.");

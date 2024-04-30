@@ -50,7 +50,6 @@ public class TFToolEvents {
 
     @SubscribeEvent
     public void craftTool(ToolCraftEvent.NormalTool event) {
-        if (!TwilightForestMod.enableTiCIntegration) return;
         NBTTagCompound toolTag = event.toolTag.getCompoundTag("InfiTool");
         List<Integer> twilitMaterials = new ArrayList<Integer>();
         twilitMaterials.add(MaterialID.FieryMetal);
@@ -118,7 +117,6 @@ public class TFToolEvents {
 
     @SubscribeEvent
     public void tooltip(ItemTooltipEvent event) {
-        if (!TwilightForestMod.enableTiCIntegration) return;
         if (event.itemStack == null || event.itemStack.getItem() == null
                 || !event.itemStack.hasTagCompound()
                 || !event.itemStack.getTagCompound().hasKey("InfiTool")
@@ -155,20 +153,20 @@ public class TFToolEvents {
     }
 
     private EnumChatFormatting colorFromID(int materialID) {
-        EnumChatFormatting cf;
-        cf = switch (materialID) {
-            default -> EnumChatFormatting.DARK_GRAY;
-            case MaterialID.FieryMetal -> EnumChatFormatting.GOLD;
-            case MaterialID.Knightmetal -> EnumChatFormatting.GREEN;
-            case MaterialID.NagaScale, MaterialID.Steeleaf -> EnumChatFormatting.DARK_GREEN;
-        };
+        EnumChatFormatting cf = EnumChatFormatting.DARK_GRAY;
+
+        if (materialID == MaterialID.FieryMetal) cf = EnumChatFormatting.GOLD;
+        else if (materialID == MaterialID.Knightmetal) {
+            cf = EnumChatFormatting.GREEN;
+        } else if (materialID == MaterialID.NagaScale || materialID == MaterialID.Steeleaf) {
+            cf = EnumChatFormatting.DARK_GREEN;
+        }
 
         return cf;
     }
 
     @SubscribeEvent
     public void onArrowSpawn(EntityJoinWorldEvent event) {
-        if (!TwilightForestMod.enableTiCIntegration) return;
         if (event.entity instanceof ArrowEntity || event.entity instanceof BoltEntity) {
             ProjectileBase entity = (ProjectileBase) event.entity;
             ItemStack entityItem = entity.getEntityItem();
@@ -182,7 +180,6 @@ public class TFToolEvents {
 
     @SubscribeEvent
     public void onProjectileHit(LivingHurtEvent event) {
-        if (!TwilightForestMod.enableTiCIntegration) return;
         if (event.source instanceof EntityDamageSourceIndirect damageSource) {
             Entity damageSourceEntity = damageSource.damageSourceEntity;
             if (damageSourceEntity instanceof ProjectileBase entity) {
@@ -218,7 +215,6 @@ public class TFToolEvents {
 
     @SubscribeEvent
     public void onProjectileKill(LivingDeathEvent event) {
-        if (!TwilightForestMod.enableTiCIntegration) return;
         if (event.source instanceof EntityDamageSourceIndirect damageSource) {
             Entity damageSourceEntity = damageSource.damageSourceEntity;
             if (damageSourceEntity instanceof ArrowEntity || damageSourceEntity instanceof BoltEntity) {

@@ -88,9 +88,7 @@ public class TFTinkerConstructIntegration {
     }
 
     public static void registerTinkersConstructIntegration(FMLPostInitializationEvent evt) {
-        TFToolEvents toolEvents = new TFToolEvents();
-        MinecraftForge.EVENT_BUS.register(toolEvents);
-        FMLCommonHandler.instance().bus().register(toolEvents);
+        initiateToolEvents();
 
         TConstructRegistry.registerActiveToolMod(new TFActiveToolMod());
 
@@ -830,6 +828,12 @@ public class TFTinkerConstructIntegration {
                 new ItemStack(TinkerTools.blankPattern, 1, 0),
                 new ItemStack(Items.paper),
                 new ItemStack(TFItems.magicMapFocus));
+    }
+
+    public static void initiateToolEvents() {
+        TFToolEvents toolEvents = new TFToolEvents();
+        MinecraftForge.EVENT_BUS.register(toolEvents);
+        FMLCommonHandler.instance().bus().register(toolEvents);
     }
 
     public static boolean isValidClayCast(int meta) {

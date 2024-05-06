@@ -37,7 +37,7 @@ public class RenderBlockTFNagastone implements ISimpleBlockRenderingHandler {
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
             RenderBlocks renderer) {
         TileEntityTFNagastone te = (TileEntityTFNagastone) world.getTileEntity(x, y, z);
-        if (te.isOutdated) {
+        if (te == null || te.isOutdated) {
             WorldClient worldClient = Minecraft.getMinecraft().theWorld;
             switch (world.getBlockMetadata(x, y, z)) {
                 default:

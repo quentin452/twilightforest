@@ -199,7 +199,6 @@ public class TFClientProxy extends TFCommonProxy {
     ModelBiped[] trophyArmorModel;
     ModelBiped[] critterArmorModel;
 
-    TFClientTicker clientTicker;
     TFClientEvents clientEvents;
 
     boolean isDangerOverlayShown;

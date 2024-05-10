@@ -357,6 +357,9 @@ public class TwilightForestMod {
                 TFTinkerConstructIntegration.registerTinkersConstructIntegration(evt);
             }
         } else {
+            if (Loader.isModLoaded("TGregworks")) {
+                TFTinkerConstructIntegration.initiateToolEvents();
+            }
             FMLLog.info("[TwilightForest] Tinkers Construct integration is disabled.");
         }
 

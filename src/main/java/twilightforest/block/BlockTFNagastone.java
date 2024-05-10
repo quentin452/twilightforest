@@ -222,6 +222,7 @@ public class BlockTFNagastone extends Block {
                     te.facing = Facing.NORTH;
                     break;
                 case 9:
+                case 14:
                     te.blockMetadata = 1;
                     te.direction = Direction.UP;
                     te.facing = Facing.SOUTH;
@@ -247,11 +248,6 @@ public class BlockTFNagastone extends Block {
                     te.blockMetadata = 1;
                     te.direction = Direction.SIDE;
                     te.facing = Facing.EAST;
-                    break;
-                case 14:
-                    te.blockMetadata = 1;
-                    te.direction = Direction.UP;
-                    te.facing = Facing.SOUTH;
                     break;
             }
             world.setTileEntity(x, y, z, te);
@@ -286,6 +282,7 @@ public class BlockTFNagastone extends Block {
 
     public boolean CanConnectTo(World world, int x, int y, int z, int direction) {
         TileEntityTFNagastone currentBlock = (TileEntityTFNagastone) world.getTileEntity(x, y, z);
+        Facing facingCurrentBlock = currentBlock.facing != null ? currentBlock.facing : Facing.EAST;
         if (world.getBlockMetadata(x, y, z) == 1) if (isNagaStoneInDirection(world, x, y, z, direction)) {
             TileEntityTFNagastone neighbourBlock = null;
             switch (direction) {
@@ -315,7 +312,7 @@ public class BlockTFNagastone extends Block {
                     case 0:
                         if (neighbourBlock.direction != Direction.DOWN) return false;
                         else {
-                            if (currentBlock.direction == Direction.SIDE) switch (currentBlock.facing) {
+                            if (currentBlock.direction == Direction.SIDE) switch (facingCurrentBlock) {
                                 case EAST:
                                 case WEST:
                                     return neighbourBlock.facing == Facing.EAST || neighbourBlock.facing == Facing.WEST;
@@ -325,14 +322,14 @@ public class BlockTFNagastone extends Block {
                                             || neighbourBlock.facing == Facing.SOUTH;
                             }
                             else {
-                                return neighbourBlock.facing == currentBlock.facing;
+                                return neighbourBlock.facing == facingCurrentBlock;
                             }
                         }
                         break;
                     case 1:
                         if (neighbourBlock.direction != Direction.UP) return false;
                         else {
-                            if (currentBlock.direction == Direction.SIDE) switch (currentBlock.facing) {
+                            if (currentBlock.direction == Direction.SIDE) switch (facingCurrentBlock) {
                                 case EAST:
                                 case WEST:
                                     return neighbourBlock.facing == Facing.EAST || neighbourBlock.facing == Facing.WEST;
@@ -342,7 +339,7 @@ public class BlockTFNagastone extends Block {
                                             || neighbourBlock.facing == Facing.SOUTH;
                             }
                             else {
-                                return neighbourBlock.facing == currentBlock.facing;
+                                return neighbourBlock.facing == facingCurrentBlock;
                             }
                         }
                         break;
@@ -362,9 +359,9 @@ public class BlockTFNagastone extends Block {
                         if ((currentBlock.direction == Direction.SIDE && neighbourBlock.direction == Direction.SIDE)
                                 || (currentBlock.direction != Direction.SIDE
                                         && neighbourBlock.direction != Direction.SIDE
-                                        && neighbourBlock.facing != currentBlock.facing)) {
+                                        && neighbourBlock.facing != facingCurrentBlock)) {
                             return false;
-                        } else switch (currentBlock.facing) {
+                        } else switch (facingCurrentBlock) {
                             case EAST:
                             case WEST:
                                 return neighbourBlock.facing == Facing.EAST || neighbourBlock.facing == Facing.WEST;
@@ -376,7 +373,7 @@ public class BlockTFNagastone extends Block {
                     case 2:
                     case 3:
                         if (currentBlock.direction == Direction.SIDE) {
-                            switch (currentBlock.facing) {
+                            switch (facingCurrentBlock) {
                                 case EAST:
                                 case WEST:
                                     if (neighbourBlock.direction == Direction.SIDE) return true;
@@ -391,7 +388,7 @@ public class BlockTFNagastone extends Block {
                         } else {
                             if (neighbourBlock.direction != Direction.SIDE) return false;
                             else {
-                                switch (currentBlock.facing) {
+                                switch (facingCurrentBlock) {
                                     case EAST:
                                     case WEST:
                                         return neighbourBlock.facing == Facing.EAST
@@ -406,7 +403,7 @@ public class BlockTFNagastone extends Block {
                     case 4:
                     case 5:
                         if (currentBlock.direction == Direction.SIDE) {
-                            switch (currentBlock.facing) {
+                            switch (facingCurrentBlock) {
                                 case EAST:
                                 case WEST:
                                     if (neighbourBlock.direction != Direction.SIDE) return false;
@@ -421,7 +418,7 @@ public class BlockTFNagastone extends Block {
                         } else {
                             if (neighbourBlock.direction != Direction.SIDE) return false;
                             else {
-                                switch (currentBlock.facing) {
+                                switch (facingCurrentBlock) {
                                     case EAST:
                                     case WEST:
                                         return false;

@@ -8,7 +8,6 @@ import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.BlockTFChest.WoodType;
-import twilightforest.block.BlockTFNagastonePillar.BlockType;
 import twilightforest.item.ItemBlockTFCritter;
 import twilightforest.item.ItemBlockTFMeta;
 import twilightforest.item.ItemBlockTFNagastone;

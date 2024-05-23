@@ -39,6 +39,11 @@ public class ComponentTFNagaCourtyardRotatedAbstract extends StructureTFComponen
         EtchedNagastoneSouth = ForgeDirection.UP;
         EtchedNagastoneWest = ForgeDirection.UP;
         EtchedNagastoneEast = ForgeDirection.UP;
+
+        NagastoneNorth = Yaw.EAST;
+        NagastoneSouth = Yaw.EAST;
+        NagastoneWest = Yaw.EAST;
+        NagastoneEast = Yaw.EAST;
     }
 
     public ComponentTFNagaCourtyardRotatedAbstract(int i, int x, int y, int z, int rotation) {

@@ -39,6 +39,10 @@ public class TFCommonProxy implements IGuiHandler {
         return 0;
     }
 
+    public int getChestBlockRenderID() {
+        return 0;
+    }
+
     public int getComplexBlockRenderID() {
         return 0;
     }
@@ -72,6 +76,10 @@ public class TFCommonProxy implements IGuiHandler {
     }
 
     public int getKnightmetalBlockRenderID() {
+        return 0;
+    }
+
+    public int getFieryMetalBlockRenderID() {
         return 0;
     }
 
@@ -139,6 +147,14 @@ public class TFCommonProxy implements IGuiHandler {
     }
 
     public ModelBiped getFieryArmorModel(int armorSlot) {
+        return null;
+    }
+
+    public ModelBiped getTrophyArmorModel(int boss) {
+        return null;
+    }
+
+    public ModelBiped getCritterArmorModel(int boss) {
         return null;
     }
 

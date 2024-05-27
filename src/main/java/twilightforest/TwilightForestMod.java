@@ -39,8 +39,10 @@ import twilightforest.item.ItemTFMazeMap;
 import twilightforest.item.TFItems;
 import twilightforest.item.TFRecipes;
 import twilightforest.structures.StructureTFMajorFeatureStart;
+import twilightforest.tileentity.TileEntityTFAlphaYetiSpawner;
 import twilightforest.tileentity.TileEntityTFCReactorActive;
 import twilightforest.tileentity.TileEntityTFCake;
+import twilightforest.tileentity.TileEntityTFChest;
 import twilightforest.tileentity.TileEntityTFCicada;
 import twilightforest.tileentity.TileEntityTFCinderFurnace;
 import twilightforest.tileentity.TileEntityTFFirefly;
@@ -50,6 +52,7 @@ import twilightforest.tileentity.TileEntityTFGhastTrapInactive;
 import twilightforest.tileentity.TileEntityTFHydraSpawner;
 import twilightforest.tileentity.TileEntityTFKnightPhantomsSpawner;
 import twilightforest.tileentity.TileEntityTFLichSpawner;
+import twilightforest.tileentity.TileEntityTFMinoshroomSpawner;
 import twilightforest.tileentity.TileEntityTFMoonworm;
 import twilightforest.tileentity.TileEntityTFNagaSpawner;
 import twilightforest.tileentity.TileEntityTFNagastone;
@@ -886,7 +889,12 @@ public class TwilightForestMod {
         GameRegistry.registerTileEntity(TileEntityTFCicada.class, "Cicada");
         GameRegistry.registerTileEntity(TileEntityTFNagaSpawner.class, "Naga Spawner");
         GameRegistry.registerTileEntity(TileEntityTFLichSpawner.class, "Lich Spawner");
+        GameRegistry.registerTileEntity(TileEntityTFMinoshroomSpawner.class, "Minoshroom Spawner");
         GameRegistry.registerTileEntity(TileEntityTFHydraSpawner.class, "Hydra Spawner");
+        GameRegistry.registerTileEntity(TileEntityTFKnightPhantomsSpawner.class, "Knight Phantom Spawner");
+        GameRegistry.registerTileEntity(TileEntityTFTowerBossSpawner.class, "Tower Boss Spawner");
+        GameRegistry.registerTileEntity(TileEntityTFAlphaYetiSpawner.class, "Alpha Yeti Spawner");
+        GameRegistry.registerTileEntity(TileEntityTFSnowQueenSpawner.class, "Snow Queen Spawner");
         GameRegistry.registerTileEntity(TileEntityTFSmoker.class, "Swamp Smoker");
         GameRegistry.registerTileEntity(TileEntityTFPoppingJet.class, "Popping Flame Jet");
         GameRegistry.registerTileEntity(TileEntityTFFlameJet.class, "Lit Flame Jet");
@@ -894,13 +902,11 @@ public class TwilightForestMod {
         GameRegistry.registerTileEntity(TileEntityTFTowerBuilder.class, "Tower Builder");
         GameRegistry.registerTileEntity(TileEntityTFReverter.class, "Tower Reverter");
         GameRegistry.registerTileEntity(TileEntityTFTrophy.class, "TF Trophy");
-        GameRegistry.registerTileEntity(TileEntityTFTowerBossSpawner.class, "Tower Boss Spawner");
         GameRegistry.registerTileEntity(TileEntityTFGhastTrapInactive.class, "Inactive Ghast Trap");
         GameRegistry.registerTileEntity(TileEntityTFGhastTrapActive.class, "Active Ghast Trap");
         GameRegistry.registerTileEntity(TileEntityTFCReactorActive.class, "Active Carminite Reactor");
-        GameRegistry.registerTileEntity(TileEntityTFKnightPhantomsSpawner.class, "Knight Phantom Spawner");
-        GameRegistry.registerTileEntity(TileEntityTFSnowQueenSpawner.class, "Snow Queen Spawner");
         GameRegistry.registerTileEntity(TileEntityTFCinderFurnace.class, "Cinder Furnace");
+        GameRegistry.registerTileEntity(TileEntityTFChest.class, "TF Chest");
     }
 
     /**

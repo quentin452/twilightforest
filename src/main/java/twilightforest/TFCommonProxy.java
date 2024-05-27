@@ -2,6 +2,7 @@ package twilightforest;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -159,5 +160,9 @@ public class TFCommonProxy implements IGuiHandler {
     }
 
     public void doBlockAnnihilateEffect(World worldObj, int blockX, int blockY, int blockZ) {}
+
+    public boolean checkForSound(ChunkCoordinates chunkcoordinates) {
+        return true;
+    }
 
 }

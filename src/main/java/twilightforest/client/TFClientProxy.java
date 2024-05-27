@@ -1,6 +1,7 @@
 package twilightforest.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelSilverfish;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -854,6 +856,12 @@ public class TFClientProxy extends TFCommonProxy {
                 }
             }
         }
+    }
+
+    public boolean checkForSound(ChunkCoordinates chunkcoordinates) {
+        Minecraft mc = Minecraft.getMinecraft();
+        ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+        return isound != null;
     }
 
 }

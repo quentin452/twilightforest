@@ -38,8 +38,11 @@ public class BlockTFCicada extends BlockTFCritter {
 
     @Override
     public boolean dropCritterIfCantStay(World world, int x, int y, int z) {
-        stopSinging(world, x, y, z);
-        return super.dropCritterIfCantStay(world, x, y, z);
+        if (super.dropCritterIfCantStay(world, x, y, z)) {
+            stopSinging(world, x, y, z);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -76,14 +79,16 @@ public class BlockTFCicada extends BlockTFCritter {
     }
 
     public void stopSinging(World worldIn, int x, int y, int z) {
-        ChunkCoordinates chunkcoordinates = new ChunkCoordinates(x, y, z);
-        Minecraft mc = Minecraft.getMinecraft();
-        ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+        if (worldIn.isRemote) {
+            ChunkCoordinates chunkcoordinates = new ChunkCoordinates(x, y, z);
+            Minecraft mc = Minecraft.getMinecraft();
+            ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
 
-        while (isound != null) {
-            mc.getSoundHandler().stopSound(isound);
-            mc.renderGlobal.mapSoundPositions.remove(chunkcoordinates);
-            isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+            while (isound != null) {
+                mc.getSoundHandler().stopSound(isound);
+                mc.renderGlobal.mapSoundPositions.remove(chunkcoordinates);
+                isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+            }
         }
     }
 

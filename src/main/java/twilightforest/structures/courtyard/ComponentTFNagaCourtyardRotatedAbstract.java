@@ -23,15 +23,15 @@ public class ComponentTFNagaCourtyardRotatedAbstract extends StructureTFComponen
     protected int rotatedStairs6;
     protected int rotatedStairs7;
 
-    protected ForgeDirection EtchedNagastoneNorth;
-    protected ForgeDirection EtchedNagastoneSouth;
-    protected ForgeDirection EtchedNagastoneWest;
-    protected ForgeDirection EtchedNagastoneEast;
+    protected ForgeDirection EtchedNagastoneNorth = ForgeDirection.NORTH;
+    protected ForgeDirection EtchedNagastoneSouth = ForgeDirection.SOUTH;
+    protected ForgeDirection EtchedNagastoneWest = ForgeDirection.WEST;
+    protected ForgeDirection EtchedNagastoneEast = ForgeDirection.EAST;
 
-    protected Yaw NagastoneNorth;
-    protected Yaw NagastoneSouth;
-    protected Yaw NagastoneWest;
-    protected Yaw NagastoneEast;
+    protected Yaw NagastoneNorth = Yaw.NORTH;
+    protected Yaw NagastoneSouth = Yaw.SOUTH;
+    protected Yaw NagastoneWest = Yaw.WEST;
+    protected Yaw NagastoneEast = Yaw.EAST;
 
     public ComponentTFNagaCourtyardRotatedAbstract() {
         super();

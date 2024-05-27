@@ -92,7 +92,7 @@ public class TFBaublesIntegration {
     }
 
     public static void playerSaveDo(EntityPlayer player, File directory) {
-        PlayerHandler.savePlayerBaubles(
+        if (TwilightForestMod.areBaublesLoaded) PlayerHandler.savePlayerBaubles(
                 player,
                 TFEventListener.getPlayerFile(TFEventListener.fileName, directory, player.getCommandSenderName()),
                 TFEventListener

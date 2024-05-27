@@ -38,8 +38,11 @@ public class BlockTFCicada extends BlockTFCritter {
 
     @Override
     public boolean dropCritterIfCantStay(World world, int x, int y, int z) {
-        stopSinging(world, x, y, z);
-        return super.dropCritterIfCantStay(world, x, y, z);
+        if (super.dropCritterIfCantStay(world, x, y, z)) {
+            stopSinging(world, x, y, z);
+            return true;
+        }
+        return false;
     }
 
     /**

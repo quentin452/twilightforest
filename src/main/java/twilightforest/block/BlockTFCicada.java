@@ -10,8 +10,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import twilightforest.tileentity.TileEntityTFCicada;
 
 public class BlockTFCicada extends BlockTFCritter {
@@ -80,16 +78,17 @@ public class BlockTFCicada extends BlockTFCritter {
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
     public void stopSinging(World worldIn, int x, int y, int z) {
-        ChunkCoordinates chunkcoordinates = new ChunkCoordinates(x, y, z);
-        Minecraft mc = Minecraft.getMinecraft();
-        ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+        if (worldIn.isRemote) {
+            ChunkCoordinates chunkcoordinates = new ChunkCoordinates(x, y, z);
+            Minecraft mc = Minecraft.getMinecraft();
+            ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
 
-        while (isound != null) {
-            mc.getSoundHandler().stopSound(isound);
-            mc.renderGlobal.mapSoundPositions.remove(chunkcoordinates);
-            isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+            while (isound != null) {
+                mc.getSoundHandler().stopSound(isound);
+                mc.renderGlobal.mapSoundPositions.remove(chunkcoordinates);
+                isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+            }
         }
     }
 

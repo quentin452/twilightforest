@@ -165,4 +165,6 @@ public class TFCommonProxy implements IGuiHandler {
         return true;
     }
 
+    public void stopSound(World worldIn, int x, int y, int z) {}
+
 }

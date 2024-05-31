@@ -863,4 +863,16 @@ public class TFClientProxy extends TFCommonProxy {
         return isound != null;
     }
 
+    public void stopSound(World worldIn, int x, int y, int z) {
+        ChunkCoordinates chunkcoordinates = new ChunkCoordinates(x, y, z);
+        Minecraft mc = Minecraft.getMinecraft();
+        ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+
+        while (isound != null) {
+            mc.getSoundHandler().stopSound(isound);
+            mc.renderGlobal.mapSoundPositions.remove(chunkcoordinates);
+            isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+        }
+    }
+
 }

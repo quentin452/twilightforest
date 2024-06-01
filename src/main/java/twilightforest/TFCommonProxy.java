@@ -3,6 +3,7 @@ package twilightforest;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -166,5 +167,8 @@ public class TFCommonProxy implements IGuiHandler {
     }
 
     public void stopSound(World worldIn, int x, int y, int z) {}
+
+    public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource,
+            float xPosition, float yPosition, float zPosition) {}
 
 }

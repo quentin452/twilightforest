@@ -2,6 +2,7 @@ package twilightforest.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.client.model.ModelSilverfish;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -873,6 +875,20 @@ public class TFClientProxy extends TFCommonProxy {
             mc.renderGlobal.mapSoundPositions.remove(chunkcoordinates);
             isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
         }
+    }
+
+    public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource,
+            float xPosition, float yPosition, float zPosition) {
+        PositionedSoundRecord positionedsoundrecord = new PositionedSoundRecord(
+                soundResource,
+                1.0f,
+                (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F + 1.0F,
+                (float) xPosition,
+                (float) yPosition,
+                (float) zPosition);
+        Minecraft mc = Minecraft.getMinecraft();
+        mc.renderGlobal.mapSoundPositions.put(chunkcoordinates, positionedsoundrecord);
+        mc.getSoundHandler().playSound(positionedsoundrecord);
     }
 
 }

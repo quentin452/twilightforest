@@ -877,7 +877,8 @@ public class TFClientProxy extends TFCommonProxy {
         }
     }
 
-    public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource) {
+    @SuppressWarnings("unchecked")
+	public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource) {
         PositionedSoundRecord positionedsoundrecord = new PositionedSoundRecord(
                 soundResource,
                 1.0f,

@@ -99,10 +99,7 @@ public class TileEntityTFCicada extends TileEntityTFCritter {
                 TwilightForestMod.proxy.playSound(
                         worldObj,
                         chunkcoordinates,
-                        new ResourceLocation(TwilightForestMod.ID + ":mob.cicada"),
-                        (float) xCoord,
-                        (float) yCoord,
-                        (float) zCoord);
+                        new ResourceLocation(TwilightForestMod.ID + ":mob.cicada"));
             }
         }
     }

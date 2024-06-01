@@ -877,15 +877,15 @@ public class TFClientProxy extends TFCommonProxy {
         }
     }
 
-    public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource,
-            float xPosition, float yPosition, float zPosition) {
+    @SuppressWarnings("unchecked")
+    public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource) {
         PositionedSoundRecord positionedsoundrecord = new PositionedSoundRecord(
                 soundResource,
                 1.0f,
                 (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F + 1.0F,
-                (float) xPosition,
-                (float) yPosition,
-                (float) zPosition);
+                (float) chunkcoordinates.posX,
+                (float) chunkcoordinates.posY,
+                (float) chunkcoordinates.posZ);
         Minecraft mc = Minecraft.getMinecraft();
         mc.renderGlobal.mapSoundPositions.put(chunkcoordinates, positionedsoundrecord);
         mc.getSoundHandler().playSound(positionedsoundrecord);

@@ -168,7 +168,6 @@ public class TFCommonProxy implements IGuiHandler {
 
     public void stopSound(World worldIn, int x, int y, int z) {}
 
-    public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource,
-            float xPosition, float yPosition, float zPosition) {}
+    public void playSound(World worldObj, ChunkCoordinates chunkcoordinates, ResourceLocation soundResource) {}
 
 }

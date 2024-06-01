@@ -1,7 +1,5 @@
 package twilightforest.tileentity;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.ResourceLocation;
 
@@ -98,17 +96,13 @@ public class TileEntityTFCicada extends TileEntityTFCritter {
         if (!TwilightForestMod.silentCicadas) {
             ChunkCoordinates chunkcoordinates = new ChunkCoordinates(xCoord, yCoord, zCoord);
             if (!TwilightForestMod.proxy.checkForSound(chunkcoordinates)) {
-                ResourceLocation resource = new ResourceLocation(TwilightForestMod.ID + ":mob.cicada");
-                PositionedSoundRecord positionedsoundrecord = new PositionedSoundRecord(
-                        resource,
-                        1.0f,
-                        (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.2F + 1.0F,
+                TwilightForestMod.proxy.playSound(
+                        worldObj,
+                        chunkcoordinates,
+                        new ResourceLocation(TwilightForestMod.ID + ":mob.cicada"),
                         (float) xCoord,
                         (float) yCoord,
                         (float) zCoord);
-                Minecraft mc = Minecraft.getMinecraft();
-                mc.renderGlobal.mapSoundPositions.put(chunkcoordinates, positionedsoundrecord);
-                mc.getSoundHandler().playSound(positionedsoundrecord);
             }
         }
     }

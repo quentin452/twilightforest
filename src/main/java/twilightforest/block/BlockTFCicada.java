@@ -36,11 +36,11 @@ public class BlockTFCicada extends BlockTFCritter {
 
     @Override
     public boolean dropCritterIfCantStay(World world, int x, int y, int z) {
-        if (super.dropCritterIfCantStay(world, x, y, z)) {
+        if (!super.dropCritterIfCantStay(world, x, y, z)) {
             TwilightForestMod.proxy.stopSound(world, x, y, z);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**

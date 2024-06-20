@@ -46,29 +46,11 @@ public class RenderBlockTFFieryMetal implements ISimpleBlockRenderingHandler {
         float m = (1.0f - p) / 2;
         float s = 0.001f;
 
-        renderblocks.enableAO = true;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.setBrightness(15 << 20 | 15 << 4); // full brightness
+        tessellator.setColorOpaque_F(1.0f, 1.0f, 1.0f);
 
-        renderblocks.aoBrightnessXYNP = 255;
-        renderblocks.aoBrightnessXYPP = 255;
-        renderblocks.aoBrightnessYZPN = 255;
-        renderblocks.aoBrightnessYZPP = 255;
-        renderblocks.aoLightValueScratchXYNP = 1.0F;
-        renderblocks.aoLightValueScratchXYPP = 1.0F;
-        renderblocks.aoLightValueScratchYZPN = 1.0F;
-        renderblocks.aoLightValueScratchYZPP = 1.0F;
-
-        renderblocks.aoLightValueScratchXYZNPN = renderblocks.aoLightValueScratchXYNP;
-        renderblocks.aoBrightnessXYZNPN = renderblocks.aoBrightnessXYNP;
-        renderblocks.aoLightValueScratchXYZPPN = renderblocks.aoLightValueScratchXYPP;
-        renderblocks.aoBrightnessXYZPPN = renderblocks.aoBrightnessXYPP;
-        renderblocks.aoLightValueScratchXYZNPP = renderblocks.aoLightValueScratchXYNP;
-        renderblocks.aoBrightnessXYZNPP = renderblocks.aoBrightnessXYNP;
-        renderblocks.aoLightValueScratchXYZPPP = renderblocks.aoLightValueScratchXYPP;
-        renderblocks.aoBrightnessXYZPPP = renderblocks.aoBrightnessXYPP;
-
-        renderblocks.colorRedTopLeft = renderblocks.colorRedBottomLeft = renderblocks.colorRedBottomRight = renderblocks.colorRedTopRight = 1.0f;
-        renderblocks.colorGreenTopLeft = renderblocks.colorGreenBottomLeft = renderblocks.colorGreenBottomRight = renderblocks.colorGreenTopRight = 1.0f;
-        renderblocks.colorBlueTopLeft = renderblocks.colorBlueBottomLeft = renderblocks.colorBlueBottomRight = renderblocks.colorBlueTopRight = 1.0f;
+        renderblocks.enableAO = false;
 
         // middle
         renderblocks.renderAllFaces = true;

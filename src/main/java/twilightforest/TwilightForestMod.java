@@ -96,6 +96,7 @@ public class TwilightForestMod {
     public static String portalCreationItemString;
 
     // integration
+    public static boolean isGTNHLoaded = false;
     public static boolean isSkinportLoaded = false;
     public static boolean areBaublesLoaded = false;
     public static boolean isNeiLoaded = false;
@@ -255,6 +256,7 @@ public class TwilightForestMod {
         } else {
             areBaublesLoaded = false;
         }
+        isGTNHLoaded = Loader.isModLoaded("dreamcraft");
 
         // check for biome conflicts, load biomes
         TFBiomeBase.assignBlankBiomeIds();

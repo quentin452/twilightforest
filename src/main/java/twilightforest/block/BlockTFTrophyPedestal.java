@@ -25,13 +25,16 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 import twilightforest.TFAchievementPage;
 import twilightforest.TwilightForestMod;
 import twilightforest.item.TFItems;
 
-public class BlockTFTrophyPedestal extends Block {
+@Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliser", modid = "Thaumcraft")
+public class BlockTFTrophyPedestal extends Block implements IInfusionStabiliser {
 
     private IIcon sprTopActive;
     private IIcon sprTop;
@@ -432,4 +435,8 @@ public class BlockTFTrophyPedestal extends Block {
         return 0;
     }
 
+    @Override
+    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
+        return true;
+    }
 }

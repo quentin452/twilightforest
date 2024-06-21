@@ -13,13 +13,16 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.passive.EntityTFTinyFirefly;
 import twilightforest.item.TFItems;
 
-public class BlockTFFireflyJar extends Block {
+@Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliser", modid = "Thaumcraft")
+public class BlockTFFireflyJar extends Block implements IInfusionStabiliser {
 
     public static IIcon jarTop;
     public static IIcon jarSide;
@@ -149,4 +152,8 @@ public class BlockTFFireflyJar extends Block {
         BlockTFFireflyJar.jarCork = par1IconRegister.registerIcon(TwilightForestMod.ID + ":fireflyjar_cork");
     }
 
+    @Override
+    public boolean canStabaliseInfusion(World world, int x, int y, int z) {
+        return true;
+    }
 }

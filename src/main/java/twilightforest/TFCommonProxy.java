@@ -156,7 +156,7 @@ public class TFCommonProxy implements IGuiHandler {
         return null;
     }
 
-    public ModelBiped getCritterArmorModel(int boss) {
+    public ModelBiped getCritterArmorModel(int critter) {
         return null;
     }
 

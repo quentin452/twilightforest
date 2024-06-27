@@ -93,7 +93,7 @@ public class TileEntityTFCicada extends TileEntityTFCritter {
     }
 
     public void playSong() {
-        if (!TwilightForestMod.silentCicadas) {
+        if (!TwilightForestMod.silentCicadas && worldObj.isRemote) {
             ChunkCoordinates chunkcoordinates = new ChunkCoordinates(xCoord, yCoord, zCoord);
             if (!TwilightForestMod.proxy.checkForSound(chunkcoordinates)) {
                 TwilightForestMod.proxy.playSound(

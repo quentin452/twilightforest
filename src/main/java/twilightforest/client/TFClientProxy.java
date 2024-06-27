@@ -861,8 +861,17 @@ public class TFClientProxy extends TFCommonProxy {
     }
 
     public boolean checkForSound(ChunkCoordinates chunkcoordinates) {
-        ISound isound = (ISound) Minecraft.getMinecraft().renderGlobal.mapSoundPositions.get(chunkcoordinates);
-        return isound != null;
+        Minecraft mc = Minecraft.getMinecraft();
+        ISound isound = (ISound) mc.renderGlobal.mapSoundPositions.get(chunkcoordinates);
+        if (isound == null) return false;
+        else {
+            if (mc.getSoundHandler().isSoundPlaying(isound)) return true;
+            else {
+                mc.getSoundHandler().stopSound(isound);
+                mc.renderGlobal.mapSoundPositions.remove(chunkcoordinates);
+                return false;
+            }
+        }
     }
 
     public void stopSound(World worldIn, int x, int y, int z) {

@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import thaumcraft.api.crafting.IInfusionStabiliser;
 import twilightforest.entity.boss.EntityTFHydra;
 import twilightforest.entity.boss.EntityTFKnightPhantom;
 import twilightforest.entity.boss.EntityTFLich;
@@ -31,7 +32,6 @@ import twilightforest.entity.boss.EntityTFSnowQueen;
 import twilightforest.entity.boss.EntityTFUrGhast;
 import twilightforest.entity.boss.EntityTFYetiAlpha;
 import twilightforest.entity.passive.EntityTFQuestRam;
-import thaumcraft.api.crafting.IInfusionStabiliser;
 import twilightforest.item.TFItems;
 import twilightforest.tileentity.TileEntityTFTrophy;
 
@@ -322,6 +322,8 @@ public class BlockTFTrophy extends BlockContainer implements IInfusionStabiliser
                     worldIn.rand.nextFloat() * 0.1F + 0.9F);
             return true;
         }
+    }
+
     @Override
     public boolean canStabaliseInfusion(World world, int x, int y, int z) {
         return true;

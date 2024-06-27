@@ -434,6 +434,7 @@ public class BlockTFTrophyPedestal extends Block implements IInfusionStabiliser 
         }
         return 0;
     }
+
     @Override
     public boolean canStabaliseInfusion(World world, int x, int y, int z) {
         return true;

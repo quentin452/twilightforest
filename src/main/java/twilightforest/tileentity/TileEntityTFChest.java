@@ -35,22 +35,22 @@ public class TileEntityTFChest extends TileEntityChest {
             this.adjacentChestZPos = null;
 
             if (this.func_145977_a(this.xCoord - 1, this.yCoord, this.zCoord)) {
-                this.adjacentChestXNeg = (TileEntityChest) this.worldObj
+                this.adjacentChestXNeg = (TileEntityTFChest) this.worldObj
                         .getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
             }
 
             if (this.func_145977_a(this.xCoord + 1, this.yCoord, this.zCoord)) {
-                this.adjacentChestXPos = (TileEntityChest) this.worldObj
+                this.adjacentChestXPos = (TileEntityTFChest) this.worldObj
                         .getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
             }
 
             if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord - 1)) {
-                this.adjacentChestZNeg = (TileEntityChest) this.worldObj
+                this.adjacentChestZNeg = (TileEntityTFChest) this.worldObj
                         .getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
             }
 
             if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord + 1)) {
-                this.adjacentChestZPos = (TileEntityChest) this.worldObj
+                this.adjacentChestZPos = (TileEntityTFChest) this.worldObj
                         .getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
             }
 
@@ -77,13 +77,13 @@ public class TileEntityTFChest extends TileEntityChest {
             return false;
         } else {
             Block block = this.worldObj.getBlock(p_145977_1_, p_145977_2_, p_145977_3_);
-            Block thisBlock = this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
+            Block thisBlock = this.getBlockType();
             return block instanceof BlockTFChest && thisBlock instanceof BlockTFChest
                     && ((BlockTFChest) block).getWoodType() == ((BlockTFChest) thisBlock).getWoodType();
         }
     }
 
-    private void func_145978_a(TileEntityChest p_145978_1_, int p_145978_2_) {
+    private void func_145978_a(TileEntityTFChest p_145978_1_, int p_145978_2_) {
         if (p_145978_1_.isInvalid()) {
             this.adjacentChestChecked = false;
         } else if (this.adjacentChestChecked) {

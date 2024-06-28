@@ -1,7 +1,6 @@
 package twilightforest.client.renderer;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -47,9 +46,9 @@ public class TileEntityTFChestRenderer extends TileEntitySpecialRenderer {
             Block block = tileEntity.getBlockType();
             i = tileEntity.getBlockMetadata();
 
-            if (block instanceof BlockChest && i == 0) {
+            if (block instanceof BlockTFChest && i == 0) {
                 try {
-                    ((BlockChest) block).func_149954_e(
+                    ((BlockTFChest) block).func_149954_e(
                             tileEntity.getWorldObj(),
                             tileEntity.xCoord,
                             tileEntity.yCoord,
@@ -64,13 +63,17 @@ public class TileEntityTFChestRenderer extends TileEntitySpecialRenderer {
                 i = tileEntity.getBlockMetadata();
             }
 
-            tileEntity.checkForAdjacentChests();
+            ((TileEntityTFChest) tileEntity).checkForAdjacentChests();
         }
 
-        BlockTFChest.WoodType type = (((TileEntityTFChest) tileEntity).cachedMaterial == WoodType.NULL)
-                ? ((BlockTFChest) tileEntity.getWorldObj()
-                        .getBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord)).getWoodType()
-                : ((TileEntityTFChest) tileEntity).cachedMaterial;
+        WoodType type = WoodType.CANOPY;
+        if (tileEntity instanceof TileEntityTFChest) {
+            if (((TileEntityTFChest) tileEntity).cachedMaterial == WoodType.NULL) {
+                Block block = tileEntity.getWorldObj()
+                        .getBlock(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                if (block instanceof BlockTFChest) type = ((BlockTFChest) block).getWoodType();
+            } else type = ((TileEntityTFChest) tileEntity).cachedMaterial;
+        }
 
         if (tileEntity.adjacentChestZNeg == null && tileEntity.adjacentChestXNeg == null) {
             ModelChest modelchest;
@@ -150,6 +153,6 @@ public class TileEntityTFChestRenderer extends TileEntitySpecialRenderer {
 
     public void renderTileEntityAt(TileEntity p_147500_1_, double p_147500_2_, double p_147500_4_, double p_147500_6_,
             float p_147500_8_) {
-        this.renderTileEntityAt((TileEntityChest) p_147500_1_, p_147500_2_, p_147500_4_, p_147500_6_, p_147500_8_);
+        this.renderTileEntityAt((TileEntityTFChest) p_147500_1_, p_147500_2_, p_147500_4_, p_147500_6_, p_147500_8_);
     }
 }

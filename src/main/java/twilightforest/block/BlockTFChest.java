@@ -3,6 +3,8 @@ package twilightforest.block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -60,6 +62,26 @@ public class BlockTFChest extends BlockChest {
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         TileEntityTFChest tileentitychest = new TileEntityTFChest();
         return tileentitychest;
+    }
+
+    /**
+     * Called when a tile entity on a side of this block changes is created or is destroyed.
+     * 
+     * @param world The world
+     * @param x     The x position of this block instance
+     * @param y     The y position of this block instance
+     * @param z     The z position of this block instance
+     * @param tileX The x position of the tile that changed
+     * @param tileY The y position of the tile that changed
+     * @param tileZ The z position of the tile that changed
+     */
+    public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
+        super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
+        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(x, y, z);
+
+        if (tileentitychest != null) {
+            tileentitychest.updateContainingBlockInfo();
+        }
     }
 
 }

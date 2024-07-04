@@ -163,8 +163,7 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
                             boundingBox.minX + 3 + x * 6,
                             boundingBox.minY,
                             boundingBox.minZ + 3 + z * 6,
-                            0,
-                            HEDGE_FLOOF);
+                            0);
                     list.add(hedge);
                     hedge.buildComponent(this, list, random);
                 }
@@ -202,8 +201,7 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
                                 boundingBox.minX + 3 + x1 * 6,
                                 boundingBox.minY,
                                 boundingBox.minZ + 3 + z1 * 6,
-                                0,
-                                HEDGE_FLOOF);
+                                0);
                         list.add(hedge);
                         hedge.buildComponent(this, list, random);
                     }
@@ -221,8 +219,7 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
                                     boundingBox.minX + 3 + x * 6,
                                     boundingBox.minY,
                                     boundingBox.minZ + 3 + z * 6,
-                                    0,
-                                    HEDGE_FLOOF);
+                                    0);
                             list.add(pillar);
                             pillar.buildComponent(this, list, random);
                         }
@@ -257,8 +254,7 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
                                 boundingBox.minX + 1 + (x + 1) * 6,
                                 boundingBox.minY,
                                 boundingBox.minZ + 6 + z * 6,
-                                3,
-                                HEDGE_FLOOF);
+                                3);
                         list.add(padder);
                         padder.buildComponent(this, list, random);
                     }
@@ -273,8 +269,7 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
                                 boundingBox.minX + 1 + x * 6,
                                 boundingBox.minY,
                                 boundingBox.minZ + 6 + z * 6,
-                                3,
-                                HEDGE_FLOOF);
+                                3);
                         list.add(padder);
                         padder.buildComponent(this, list, random);
                     }
@@ -284,8 +279,7 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
                                 boundingBox.minX + 3 + x * 6,
                                 boundingBox.minY,
                                 boundingBox.minZ + 2 + (z + 1) * 6,
-                                0,
-                                HEDGE_FLOOF);
+                                0);
                         list.add(padder);
                         padder.buildComponent(this, list, random);
                     }
@@ -295,8 +289,7 @@ public class ComponentTFNagaCourtyardMain extends StructureTFComponent {
                                 boundingBox.minX + 3 + x * 6,
                                 boundingBox.minY,
                                 boundingBox.minZ + 2 + z * 6,
-                                0,
-                                HEDGE_FLOOF);
+                                0);
                         list.add(padder);
                         padder.buildComponent(this, list, random);
                     }

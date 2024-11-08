@@ -399,7 +399,7 @@ public class EntityTFSnowQueen extends EntityMob implements IBossDisplayData, IE
                 TFFeature nearbyFeature = ((TFWorldChunkManager) worldObj.provider.worldChunkMgr)
                         .getFeatureAt(dx, dz, worldObj);
 
-                if (nearbyFeature == TFFeature.lichTower) {
+                if (nearbyFeature == TFFeature.iceTower) {
                     chunkProvider.setStructureConquered(dx, dy, dz, true);
                 }
             }
